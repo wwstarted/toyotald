@@ -1,397 +1,432 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  const bannerContainer = document.querySelector("#banner-carousel");
+(function () {
+  "use strict";
 
-  if (!bannerContainer) return;
+  document.addEventListener("DOMContentLoaded", function () {
+    // ==========================================
+    // HERO SLIDER
+    // ==========================================
+    const slider = {
+      currentSlide: 0,
+      slides: document.querySelectorAll(".slide"),
+      dots: document.querySelectorAll(".dot"),
+      prevBtn: document.getElementById("prevSlide"),
+      nextBtn: document.getElementById("nextSlide"),
+      autoplayInterval: null,
+      autoplayDelay: 5000,
 
-  try {
-    const res = await fetch(
-      "http://localhost/PXP_SSW/wordpress/wp-json/wp/v2/posts?per_page=100"
+      init() {
+        if (this.slides.length === 0) return;
+
+        this.prevBtn.addEventListener("click", () => this.prev());
+        this.nextBtn.addEventListener("click", () => this.next());
+
+        this.dots.forEach((dot, index) => {
+          dot.addEventListener("click", () => this.goToSlide(index));
+        });
+
+        this.startAutoplay();
+
+        // Pause on hover
+        const sliderContainer = document.querySelector(".slider-container");
+        sliderContainer.addEventListener("mouseenter", () =>
+          this.stopAutoplay()
+        );
+        sliderContainer.addEventListener("mouseleave", () =>
+          this.startAutoplay()
+        );
+      },
+
+      goToSlide(index) {
+        this.slides[this.currentSlide].classList.remove("active");
+        this.dots[this.currentSlide].classList.remove("active");
+
+        this.currentSlide = index;
+
+        this.slides[this.currentSlide].classList.add("active");
+        this.dots[this.currentSlide].classList.add("active");
+      },
+
+      next() {
+        const nextSlide = (this.currentSlide + 1) % this.slides.length;
+        this.goToSlide(nextSlide);
+      },
+
+      prev() {
+        const prevSlide =
+          (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+        this.goToSlide(prevSlide);
+      },
+
+      startAutoplay() {
+        this.autoplayInterval = setInterval(() => {
+          this.next();
+        }, this.autoplayDelay);
+      },
+
+      stopAutoplay() {
+        clearInterval(this.autoplayInterval);
+      },
+    };
+
+    slider.init();
+
+    // ==========================================
+    // STATS COUNTER ANIMATION
+    // ==========================================
+    const counters = document.querySelectorAll(".stat-number");
+
+    const animateCounter = (counter) => {
+      const target = parseInt(counter.dataset.target);
+      const duration = 2000;
+      const increment = target / (duration / 16);
+      let current = 0;
+
+      const updateCounter = () => {
+        current += increment;
+        if (current < target) {
+          counter.textContent = Math.floor(current).toLocaleString("vi-VN");
+          requestAnimationFrame(updateCounter);
+        } else {
+          counter.textContent = target.toLocaleString("vi-VN");
+        }
+      };
+
+      updateCounter();
+    };
+
+    // Intersection Observer for counter animation
+    const counterObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (
+            entry.isIntersecting &&
+            !entry.target.classList.contains("counted")
+          ) {
+            animateCounter(entry.target);
+            entry.target.classList.add("counted");
+          }
+        });
+      },
+      { threshold: 0.5 }
     );
-    const items = await res.json();
 
-    console.log("All post items:", items);
-
-    const shuffled = items.sort(() => Math.random() - 0.5);
-
-    const randomFour = shuffled.slice(0, 4);
-
-    randomFour.forEach((item) => {
-      const image = item.bgr_image || "";
-      const postLink = item.post_link || "#";
-      const detailLink = item.link || "#";
-      const title = item.title.rendered || "No title";
-
-      const itemHTML = `
-        <div class="carousel-item" onclick="window.location.href='${detailLink}';" style="cursor: pointer;">
-          <img class="carousel-image" src="${image}" alt="${title}">
-          <button 
-            class="btn carousel-btn" 
-            onclick="event.stopPropagation(); window.open('${postLink}', '_blank');"
-          >
-            Visit Site
-            <i class="carousel-btn-icon fa-solid fa-angles-right"></i>
-          </button>
-        </div>
-      `;
-
-      bannerContainer.insertAdjacentHTML("beforeend", itemHTML);
+    counters.forEach((counter) => {
+      counterObserver.observe(counter);
     });
-  } catch (error) {
-    console.error("Lỗi khi tải post items:", error);
-  }
-});
 
-// ==========================
-const prevBtn = document.querySelector(".banner-section-prev");
-const nextBtn = document.querySelector(".banner-section-back");
-const slider = document.querySelector(".banner-section-slide");
+    // ==========================================
+    // PRODUCT FILTER
+    // ==========================================
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const productCards = document.querySelectorAll(".product-card");
 
-if (prevBtn && nextBtn && slider) {
-  prevBtn.addEventListener("click", () => {
-    slider.scrollBy({
-      left: -320,
-      behavior: "smooth",
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", function () {
+        // Remove active class from all buttons
+        filterBtns.forEach((b) => b.classList.remove("active"));
+        this.classList.add("active");
+
+        const filter = this.dataset.filter;
+
+        productCards.forEach((card) => {
+          if (filter === "all" || card.dataset.category === filter) {
+            card.style.display = "block";
+            card.style.animation = "fadeInUp 0.5s ease";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
     });
-  });
 
-  nextBtn.addEventListener("click", () => {
-    slider.scrollBy({
-      left: 320,
-      behavior: "smooth",
+    // ==========================================
+    // FAQ ACCORDION
+    // ==========================================
+    const faqItems = document.querySelectorAll(".faq-item");
+
+    faqItems.forEach((item) => {
+      const question = item.querySelector(".faq-question");
+
+      question.addEventListener("click", () => {
+        // Close other items
+        faqItems.forEach((otherItem) => {
+          if (otherItem !== item && otherItem.classList.contains("active")) {
+            otherItem.classList.remove("active");
+          }
+        });
+
+        // Toggle current item
+        item.classList.toggle("active");
+      });
     });
-  });
-}
 
-function toggleContent(button) {
-  const section = button.closest(".info-section");
-  const content = section.querySelector(".info-content-scrollable");
-  const btnText = button.querySelector(".text");
-  const fadeOverlay = section.querySelector(".fade-overlay");
+    // ==========================================
+    // REVIEWS SLIDER (Simple)
+    // ==========================================
+    const reviewCards = document.querySelectorAll(".review-card");
+    const reviewPrev = document.querySelector(".review-prev");
+    const reviewNext = document.querySelector(".review-next");
+    let currentReview = 0;
 
-  content.classList.toggle("expanded");
-  button.classList.toggle("expanded");
+    if (reviewCards.length > 0 && window.innerWidth <= 768) {
+      // Show one review at a time on mobile
+      const showReview = (index) => {
+        reviewCards.forEach((card, i) => {
+          card.style.display = i === index ? "block" : "none";
+        });
+      };
 
-  if (content.classList.contains("expanded")) {
-    btnText.textContent = "Read More";
-    fadeOverlay.classList.add("hidden");
-  } else {
-    btnText.textContent = "Read Less";
-    fadeOverlay.classList.remove("hidden");
+      reviewPrev.addEventListener("click", () => {
+        currentReview =
+          (currentReview - 1 + reviewCards.length) % reviewCards.length;
+        showReview(currentReview);
+      });
 
-    section.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }
-}
+      reviewNext.addEventListener("click", () => {
+        currentReview = (currentReview + 1) % reviewCards.length;
+        showReview(currentReview);
+      });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const contentElements = document.querySelectorAll(".info-content-scrollable");
-
-  contentElements.forEach((content) => {
-    const section = content.closest(".info-section");
-    const button = section.querySelector(".show-more");
-
-    if (content.scrollHeight <= 400) {
-      if (button) button.style.display = "none";
-
-      const fadeOverlay = section.querySelector(".fade-overlay");
-      if (fadeOverlay) fadeOverlay.style.display = "none";
-
-      content.style.maxHeight = "none";
+      showReview(0);
+    } else {
+      // Hide navigation on desktop
+      if (reviewPrev) reviewPrev.style.display = "none";
+      if (reviewNext) reviewNext.style.display = "none";
     }
-  });
-});
 
-const API_BASE = "http://localhost/PXP_SSW/wordpress/wp-json/wp/v2";
+    // ==========================================
+    // GALLERY LIGHTBOX (Simple)
+    // ==========================================
+    const galleryItems = document.querySelectorAll(".gallery-item");
 
-async function fetchAll(endpoint, perPage = 50) {
-  let page = 1;
-  let allData = [];
-  while (true) {
-    const res = await fetch(
-      `${API_BASE}/${endpoint}?page=${page}&per_page=${perPage}`
-    );
-    if (!res.ok) break;
-    const data = await res.json();
-    allData = [...allData, ...data];
-    if (data.length < perPage) break;
-    page++;
-  }
-  return allData;
-}
+    galleryItems.forEach((item) => {
+      item.addEventListener("click", function () {
+        const img = this.querySelector("img");
+        if (img) {
+          // Create simple lightbox
+          const lightbox = document.createElement("div");
+          lightbox.className = "lightbox";
+          lightbox.innerHTML = `
+                    <div class="lightbox-content">
+                        <span class="lightbox-close">&times;</span>
+                        <img src="${img.src}" alt="${img.alt}">
+                    </div>
+                `;
 
-async function fetchData() {
-  try {
-    const [cates, posts] = await Promise.all([
-      fetchAll("categories"),
-      fetchAll("posts"),
-    ]);
+          // Add styles
+          lightbox.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100vh;
+                    background: rgba(0,0,0,0.9);
+                    z-index: 9999;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    animation: fadeIn 0.3s ease;
+                `;
 
-    console.log("Categories:", cates);
-    console.log("Posts:", posts);
+          const content = lightbox.querySelector(".lightbox-content");
+          content.style.cssText = `
+                    position: relative;
+                    max-width: 90%;
+                    max-height: 90%;
+                `;
 
-    renderCategories(cates, posts);
-  } catch (err) {
-    console.error("Lỗi khi fetch dữ liệu:", err);
-  }
-}
+          const imgElement = lightbox.querySelector("img");
+          imgElement.style.cssText = `
+                    max-width: 100%;
+                    max-height: 90vh;
+                    border-radius: 8px;
+                `;
 
-function renderCategories(cates, posts) {
-  const container = document.querySelector(".categories-container-home");
-  if (!container) return;
-  container.innerHTML = "";
+          const closeBtn = lightbox.querySelector(".lightbox-close");
+          closeBtn.style.cssText = `
+                    position: absolute;
+                    top: -40px;
+                    right: 0;
+                    font-size: 40px;
+                    color: white;
+                    cursor: pointer;
+                    line-height: 1;
+                `;
 
-  const visibleCates2 = cates.filter((cate) => {
-    const v = cate.meta?._cate_visible;
-    return v === "1" || v === 1 || v === true;
-  });
+          document.body.appendChild(lightbox);
 
-  const visibleCates = visibleCates2.slice(0, 6);
+          // Close lightbox
+          closeBtn.addEventListener("click", () => {
+            lightbox.remove();
+          });
 
-  console.log("Visible categories:", visibleCates);
+          lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+              lightbox.remove();
+            }
+          });
 
-  visibleCates.forEach((cate) => {
-    const cateId = cate.id;
-    const meta = cate.meta || {};
-
-    const cateThumbnail = meta.thumbnail || "";
-    const shortDesc = cate.description || "";
-    const cateTitle = cate.name || "No title";
-
-    const catePosts = posts
-      .filter((p) => {
-        const cats = p.categories || [];
-        return cats.includes(cateId);
-      })
-      .sort((a, b) => (a.meta?.top || 0) - (b.meta?.top || 0));
-
-    const displayPosts = catePosts.slice(0, 6);
-
-    const postListHTML =
-      displayPosts.length > 0
-        ? displayPosts
-            .map(
-              (post, index) => `
-        <a href="${post.link}" style="text-decoration: none; color: inherit;">
-    <li>
-        <p class="features-list-top">${index + 1}</p>
-        <img class="features-list-logo-image" src="${post.logo || ""}" alt="${
-                post.title.rendered
-              }" />
-
-        <p class="text-line features-list-name">${post.title.rendered}</p>
-    </li>
-</a>
-      `
-            )
-            .join("")
-        : `<li>No posts yet.</li>`;
-
-    const lastThreePosts = catePosts.slice(-3);
-
-    const lastThreeLogosHTML = lastThreePosts
-      .map(
-        (post) => `
-        <a href="${post.link}" style="text-decoration: none; color: inherit;">
-      <img class="footer-logo-preview"
-        src="${post.logo || ""}"
-        alt="${post.title.rendered}" />
-        </a>
-    `
-      )
-      .join("");
-
-    const totalItems = catePosts.length;
-
-    const cardHTML = `
-      <div class="card">
-
-        <!-- HEADER -->
-        <div class="card-header">
-          <div class="card-icon">
-            <img class="card-icon-image"
-              src="${cateThumbnail}"
-              alt="icon ${cateTitle}" />
-          </div>
-
-          <div class="text-line card-title">
-            <a class="card-title-link" href="#">${cateTitle}</a>
-            <div class="card-tag">
-              <span class="card-tag-cate">TOP Popular in VietNam</span>
-            </div>
-          </div>
-        </div>
-
-        <p class="text-line card-description">${shortDesc}</p>
-
-        <!-- LIST -->
-        <ul class="features-list">
-          ${postListHTML}
-        </ul>
-
-        <!-- FOOTER -->
-        <div class="card-footer">
-          <a href="${cate.link}" class="visit-btn">
-            <span>Load ${totalItems} sites</span>
-            <i class="fa-solid fa-chevron-right footer-arrow-icon"></i>
-          </a>
-
-          <div class="footer-logos">
-            ${lastThreeLogosHTML}
-          </div>
-        </div>
-
-      </div>
-    `;
-
-    container.insertAdjacentHTML("beforeend", cardHTML);
-  });
-}
-
-fetchData();
-
-// /** =========banner-slide==========  */
-// document.addEventListener("DOMContentLoaded", async () => {
-//   const bannerContainer = document.querySelector("#banner-slide-home");
-
-//   try {
-//     const cateRes = await fetch(`${API_BASE}/post_item?per_page=5`);
-//     const cate = await cateRes.json();
-
-//     cate.forEach((banner) => {
-//         const meta = banner.meta || {};
-//         const image = meta.image || "";
-//         const title = banner?.title?.rendered || "No Title";
-
-//         const bannerHTML = `
-//           <div class="banner-card">
-//             <img
-//               src="${image}"
-//               alt="${title}"
-//               class="banner-card-image"
-//             />
-//             <a href="${WP_HOME}/detailscate/?post_id=${banner.id}"  class="banner-card-btn">${title}</a>
-//           </div>
-//         `;
-//         bannerContainer.insertAdjacentHTML("beforeend", bannerHTML);
-//       });
-
-//   } catch (error) {
-//     console.error("Lỗi khi tải banner:", error);
-//   }
-// });
-
-/** =========Cars Blogs==========  */
-// document.addEventListener("DOMContentLoaded", async () => {
-//   const bannerContainer = document.querySelector("#cars-blogs-home");
-
-//   try {
-//     const res = await fetch("http://localhost/PXP_SSW/wordpress/wp-json/wp/v2/cars_blog?per_page=3");
-//     const banners = await res.json();
-
-//     banners.forEach((banner) => {
-//         const meta = banner.meta || {};
-//         const blog_desc = meta.blog_desc || "";
-//         const title = banner?.title?.rendered || "Banner";
-
-//         const bannerHTML = `
-//         <section class="info-section">
-//         <div>
-//           <div class="info-header">
-//             <h2>${title}</h2>
-//             <div class="info-icons">
-//               <span>🌟</span>
-//               <span>🏆</span>
-//             </div>
-//           </div>
-//           <div class="info-content">
-//             <p>
-//               ${blog_desc}
-//             </p>
-//             <div class="fade-overlay"></div>
-//           </div>
-//           <div class="btn-container">
-//             <button class="show-more" onclick="toggleContent(this)">
-//               <span class="text">Read More</span>
-//               <span class="icon"><i class="fa-solid fa-angles-down"></i></span>
-//             </button>
-//           </div>
-//         </div>
-//         </section>
-//         `;
-//         bannerContainer.insertAdjacentHTML("beforeend", bannerHTML);
-//       });
-
-//   } catch (error) {
-//     console.error("Lỗi khi tải banner:", error);
-//   }
-// });
-
-/** Blog Section */
-document.addEventListener("DOMContentLoaded", async () => {
-  const bannerContainer = document.querySelector("#section-blog-home");
-
-  if (!bannerContainer) return;
-
-  try {
-    const res = await fetch(
-      "http://localhost/PXP_SSW/wordpress/wp-json/wp/v2/blogs?per_page=100"
-    );
-    const blogs = await res.json();
-
-    const visibleBlogs = blogs.filter((blog) => {
-      const isVisible = blog.meta?._blogs_visible;
-      return isVisible === "1" || isVisible === true || isVisible === 1;
+          document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") {
+              lightbox.remove();
+            }
+          });
+        }
+      });
     });
 
-    console.log("Visible blogs:", visibleBlogs);
+    // ==========================================
+    // CONTACT FORM VALIDATION
+    // ==========================================
+    const contactForm = document.getElementById("contactForm");
 
-    const displayBlogs = visibleBlogs.slice(0, 3);
+    if (contactForm) {
+      contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-    displayBlogs.forEach((blog) => {
-      const meta = blog.meta || {};
-      const title = blog?.title?.rendered || "No title";
-      const image = meta.bg_thumbnail || "";
-      const desc = meta.bg_short_desc || "No description";
+        // Basic validation
+        const name = this.querySelector('input[name="name"]').value.trim();
+        const phone = this.querySelector('input[name="phone"]').value.trim();
 
-      const author = blog.author_name || "Unknown Author";
-      const author_logo = blog.author_avatar || "";
+        if (!name || !phone) {
+          alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
+          return;
+        }
 
-      const date = formatDate(blog.date);
+        // Phone validation (basic)
+        const phoneRegex = /^[0-9]{10,11}$/;
+        if (!phoneRegex.test(phone.replace(/\s/g, ""))) {
+          alert("Số điện thoại không hợp lệ!");
+          return;
+        }
 
-      const blogHTML = `
-        <a href="${blog.link}" class="blog-card">
-          <div class="blog-image">
-            <img src="${image}" alt="${title}" />
-          </div>
-          <div class="blog-content">
-            <h3 class="text-line blog-title">${title}</h3>
-            <p class="text-line blog-description">${desc}</p>
-            <div class="blog-meta">
-              <img class="blog-meta-avatar" src="${author_logo}" alt="${author}" />
-              <span>${author} | ${date}</span>
-            </div>
-            <span class="read-more">
-              <span>Read more</span>
-              <i style="font-size: 10px" class="fa-solid fa-chevron-right"></i>
-            </span>
-          </div>
-        </a>
-      `;
+        // Show success message
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML =
+          '<i class="fa-solid fa-check"></i> Đã gửi thành công!';
+        submitBtn.disabled = true;
+        submitBtn.style.background = "#28a745";
 
-      bannerContainer.insertAdjacentHTML("beforeend", blogHTML);
+        // Reset form after 2 seconds
+        setTimeout(() => {
+          this.reset();
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+          submitBtn.style.background = "";
+        }, 2000);
+
+        // Here you would normally send data to server
+        console.log("Form submitted:", {
+          name,
+          phone,
+          email: this.querySelector('input[name="email"]').value,
+          car: this.querySelector('select[name="car"]').value,
+          message: this.querySelector('textarea[name="message"]').value,
+        });
+      });
+    }
+
+    // ==========================================
+    // SMOOTH SCROLL FOR ANCHOR LINKS
+    // ==========================================
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        const href = this.getAttribute("href");
+        if (href !== "#" && href !== "#0") {
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        }
+      });
     });
-  } catch (error) {
-    console.error("Lỗi khi tải blogs:", error);
-  }
-});
 
-function formatDate(dateString) {
-  if (!dateString) return "No date";
+    // ==========================================
+    // SCROLL ANIMATIONS (Fade in on scroll)
+    // ==========================================
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll(
+        ".featured-card, .product-card, .news-card, .review-card, .why-item"
+      );
 
-  const date = new Date(dateString);
-  const options = { year: "numeric", month: "short", day: "numeric" };
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = "0";
+              entry.target.style.animation = "fadeInUp 0.6s ease forwards";
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
 
-  return date.toLocaleDateString("en-US", options);
-}
+      elements.forEach((el, index) => {
+        el.style.animationDelay = `${index * 0.05}s`;
+        observer.observe(el);
+      });
+    };
+
+    animateOnScroll();
+
+    // ==========================================
+    // BACK TO TOP BUTTON (Optional)
+    // ==========================================
+    const createBackToTop = () => {
+      const btn = document.createElement("button");
+      btn.className = "back-to-top";
+      btn.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
+      btn.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        `;
+
+      btn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      btn.addEventListener("mouseenter", () => {
+        btn.style.transform = "scale(1.1)";
+      });
+
+      btn.addEventListener("mouseleave", () => {
+        btn.style.transform = "scale(1)";
+      });
+
+      document.body.appendChild(btn);
+
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          btn.style.display = "flex";
+        } else {
+          btn.style.display = "none";
+        }
+      });
+    };
+
+    createBackToTop();
+
+    console.log("Toyota Homepage initialized successfully!");
+  });
+})();

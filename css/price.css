@@ -1,0 +1,395 @@
+/* ================================================
+   CAR PRICE LIST SECTION (Bảng Giá Xe)
+   ================================================ */
+.price-list-section {
+  padding: var(--section-padding) 0;
+  background: var(--color-bg-light);
+}
+
+/* Style cho khối tab filter */
+.price-filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: var(--spacing-3xl);
+  justify-content: center;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-light);
+}
+
+/* Style cho tiêu đề nhóm xe (SUV, Sedan...) */
+.price-group-title {
+  font-size: var(--font-size-4xl);
+  font-weight: 800;
+  color: var(--color-text-dark);
+  margin-top: var(--spacing-3xl);
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 3px solid var(--color-primary);
+}
+
+.price-list-wrapper {
+  display: grid;
+  gap: var(--spacing-3xl);
+}
+
+.price-card {
+  /* Đã được cập nhật display: flex trong JS để khớp với mobile/desktop */
+  display: flex;
+  /* Thay đổi từ flex-start sang center để căn giữa ảnh theo chiều dọc */
+  align-items: center;
+  gap: var(--spacing-2xl);
+  background: var(--color-bg);
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  margin-bottom: var(--spacing-xl); /* Khoảng cách giữa các xe */
+}
+
+.price-card:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+.price-image {
+  flex-basis: 35%;
+  max-width: 35%;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  position: relative;
+  aspect-ratio: 4 / 3;
+  justify-content: center;
+  align-items: center;
+}
+
+.price-image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.price-card:hover .price-image img {
+  transform: scale(1.03);
+}
+
+.price-details {
+  flex-basis: 65%;
+  max-width: 65%;
+}
+
+.price-details h3 {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--color-border);
+}
+
+/* --- Price Table Styling --- */
+.price-table-wrapper {
+  margin-bottom: var(--spacing-xl);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-lg);
+  table-layout: fixed; /* Bổ sung cho bảng 3 cột */
+}
+
+.price-table th {
+  background: var(--color-primary);
+  color: white;
+  padding: var(--spacing-md) var(--spacing-lg);
+  text-align: left;
+  font-weight: 600;
+  border-bottom: none !important;
+}
+
+.price-table tr {
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.price-table tr:last-child {
+  border-bottom: none;
+}
+
+.price-table td {
+  padding: var(--spacing-md) var(--spacing-lg);
+  color: var(--color-text);
+}
+
+.price-table tbody tr:hover {
+  background: rgba(var(--color-primary-rgb), 0.05);
+  cursor: default;
+}
+
+.price-table th.price-column,
+.price-table td.price-value {
+  width: 25%;
+  text-align: right;
+}
+
+.price-table td:first-child {
+  font-weight: 500;
+}
+
+.price-table .price-value {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: var(--font-size-xl);
+  background: var(--color-bg-light);
+}
+
+/* --- Actions Area --- */
+.card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--spacing-lg);
+}
+
+.card-actions .btn {
+  padding: 10px 24px;
+  font-size: var(--font-size-base);
+}
+
+@media (max-width: 1024px) {
+  .price-card {
+    gap: var(--spacing-xl);
+    padding: var(--spacing-xl);
+  }
+  .price-image {
+    flex-basis: 40%;
+    max-width: 40%;
+  }
+  .price-details {
+    flex-basis: 60%;
+    max-width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .price-filter-tabs {
+    justify-content: flex-start;
+  }
+
+  .price-group-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .price-card {
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-lg);
+  }
+
+  .price-image,
+  .price-details {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  .price-image {
+    aspect-ratio: unset;
+    height: 200px;
+  }
+
+  .price-table-wrapper {
+    overflow-x: auto;
+  }
+
+  .price-table {
+    min-width: 500px;
+  }
+
+  .price-table .price-value {
+    font-size: var(--font-size-lg);
+  }
+
+  .card-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-md);
+  }
+
+  .card-actions .cta-link {
+    justify-content: center;
+    display: flex;
+  }
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.section-header h2 {
+  font-size: var(--font-size-5xl);
+  font-weight: 900;
+  color: var(--color-text-dark);
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-md);
+}
+
+.section-header p {
+  font-size: var(--font-size-xl);
+  color: var(--color-text);
+  max-width: 800px;
+  margin: 0 auto var(--spacing-3xl) auto;
+}
+
+.section-divider {
+  width: 60px;
+  height: 4px;
+  background: var(--color-primary);
+  margin-bottom: var(--spacing-lg);
+  border-radius: 2px;
+}
+
+.price-filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: var(--spacing-3xl);
+  justify-content: center;
+  padding: var(--spacing-lg);
+  background: var(--color-bg-light);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.price-filter-tabs .filter-btn {
+  background: white;
+  color: var(--color-text-dark);
+  border: 1px solid var(--color-border);
+  padding: 12px 20px;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+}
+
+.price-filter-tabs .filter-btn:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+
+.price-filter-tabs .filter-btn.active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.price-table th {
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.price-table th:first-child,
+.price-table td:first-child {
+  width: 35%;
+}
+
+.price-table th.price-column,
+.price-table td.price-value {
+  width: 45%;
+  text-align: right;
+}
+
+.price-table th:nth-child(2),
+.price-table td:nth-child(2) {
+  width: 40%;
+}
+
+.contact-cta-banner-new {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-dark) 0%,
+    var(--color-primary) 100%
+  );
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl) var(--spacing-3xl);
+  margin-top: var(--spacing-4xl);
+  color: white;
+  box-shadow: var(--shadow-xl);
+  margin-top: 40px;
+}
+
+.cta-content-box {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2xl);
+}
+
+.cta-icon {
+  font-size: var(--font-size-5xl);
+  color: var(--color-secondary-light);
+  flex-shrink: 0;
+}
+
+.cta-text {
+  flex-grow: 1;
+}
+
+.cta-text h3 {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  margin: 0 0 var(--spacing-sm);
+  color: white;
+}
+
+.cta-text p {
+  font-size: var(--font-size-lg);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.cta-action {
+  flex-shrink: 0;
+}
+
+.cta-action .btn-secondary {
+  background: var(--color-secondary);
+  color: var(--color-text-dark);
+  font-weight: 700;
+  padding: 14px 30px;
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.cta-action .btn-secondary:hover {
+  background: var(--color-secondary-dark);
+}
+
+@media (max-width: 768px) {
+  .cta-content-box {
+    flex-direction: column;
+    text-align: center;
+  }
+  .cta-icon {
+    margin-bottom: var(--spacing-md);
+  }
+  .cta-action {
+    margin-top: var(--spacing-lg);
+    width: 100%;
+  }
+  .cta-action .btn-secondary {
+    width: 100%;
+  }
+}

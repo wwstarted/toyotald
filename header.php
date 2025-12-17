@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php wp_title('|', true, 'right');
     bloginfo('name'); ?></title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <?php wp_head(); ?>
 </head>
 
@@ -21,48 +25,99 @@
                         <?php if (has_custom_logo()): ?>
                             <?php the_custom_logo(); ?>
                         <?php else: ?>
-                            <img src="<?php echo get_template_directory_uri(); ?>/images/logo.png" alt="Toyota Logo"
-                                class="site-logo">
+                            <img src="https://th.bing.com/th/id/OIP.hKL_zFVdLx8dCiYOZ8hrGgHaGL?w=150&h=150&c=6&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1"
+                                alt="Toyota Logo" class="site-logo">
                         <?php endif; ?>
                         <span class="site-name">Toyota Đà Lạt</span>
                     </a>
                 </div>
                 <div class="hotline-section">
-                    <svg class="phone-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <path
-                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-                        </path>
-                    </svg>
-                    <a href="tel:0943231614" class="hotline-number">0943 231 614</a>
+                    <i class="fa-solid fa-phone phone-icon"></i>
+                    <a href="tel:0943231614" class="hotline-number">033 408 7540</a>
                 </div>
             </div>
 
-            <!-- Center Section: Navigation Menu -->
+            <!-- Center Section: Static Navigation Menu -->
             <nav class="header-center">
-                <?php
-                wp_nav_menu(array(
-                    'theme_location' => 'primary',
-                    'container' => false,
-                    'menu_class' => 'main-menu',
-                    'fallback_cb' => '__return_false'
-                ));
-                ?>
+                <ul class="main-menu">
+                    <li><a href="<?php echo esc_url(home_url('/')); ?>">Trang chủ</a></li>
+                    <li class="menu-item-has-children">
+                        <a href="<?php echo esc_url(home_url('/san-pham')); ?>">Sản phẩm</a>
+                        <ul class="sub-menu">
+                            <li><a href="<?php echo esc_url(home_url('/san-pham/toyota-wigo')); ?>">Toyota Wigo</a></li>
+                            <li><a href="<?php echo esc_url(home_url('/san-pham/toyota-vios')); ?>">Toyota Vios</a></li>
+                            <li><a href="<?php echo esc_url(home_url('/san-pham/toyota-corolla-cross')); ?>">Toyota
+                                    Corolla Cross</a></li>
+                            <li><a href="<?php echo esc_url(home_url('/san-pham/toyota-fortuner')); ?>">Toyota
+                                    Fortuner</a></li>
+                            <li><a href="<?php echo esc_url(home_url('/san-pham/toyota-innova')); ?>">Toyota Innova</a>
+                            </li>
+                            <li><a href="<?php echo esc_url(home_url('/san-pham')); ?>">Xem tất cả</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="<?php echo esc_url(home_url('/bang-gia')); ?>">Bảng giá</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/tin-tuc')); ?>">Tin tức - Khuyến mãi</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/dang-ky-lai-thu')); ?>">Đăng ký lái thử</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/dich-vu')); ?>">Dịch vụ</a></li>
+                </ul>
             </nav>
 
-            <!-- Right Section: Search Form -->
+            <!-- Right Section: Search Form with Dropdown -->
             <div class="header-right">
-                <form role="search" method="get" class="search-form" action="<?php echo esc_url(home_url('/')); ?>">
-                    <input type="search" class="search-input" placeholder="Tìm kiếm..." name="s"
-                        value="<?php echo get_search_query(); ?>">
-                    <button type="submit" class="search-button">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.35-4.35"></path>
-                        </svg>
-                    </button>
-                </form>
+                <div class="header-search">
+                    <form role="search" method="get" class="search-form" action="<?php echo esc_url(home_url('/')); ?>">
+                        <input type="search" class="search-input" placeholder="Tìm kiếm..." name="s"
+                            value="<?php echo get_search_query(); ?>" autocomplete="off">
+                        <button type="submit" class="search-button">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+
+                        <!-- Search Dropdown (will be populated by JS) -->
+                        <div class="search-dropdown">
+                            <div class="search-dropdown-content">
+                                <!-- Loading State -->
+                                <div class="search-loading">
+                                    <i class="fa-solid fa-spinner fa-spin"></i>
+                                    <span>Đang tìm kiếm...</span>
+                                </div>
+
+                                <!-- Results -->
+                                <div class="search-results">
+                                    <!-- Products Section -->
+                                    <div class="search-section" id="products-section">
+                                        <div class="search-section-header">
+                                            <i class="fa-solid fa-car"></i>
+                                            <span>SẢN PHẨM</span>
+                                        </div>
+                                        <div class="search-section-results" id="products-results"></div>
+                                    </div>
+
+                                    <!-- Posts Section -->
+                                    <div class="search-section" id="posts-section">
+                                        <div class="search-section-header">
+                                            <i class="fa-solid fa-newspaper"></i>
+                                            <span>BÀI VIẾT</span>
+                                        </div>
+                                        <div class="search-section-results" id="posts-results"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Empty State -->
+                                <div class="search-empty">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <p>Không tìm thấy kết quả</p>
+                                    <span>Thử với từ khóa khác</span>
+                                </div>
+
+                                <!-- Error State -->
+                                <div class="search-error">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <p>Có lỗi xảy ra</p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <!-- Mobile Menu Toggle -->
@@ -82,21 +137,17 @@
                 <span class="site-name">Toyota Đà Lạt</span>
                 <button class="mobile-menu-close" id="mobile-menu-close">&times;</button>
             </div>
-            <?php
-            wp_nav_menu(array(
-                'theme_location' => 'primary',
-                'container' => false,
-                'menu_class' => 'mobile-menu',
-                'fallback_cb' => '__return_false'
-            ));
-            ?>
+            <ul class="mobile-menu">
+                <li><a href="<?php echo esc_url(home_url('/')); ?>">Trang chủ</a></li>
+                <li><a href="<?php echo esc_url(home_url('/san-pham')); ?>">Sản phẩm</a></li>
+                <li><a href="<?php echo esc_url(home_url('/bang-gia')); ?>">Bảng giá</a></li>
+                <li><a href="<?php echo esc_url(home_url('/tin-tuc')); ?>">Tin tức - Khuyến mãi</a></li>
+                <li><a href="<?php echo esc_url(home_url('/dang-ky-lai-thu')); ?>">Đăng ký lái thử</a></li>
+                <li><a href="<?php echo esc_url(home_url('/dich-vu')); ?>">Dịch vụ</a></li>
+            </ul>
             <div class="mobile-hotline">
                 <a href="tel:0943231614" class="mobile-hotline-link">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path
-                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-                        </path>
-                    </svg>
+                    <i class="fa-solid fa-phone"></i>
                     Gọi ngay: 0943 231 614
                 </a>
             </div>

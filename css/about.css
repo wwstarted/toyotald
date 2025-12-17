@@ -1,0 +1,236 @@
+/* ABOUT PAGE STYLES - MODERN & TRENDING */
+
+/* --- 1. HERO --- */
+.about-hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  margin-top: -70px;
+}
+
+.about-badge {
+  /* Đổi sang kiểu tag/pill hiện đại hơn */
+  display: inline-block;
+  color: var(--color-primary-dark);
+  background: var(--color-primary-light);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.hero-image-wrapper {
+  /* Khung ảnh ấn tượng hơn */
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 500px;
+}
+.hero-image-wrapper img {
+  /* Đảm bảo ảnh cover và không bị biến dạng */
+  object-fit: cover;
+  display: block;
+  height: 100%;
+}
+
+/* --- 2. MISSION, VISION, CORE VALUES --- */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-2xl);
+  text-align: center;
+}
+
+.value-card {
+  padding: var(--spacing-lg);
+  transition: all var(--transition-base);
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.value-icon-circle {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-2xl);
+  line-height: 1; /* Để icon căn giữa */
+  box-shadow: var(--shadow-md);
+}
+
+/* --- 3. FACILITIES (Zig-Zag Layout) --- */
+.info-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3xl);
+  align-items: center;
+}
+
+.info-block.reverse {
+  /* Đảo ngược thứ tự cho khối thứ 2 */
+  grid-template-areas: "content media";
+}
+.info-block.reverse .info-content {
+  grid-area: content;
+}
+.info-block.reverse .info-media {
+  grid-area: media;
+}
+
+.info-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.clean-list {
+  list-style: none;
+  padding: 0;
+}
+
+.clean-list li {
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-base);
+}
+
+.clean-list li span {
+  margin-right: 8px;
+}
+
+/* --- 4. TIMELINE (Đơn giản hóa) --- */
+.timeline-simple {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  max-width: 1000px;
+  margin: var(--spacing-3xl) auto 0;
+  padding-top: 30px; /* Khoảng trống cho đường kẻ */
+}
+
+/* Đường kẻ ngang */
+.timeline-simple::before {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background-color: var(--color-border);
+  top: 0;
+  left: 0;
+}
+
+.timeline-item-simple {
+  width: 23%; /* Chiếm khoảng 1/4 */
+  text-align: center;
+  position: relative;
+}
+
+/* Chấm tròn & Năm */
+.timeline-item-simple::before {
+  content: attr(data-year); /* Lấy năm từ data attribute */
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  background-color: var(--color-primary);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.timeline-item-simple::after {
+  content: "";
+  position: absolute;
+  top: -3px; /* Đặt trên đường kẻ */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15px;
+  height: 15px;
+  background-color: var(--color-primary);
+  border: 3px solid var(--color-bg);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-item-simple p {
+  margin-top: var(--spacing-lg);
+  color: var(--color-text);
+}
+
+/* --- 5. CTA (Đã dùng Utility) --- */
+/* Đã dùng Utility Classes, chỉ cần thêm style nhỏ cho các nút */
+.about-cta .btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1024px) {
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .info-block,
+  .info-block.reverse {
+    grid-template-columns: 1fr;
+    grid-template-areas: none; /* Bỏ grid areas */
+    gap: var(--spacing-xl);
+  }
+  .info-block.reverse .info-content {
+    order: 2; /* Đẩy content xuống dưới media */
+  }
+  .info-block.reverse .info-media {
+    order: 1; /* Đẩy media lên trên */
+  }
+
+  .timeline-simple {
+    flex-direction: column; /* Chuyển thành trục dọc */
+    align-items: flex-start;
+    padding-top: 0;
+    padding-left: 20px;
+  }
+
+  .timeline-simple::before {
+    height: 100%;
+    width: 3px;
+    top: 0;
+    left: 0;
+  }
+
+  .timeline-item-simple {
+    width: 100%;
+    text-align: left;
+    padding: var(--spacing-lg) 0 0 30px;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .timeline-item-simple::before {
+    left: 3px;
+    transform: translateX(0) translateY(-120%);
+  }
+
+  .timeline-item-simple::after {
+    left: 0;
+    top: 25px;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-cta .d-flex {
+    flex-direction: column;
+  }
+}
