@@ -134,7 +134,6 @@ footer .footer-content {
   color: #3b82f6;
 }
 
-/* GRID LAYOUT */
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -191,7 +190,6 @@ footer .footer-content {
   background: #2563eb;
 }
 
-/* MID INFO BAR */
 .footer-mid-info {
   text-align: center;
   color: #9ca3af;
@@ -199,7 +197,6 @@ footer .footer-content {
   letter-spacing: 0.5px;
 }
 
-/* BOTTOM */
 .footer-content-end {
   text-align: center;
   color: #6b7280;
@@ -208,7 +205,6 @@ footer .footer-content {
   padding-top: 20px;
 }
 
-/* MOBILE */
 @media (max-width: 768px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr;

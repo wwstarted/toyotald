@@ -18,13 +18,6 @@ function toyota_enqueue_assets()
         '1.0.0'
     );
 
-    // wp_enqueue_style(
-    //     'toyota-global1',
-    //     get_template_directory_uri() . '/css/single.css',
-    //     array(),
-    //     '1.0.0'
-    // );
-
     wp_enqueue_style(
         'toyota-header',
         get_template_directory_uri() . '/css/header.css',
@@ -96,6 +89,60 @@ function toyota_enqueue_assets()
         );
     }
 
+    if (is_page_template('page-contact.php')) {
+        wp_enqueue_style(
+            'toyota-contact',
+            get_template_directory_uri() . '/css/contact.css',
+            array('toyota-global'),
+            '1.0.0'
+        );
+
+        wp_enqueue_script(
+            'toyota-contact',
+            get_template_directory_uri() . '/js.contact.js',
+            array(),
+            '1.0.0',
+            true
+        );
+    }
+
+
+    if (is_page_template('page-single-blogs.php')) {
+        wp_enqueue_style(
+            'single-post',
+            get_template_directory_uri() . '/css/single-blogs.css'
+        );
+
+        wp_enqueue_script(
+            'single-post',
+            get_template_directory_uri() . '/js/single-blogs.js',
+            array(),
+            null,
+            true
+        );
+    }
+
+
+
+    add_action('wp_enqueue_scripts', 'enqueue_single_post_assets');
+
+    if (is_page_template('page-blogs.php')) {
+        wp_enqueue_style(
+            'toyota-blogs',
+            get_template_directory_uri() . '/css/blogs.css',
+            array('toyota-global'),
+            '1.0.0'
+        );
+
+        wp_enqueue_script(
+            'toyota-blogs',
+            get_template_directory_uri() . '/js/blogs.js',
+            array(),
+            '1.0.0',
+            true
+        );
+    }
+
     if (is_page_template('page-price.php')) {
         wp_enqueue_style(
             'toyota-price',
@@ -107,6 +154,23 @@ function toyota_enqueue_assets()
         wp_enqueue_script(
             'toyota-price',
             get_template_directory_uri() . '/js/price.js',
+            array(),
+            '1.0.0',
+            true
+        );
+    }
+
+    if (is_page_template('page-text.php')) {
+        wp_enqueue_style(
+            'text',
+            get_template_directory_uri() . '/css/text.css',
+            array('toyota-global'),
+            '1.0.0'
+        );
+
+        wp_enqueue_script(
+            'text',
+            get_template_directory_uri() . '/js/text.js',
             array(),
             '1.0.0',
             true
@@ -258,6 +322,7 @@ function toyota_register_search_endpoint()
     ));
 }
 add_action('rest_api_init', 'toyota_register_search_endpoint');
+
 
 function toyota_search_callback($request)
 {

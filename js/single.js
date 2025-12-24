@@ -1,3 +1,8 @@
+/**
+ * Toyota Product Detail Page - Modern JavaScript
+ * All interactions and calculations
+ */
+
 (function () {
   "use strict";
 
@@ -15,22 +20,25 @@
       init() {
         if (this.mainImages.length === 0) return;
 
-        this.prevBtn.addEventListener("click", () => this.prev());
-        this.nextBtn.addEventListener("click", () => this.next());
+        this.prevBtn?.addEventListener("click", () => this.prev());
+        this.nextBtn?.addEventListener("click", () => this.next());
 
         this.thumbnails.forEach((thumb, index) => {
           thumb.addEventListener("click", () => this.goToSlide(index));
         });
+
+        // Auto-play (optional)
+        // setInterval(() => this.next(), 5000);
       },
 
       goToSlide(index) {
-        this.mainImages[this.currentIndex].classList.remove("active");
-        this.thumbnails[this.currentIndex].classList.remove("active");
+        this.mainImages[this.currentIndex]?.classList.remove("active");
+        this.thumbnails[this.currentIndex]?.classList.remove("active");
 
         this.currentIndex = index;
 
-        this.mainImages[this.currentIndex].classList.add("active");
-        this.thumbnails[this.currentIndex].classList.add("active");
+        this.mainImages[this.currentIndex]?.classList.add("active");
+        this.thumbnails[this.currentIndex]?.classList.add("active");
       },
 
       next() {
@@ -53,25 +61,9 @@
     // ==========================================
     const tabsNav = document.getElementById("productTabsNav");
     const tabLinks = document.querySelectorAll(".tab-link");
-
-    // Sticky tabs on scroll
-    let tabsOffsetTop = 0;
-    if (tabsNav) {
-      tabsOffsetTop = tabsNav.offsetTop;
-    }
-
-    window.addEventListener("scroll", function () {
-      if (window.pageYOffset >= tabsOffsetTop - 100) {
-        tabsNav.style.position = "fixed";
-        tabsNav.style.top = "0";
-        tabsNav.style.width = "100%";
-      } else {
-        tabsNav.style.position = "sticky";
-      }
-
-      // Update active tab on scroll
-      updateActiveTab();
-    });
+    const sections = document.querySelectorAll(
+      ".content-section, .simple-price-section, .pricing-section, .calculator-section"
+    );
 
     // Smooth scroll to sections
     tabLinks.forEach((link) => {
@@ -81,7 +73,7 @@
         const targetSection = document.querySelector(targetId);
 
         if (targetSection) {
-          const offsetTop = targetSection.offsetTop - 150;
+          const offsetTop = targetSection.offsetTop - 100;
           window.scrollTo({
             top: offsetTop,
             behavior: "smooth",
@@ -90,15 +82,18 @@
       });
     });
 
-    // Update active tab based on scroll position
+    // Update active tab on scroll
     function updateActiveTab() {
-      const sections = document.querySelectorAll(".content-section");
       let currentSection = "";
+      const scrollPos = window.pageYOffset + 200;
 
       sections.forEach((section) => {
-        const sectionTop = section.offsetTop - 200;
-        if (window.pageYOffset >= sectionTop) {
-          currentSection = section.getAttribute("id");
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute("id");
+
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+          currentSection = sectionId;
         }
       });
 
@@ -109,6 +104,8 @@
         }
       });
     }
+
+    window.addEventListener("scroll", updateActiveTab);
 
     // ==========================================
     // CALCULATOR TABS
@@ -126,7 +123,7 @@
 
         // Add active to current
         this.classList.add("active");
-        document.getElementById(`calc-${targetCalc}`).classList.add("active");
+        document.getElementById(`calc-${targetCalc}`)?.classList.add("active");
       });
     });
 
@@ -135,8 +132,9 @@
     // ==========================================
     window.calculateRegistration = function () {
       const carVersion = document.getElementById("carVersion");
-      const carPrice = parseInt(carVersion.value);
+      if (!carVersion) return;
 
+      const carPrice = parseInt(carVersion.value);
       const registrationFee = carPrice * 0.1; // 10%
       const insurance = carPrice * 0.015; // 1.5%
       const plateNumber = 20000000;
@@ -153,15 +151,11 @@
         roadFee +
         inspection;
 
-      // Update results
-      document.getElementById("result-car-price").textContent =
-        formatCurrency(carPrice);
-      document.getElementById("result-registration-fee").textContent =
-        formatCurrency(registrationFee);
-      document.getElementById("result-insurance").textContent =
-        formatCurrency(insurance);
-      document.getElementById("result-total").textContent =
-        formatCurrency(total);
+      // Update results with animation
+      animateValue("result-car-price", 0, carPrice, 500);
+      animateValue("result-registration-fee", 0, registrationFee, 500);
+      animateValue("result-insurance", 0, insurance, 500);
+      animateValue("result-total", 0, total, 800);
     };
 
     // ==========================================
@@ -213,26 +207,38 @@
       const totalPayment = monthlyPayment * months;
       const totalInterest = totalPayment - loanAmount;
 
-      // Update results
-      document.getElementById("loan-downpayment").textContent =
-        formatCurrency(downPayment);
-      document.getElementById("loan-monthly").textContent =
-        formatCurrency(monthlyPayment);
-      document.getElementById("loan-interest").textContent =
-        formatCurrency(totalInterest);
-      document.getElementById("loan-total").textContent = formatCurrency(
-        totalPayment + downPayment
-      );
+      // Update results with animation
+      animateValue("loan-downpayment", 0, downPayment, 500);
+      animateValue("loan-monthly", 0, monthlyPayment, 500);
+      animateValue("loan-interest", 0, totalInterest, 500);
+      animateValue("loan-total", 0, totalPayment + downPayment, 800);
     };
 
-    // Format currency
+    // Format currency helper
     function formatCurrency(amount) {
-      return (
-        Math.round(amount).toLocaleString("vi-VN", {
-          style: "currency",
-          currency: "VND",
-        }) + ""
-      );
+      return Math.round(amount).toLocaleString("vi-VN") + " ₫";
+    }
+
+    // Animate value helper
+    function animateValue(elementId, start, end, duration) {
+      const element = document.getElementById(elementId);
+      if (!element) return;
+
+      const range = end - start;
+      const increment = range / (duration / 16);
+      let current = start;
+
+      const timer = setInterval(() => {
+        current += increment;
+        if (
+          (increment > 0 && current >= end) ||
+          (increment < 0 && current <= end)
+        ) {
+          current = end;
+          clearInterval(timer);
+        }
+        element.textContent = formatCurrency(current);
+      }, 16);
     }
 
     // ==========================================
@@ -251,7 +257,7 @@
         galleryFilterBtns.forEach((b) => b.classList.remove("active"));
         this.classList.add("active");
 
-        // Filter items
+        // Filter items with animation
         galleryItems.forEach((item) => {
           if (
             filter === "all" ||
@@ -279,6 +285,7 @@
     });
 
     function createLightbox(src, alt) {
+      // Create lightbox element
       const lightbox = document.createElement("div");
       lightbox.className = "lightbox-modal";
       lightbox.innerHTML = `
@@ -366,9 +373,10 @@
       closeBtn.addEventListener("click", closeLightbox);
       backdrop.addEventListener("click", closeLightbox);
 
-      document.addEventListener("keydown", function (e) {
+      document.addEventListener("keydown", function escHandler(e) {
         if (e.key === "Escape") {
           closeLightbox();
+          document.removeEventListener("keydown", escHandler);
         }
       });
     }
@@ -381,7 +389,7 @@
     faqItems.forEach((item) => {
       const question = item.querySelector(".faq-question");
 
-      question.addEventListener("click", () => {
+      question?.addEventListener("click", () => {
         // Close other items
         faqItems.forEach((otherItem) => {
           if (otherItem !== item && otherItem.classList.contains("active")) {
@@ -403,18 +411,18 @@
       productContactForm.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        const name = this.querySelector('input[name="name"]').value.trim();
-        const phone = this.querySelector('input[name="phone"]').value.trim();
+        const name = this.querySelector('input[name="name"]')?.value.trim();
+        const phone = this.querySelector('input[name="phone"]')?.value.trim();
 
         if (!name || !phone) {
-          alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
+          showToast("Vui lòng điền đầy đủ thông tin bắt buộc!", "error");
           return;
         }
 
         // Phone validation
         const phoneRegex = /^[0-9]{10,11}$/;
         if (!phoneRegex.test(phone.replace(/\s/g, ""))) {
-          alert("Số điện thoại không hợp lệ!");
+          showToast("Số điện thoại không hợp lệ!", "error");
           return;
         }
 
@@ -425,6 +433,11 @@
           '<i class="fa-solid fa-check"></i> Đã gửi thành công!';
         submitBtn.disabled = true;
         submitBtn.style.background = "#28a745";
+
+        showToast(
+          "Đã gửi thông tin thành công! Chúng tôi sẽ liên hệ trong vòng 15 phút.",
+          "success"
+        );
 
         // Reset after 2 seconds
         setTimeout(() => {
@@ -438,11 +451,44 @@
         console.log("Form submitted:", {
           name,
           phone,
-          email: this.querySelector('input[name="email"]').value,
-          version: this.querySelector('select[name="version"]').value,
-          message: this.querySelector('textarea[name="message"]').value,
+          email: this.querySelector('input[name="email"]')?.value,
+          version: this.querySelector('select[name="version"]')?.value,
+          message: this.querySelector('textarea[name="message"]')?.value,
         });
       });
+    }
+
+    // Toast notification helper
+    function showToast(message, type = "info") {
+      const toast = document.createElement("div");
+      toast.className = `toast toast-${type}`;
+      toast.textContent = message;
+      toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${
+          type === "success"
+            ? "#28a745"
+            : type === "error"
+            ? "#dc3545"
+            : "#007bff"
+        };
+        color: white;
+        padding: 16px 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 10000;
+        animation: slideInRight 0.3s ease;
+        max-width: 350px;
+      `;
+
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.animation = "slideOutRight 0.3s ease";
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
     }
 
     // ==========================================
@@ -452,13 +498,13 @@
 
     window.addEventListener("scroll", function () {
       if (window.pageYOffset > 300) {
-        backToTopBtn.classList.add("visible");
+        backToTopBtn?.classList.add("visible");
       } else {
-        backToTopBtn.classList.remove("visible");
+        backToTopBtn?.classList.remove("visible");
       }
     });
 
-    backToTopBtn.addEventListener("click", function () {
+    backToTopBtn?.addEventListener("click", function () {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -466,11 +512,11 @@
     });
 
     // ==========================================
-    // SMOOTH SCROLL ANIMATIONS
+    // SCROLL REVEAL ANIMATIONS
     // ==========================================
     const animateOnScroll = () => {
       const elements = document.querySelectorAll(
-        ".pricing-card, .feature-item, .performance-card, .safety-item, .review-card, .product-card"
+        ".pricing-card, .feature-item, .performance-card, .safety-item, .product-card, .highlight-item"
       );
 
       const observer = new IntersectionObserver(
@@ -478,7 +524,7 @@
           entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
               setTimeout(() => {
-                entry.target.style.opacity = "0";
+                entry.target.style.opacity = "1";
                 entry.target.style.animation = "fadeInUp 0.6s ease forwards";
               }, index * 50);
               observer.unobserve(entry.target);
@@ -489,11 +535,62 @@
       );
 
       elements.forEach((el) => {
+        el.style.opacity = "0";
         observer.observe(el);
       });
     };
 
     animateOnScroll();
+
+    // ==========================================
+    // ADD CSS ANIMATIONS
+    // ==========================================
+    const style = document.createElement("style");
+    style.textContent = `
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideOutRight {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
 
     // ==========================================
     // INITIALIZE CALCULATORS WITH DEFAULT VALUES
@@ -508,6 +605,26 @@
       interestRate.dispatchEvent(new Event("input"));
     }
 
-    console.log("✅ Product Detail Page initialized successfully!");
+    // ==========================================
+    // SMOOTH SCROLL FOR ALL ANCHOR LINKS
+    // ==========================================
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        const href = this.getAttribute("href");
+        if (href !== "#" && href.length > 1) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            const offsetTop = target.offsetTop - 100;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: "smooth",
+            });
+          }
+        }
+      });
+    });
+
+    console.log("✅ Toyota Product Detail Page initialized successfully!");
   });
 })();

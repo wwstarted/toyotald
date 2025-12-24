@@ -1,0 +1,136 @@
+/* Base */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+/* Section */
+.what-we-do {
+  padding: 120px 0;
+}
+.wwd-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* LEFT */
+.wwd-left {
+  position: relative;
+}
+.wwd-images {
+  position: sticky;
+  top: 100px;
+  height: 80vh;
+}
+/* .wwd-image {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 1s ease, transform 1.1s ease;
+}
+
+.wwd-image.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.wwd-image.leaving {
+  opacity: 0;
+  transform: scale(1.03);
+  z-index: 1;
+} */
+
+/* IMAGE – Fade + Translate (Collective style) */
+.wwd-image {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wwd-image.active {
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 2;
+}
+
+.wwd-image.leaving {
+  opacity: 0;
+  transform: translateY(-12px);
+  z-index: 1;
+}
+
+.wwd-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* RIGHT */
+.wwd-right {
+  min-height: 300vh; /* tạo không gian scroll */
+}
+.wwd-services {
+  position: sticky;
+  top: 100px;
+}
+.wwd-service {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wwd-service.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.wwd-service span,
+.wwd-service h2,
+.wwd-service p {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+}
+
+/* ENTER */
+.wwd-service.active span {
+  transition-delay: 0.05s;
+}
+.wwd-service.active h2 {
+  transition-delay: 0.12s;
+}
+.wwd-service.active p {
+  transition-delay: 0.2s;
+}
+
+.wwd-service.active span,
+.wwd-service.active h2,
+.wwd-service.active p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* LEAVE */
+.wwd-service.leaving span,
+.wwd-service.leaving h2,
+.wwd-service.leaving p {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.eyebrow {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}

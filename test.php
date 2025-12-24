@@ -1,59 +1,82 @@
-<div class="feature-text">
-    <h4>Màn Hình Cảm Ứng</h4>
-    <p>Màn hình 10.1 inch hiển thị sắc nét, hỗ trợ Apple CarPlay & Android Auto</p>
-</div>
-</div>
-
-<div class="interior-feature-item">
-    <div class="feature-icon">
-        <i class="fa-solid fa-wind"></i>
-    </div>
-    <div class="feature-text">
-        <h4>Điều Hòa 2 Vùng</h4>
-        <p>Hệ thống điều hòa tự động 2 vùng độc lập với cửa gió hàng ghế sau</p>
-    </div>
+<?php
+/**
+ * Template Name: single
+ * Description: Trang hiển thị bảng giá chi tiết các dòng xe Toyota.
+ */
+get_header(); ?>
+<div class="section-header">
+    <h2>Nội Thất Toyota Corolla Cross</h2>
+    <div class="section-divider"></div>
+    <p>Không gian rộng rãi, sang trọng và tiện nghi</p>
 </div>
 
-<div class="interior-feature-item">
-    <div class="feature-icon">
-        <i class="fa-solid fa-couch"></i>
+<div class="interior-grid">
+    <div class="interior-main-image">
+        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&h=500&fit=crop"
+            alt="Nội thất Corolla Cross">
     </div>
-    <div class="feature-text">
-        <h4>Ghế Da Cao Cấp</h4>
-        <p>Ghế bọc da cao cấp, ghế lái chỉnh điện 8 hướng với nhớ vị trí</p>
-    </div>
-</div>
 
-<div class="interior-feature-item">
-    <div class="feature-icon">
-        <i class="fa-solid fa-sun"></i>
-    </div>
-    <div class="feature-text">
-        <h4>Cửa Sổ Trời Toàn Cảnh</h4>
-        <p>Cửa sổ trời panorama mang lại không gian thoáng đãng</p>
-    </div>
-</div>
+    <div class="interior-features">
+        <div class="interior-feature-item">
+            <div class="feature-icon">
+                <i class="fa-solid fa-tv"></i>
+            </div>
+            <div class="feature-text">
+                <h4>Màn Hình Cảm Ứng</h4>
+                <p>Màn hình 10.1 inch hiển thị sắc nét, hỗ trợ Apple CarPlay & Android Auto</p>
+            </div>
+        </div>
 
-<div class="interior-feature-item">
-    <div class="feature-icon">
-        <i class="fa-solid fa-volume-high"></i>
-    </div>
-    <div class="feature-text">
-        <h4>Âm Thanh Cao Cấp</h4>
-        <p>Hệ thống âm thanh 9 loa JBL mang đến trải nghiệm giải trí đỉnh cao</p>
-    </div>
-</div>
+        <div class="interior-feature-item">
+            <div class="feature-icon">
+                <i class="fa-solid fa-wind"></i>
+            </div>
+            <div class="feature-text">
+                <h4>Điều Hòa 2 Vùng</h4>
+                <p>Hệ thống điều hòa tự động 2 vùng độc lập với cửa gió hàng ghế sau</p>
+            </div>
+        </div>
 
-<div class="interior-feature-item">
-    <div class="feature-icon">
-        <i class="fa-solid fa-suitcase"></i>
+        <div class="interior-feature-item">
+            <div class="feature-icon">
+                <i class="fa-solid fa-couch"></i>
+            </div>
+            <div class="feature-text">
+                <h4>Ghế Da Cao Cấp</h4>
+                <p>Ghế bọc da cao cấp, ghế lái chỉnh điện 8 hướng với nhớ vị trí</p>
+            </div>
+        </div>
+
+        <div class="interior-feature-item">
+            <div class="feature-icon">
+                <i class="fa-solid fa-sun"></i>
+            </div>
+            <div class="feature-text">
+                <h4>Cửa Sổ Trời Toàn Cảnh</h4>
+                <p>Cửa sổ trời panorama mang lại không gian thoáng đãng</p>
+            </div>
+        </div>
+
+        <div class="interior-feature-item">
+            <div class="feature-icon">
+                <i class="fa-solid fa-volume-high"></i>
+            </div>
+            <div class="feature-text">
+                <h4>Âm Thanh Cao Cấp</h4>
+                <p>Hệ thống âm thanh 9 loa JBL mang đến trải nghiệm giải trí đỉnh cao</p>
+            </div>
+        </div>
+
+        <div class="interior-feature-item">
+            <div class="feature-icon">
+                <i class="fa-solid fa-suitcase"></i>
+            </div>
+            <div class="feature-text">
+                <h4>Khoang Hành Lý 487L</h4>
+                <p>Khoang hành lý rộng rãi, ghế sau gập linh hoạt 60:40</p>
+            </div>
+        </div>
     </div>
-    <div class="feature-text">
-        <h4>Khoang Hành Lý 487L</h4>
-        <p>Khoang hành lý rộng rãi, ghế sau gập linh hoạt 60:40</p>
-    </div>
-</div>
-</div>
 </div>
 </div>
 </section>
@@ -83,8 +106,8 @@
                         <span class="stat-unit">Nm</span>
                     </div>
                 </div>
-                <p>Động cơ xăng 1.8L Dual VVT-i kết hợp hộp số CVT mang lại khả năng vận hành mượt
-                    mà và tiết kiệm nhiên liệu.</p>
+                <p>Động cơ xăng 1.8L Dual VVT-i kết hợp hộp số CVT mang lại khả năng vận hành mượt mà và tiết kiệm nhiên
+                    liệu.</p>
             </div>
 
             <div class="performance-card highlight">
@@ -102,8 +125,8 @@
                         <span class="stat-unit">Nm</span>
                     </div>
                 </div>
-                <p>Hệ thống Hybrid kết hợp động cơ xăng và mô-tơ điện, tiết kiệm nhiên liệu lên đến
-                    40%, chỉ 3.01L/100km.</p>
+                <p>Hệ thống Hybrid kết hợp động cơ xăng và mô-tơ điện, tiết kiệm nhiên liệu lên đến 40%, chỉ
+                    3.01L/100km.</p>
             </div>
 
             <div class="performance-card">
@@ -416,8 +439,8 @@
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                 </div>
-                <p class="review-text">"Xe rất đẹp và tiết kiệm nhiên liệu. Bản Hybrid chạy trong
-                    phố chỉ tốn 4L/100km. Tư vấn viên nhiệt tình, giao xe đúng hẹn."</p>
+                <p class="review-text">"Xe rất đẹp và tiết kiệm nhiên liệu. Bản Hybrid chạy trong phố chỉ tốn 4L/100km.
+                    Tư vấn viên nhiệt tình, giao xe đúng hẹn."</p>
                 <div class="review-author">
                     <img src="https://ui-avatars.com/api/?name=Nguyen+Van+A&background=eb0a1e&color=fff" alt="Customer">
                     <div>
@@ -435,8 +458,8 @@
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                 </div>
-                <p class="review-text">"Không gian nội thất rộng rãi, phù hợp gia đình. Hệ thống an
-                    toàn Toyota Safety Sense rất tuyệt vời, lái xe an tâm hơn."</p>
+                <p class="review-text">"Không gian nội thất rộng rãi, phù hợp gia đình. Hệ thống an toàn Toyota Safety
+                    Sense rất tuyệt vời, lái xe an tâm hơn."</p>
                 <div class="review-author">
                     <img src="https://ui-avatars.com/api/?name=Tran+Thi+B&background=eb0a1e&color=fff" alt="Customer">
                     <div>
@@ -454,8 +477,8 @@
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                 </div>
-                <p class="review-text">"Giá hợp lý, hỗ trợ trả góp tốt. Thiết kế đẹp, vận hành êm
-                    ái. Đội ngũ tư vấn chuyên nghiệp, hậu mãi chu đáo."</p>
+                <p class="review-text">"Giá hợp lý, hỗ trợ trả góp tốt. Thiết kế đẹp, vận hành êm ái. Đội ngũ tư vấn
+                    chuyên nghiệp, hậu mãi chu đáo."</p>
                 <div class="review-author">
                     <img src="https://ui-avatars.com/api/?name=Le+Van+C&background=eb0a1e&color=fff" alt="Customer">
                     <div>
@@ -483,9 +506,9 @@
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>Toyota Corolla Cross hiện có 3 phiên bản: 1.8G (820 triệu), 1.8V (890 triệu)
-                        và 1.8 HEV Hybrid (913 triệu). Mỗi phiên bản có những trang bị và tính năng
-                        khác nhau phù hợp với nhu cầu của từng khách hàng.</p>
+                    <p>Toyota Corolla Cross hiện có 3 phiên bản: 1.8G (820 triệu), 1.8V (890 triệu) và 1.8 HEV Hybrid
+                        (913 triệu). Mỗi phiên bản có những trang bị và tính năng khác nhau phù hợp với nhu cầu của từng
+                        khách hàng.</p>
                 </div>
             </div>
 
@@ -495,9 +518,8 @@
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>Phiên bản xăng tiêu thụ khoảng 6.5L/100km. Phiên bản Hybrid tiết kiệm hơn
-                        nhiều với mức 3.01L/100km trong điều kiện đô thị, giúp tiết kiệm chi phí
-                        nhiên liệu lên đến 40%.</p>
+                    <p>Phiên bản xăng tiêu thụ khoảng 6.5L/100km. Phiên bản Hybrid tiết kiệm hơn nhiều với mức
+                        3.01L/100km trong điều kiện đô thị, giúp tiết kiệm chi phí nhiên liệu lên đến 40%.</p>
                 </div>
             </div>
 
@@ -507,10 +529,9 @@
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>Corolla Cross được trang bị hệ thống Toyota Safety Sense bao gồm: cảnh báo
-                        tiền va chạm, cảnh báo lệch làn, hỗ trợ giữ làn, kiểm soát hành trình chủ
-                        động, đèn pha thích ứng. Ngoài ra còn có 7 túi khí, camera 360°, cảm biến
-                        lùi...</p>
+                    <p>Corolla Cross được trang bị hệ thống Toyota Safety Sense bao gồm: cảnh báo tiền va chạm, cảnh báo
+                        lệch làn, hỗ trợ giữ làn, kiểm soát hành trình chủ động, đèn pha thích ứng. Ngoài ra còn có 7
+                        túi khí, camera 360°, cảm biến lùi...</p>
                 </div>
             </div>
 
@@ -520,9 +541,9 @@
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>Toyota Corolla Cross được bảo hành 3 năm hoặc 100,000 km (tùy điều kiện nào
-                        đến trước). Riêng hệ thống Hybrid được bảo hành 5 năm hoặc 150,000 km. Bảo
-                        hành toàn cầu, có thể bảo dưỡng tại bất kỳ đại lý Toyota nào.</p>
+                    <p>Toyota Corolla Cross được bảo hành 3 năm hoặc 100,000 km (tùy điều kiện nào đến trước). Riêng hệ
+                        thống Hybrid được bảo hành 5 năm hoặc 150,000 km. Bảo hành toàn cầu, có thể bảo dưỡng tại bất kỳ
+                        đại lý Toyota nào.</p>
                 </div>
             </div>
 
@@ -532,9 +553,9 @@
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>Chúng tôi hỗ trợ vay trả góp lên đến 85% giá trị xe với lãi suất ưu đãi từ
-                        6.99%-9.5%/năm. Thủ tục đơn giản, hồ sơ duyệt trong ngày, không cần thẩm
-                        định thu nhập. Thời gian vay từ 1-7 năm.</p>
+                    <p>Chúng tôi hỗ trợ vay trả góp lên đến 85% giá trị xe với lãi suất ưu đãi từ 6.99%-9.5%/năm. Thủ
+                        tục đơn giản, hồ sơ duyệt trong ngày, không cần thẩm định thu nhập. Thời gian vay từ 1-7 năm.
+                    </p>
                 </div>
             </div>
         </div>
@@ -581,28 +602,560 @@
 
                 <div class="form-group">
                     <label>Nội dung</label>
-                    <textarea name="message" rows="4" placeholder="Nhập nội dung cần tư vấn..."></textarea>
-                </div>
+                    <textarea name="message" rows="4" placeholder="<?php get_header(); ?>
 
-                <button type="submit" class="btn btn-primary btn-lg btn-block">
-                    <i class="fa-solid fa-paper-plane"></i> Gửi thông tin
-                </button>
-            </form>
+<!-- Breadcrumb -->
+<section class=" breadcrumb-section">
+    <div class="container">
+        <nav class="breadcrumb-nav">
+            <a href="/">Trang chủ</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="/xe-toyota">Xe Toyota</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>Toyota Corolla Cross</span>
+        </nav>
+    </div>
+</section>
+
+<!-- Product Hero Section -->
+<section class="product-hero">
+    <div class="container">
+        <div class="product-hero-grid">
+            <!-- Left: Image Gallery -->
+            <div class="product-gallery">
+                <div class="gallery-badges">
+                    <span class="badge badge-hot">Hot</span>
+                    <span class="badge badge-promo">-30 triệu</span>
+                </div>
+                
+                <!-- Main Image -->
+                <div class="gallery-main">
+                    <div class="main-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&h=600&fit=crop" 
+                             alt="Toyota Corolla Cross" 
+                             class="main-image active"
+                             data-index="0">
+                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&h=600&fit=crop" 
+                             alt="Toyota Corolla Cross" 
+                             class="main-image"
+                             data-index="1">
+                        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&h=600&fit=crop" 
+                             alt="Toyota Corolla Cross" 
+                             class="main-image"
+                             data-index="2">
+                        <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800&h=600&fit=crop" 
+                             alt="Toyota Corolla Cross" 
+                             class="main-image"
+                             data-index="3">
+                    </div>
+                    
+                    <!-- Gallery Navigation -->
+                    <button class="gallery-nav gallery-prev">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button class="gallery-nav gallery-next">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Thumbnails -->
+                <div class="gallery-thumbnails">
+                    <div class="thumbnail active" data-index="0">
+                        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=150&h=100&fit=crop" alt="Thumb 1">
+                    </div>
+                    <div class="thumbnail" data-index="1">
+                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=150&h=100&fit=crop" alt="Thumb 2">
+                    </div>
+                    <div class="thumbnail" data-index="2">
+                        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=150&h=100&fit=crop" alt="Thumb 3">
+                    </div>
+                    <div class="thumbnail" data-index="3">
+                        <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=150&h=100&fit=crop" alt="Thumb 4">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right: Quick Info Card -->
+            <div class="product-quick-info">
+                <div class="product-info-card">
+                    <h1 class="product-name">Toyota Corolla Cross</h1>
+                    <div class="product-subtitle">Crossover thông minh, đa dụng</div>
+                    
+                    <div class="product-price-box">
+                        <div class="price-label">Giá từ:</div>
+                        <div class="price-value">820 triệu</div>
+                        <div class="price-note">* Giá đã bao gồm VAT</div>
+                    </div>
+                    
+                    <!-- Key Specs -->
+                    <div class="key-specs">
+                        <div class="spec-item">
+                            <i class="fa-solid fa-gauge-high"></i>
+                            <div class="spec-content">
+                                <div class="spec-label">Động cơ</div>
+                                <div class="spec-value">1.8L</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fa-solid fa-gears"></i>
+                            <div class="spec-content">
+                                <div class="spec-label">Hộp số</div>
+                                <div class="spec-value">CVT</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fa-solid fa-gas-pump"></i>
+                            <div class="spec-content">
+                                <div class="spec-label">Nhiên liệu</div>
+                                <div class="spec-value">6.5L/100km</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fa-solid fa-users"></i>
+                            <div class="spec-content">
+                                <div class="spec-label">Số chỗ</div>
+                                <div class="spec-value">5 chỗ</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Promo Banner -->
+                    <div class="promo-banner">
+                        <i class="fa-solid fa-gift"></i>
+                        <div class="promo-text">
+                            <strong>Ưu đãi đặc biệt:</strong> Giảm 30 triệu + Phụ kiện chính hãng
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="cta-buttons">
+                        <a href="#contact-form" class="btn btn-primary btn-lg btn-block">
+                            <i class="fa-solid fa-paper-plane"></i> Nhận báo giá
+                        </a>
+                        <a href="#" class="btn btn-secondary btn-lg btn-block">
+                            <i class="fa-solid fa-car"></i> Đăng ký lái thử
+                        </a>
+                    </div>
+                    
+                    <!-- Quick Contact -->
+                    <div class="quick-contact">
+                        <div class="contact-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <a href="tel:0943231614">094 323 1614</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fa-solid fa-comment-dots"></i>
+                            <a href="https://zalo.me/0943231614" target="_blank">Chat Zalo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Floating Action Buttons -->
-<div class="floating-actions">
-    <a href="tel:0943231614" class="floating-btn phone-btn" title="Gọi ngay">
-        <i class="fa-solid fa-phone"></i>
-    </a>
-    <a href="https://zalo.me/0943231614" target="_blank" class="floating-btn zalo-btn" title="Chat Zalo">
-        <i class="fa-solid fa-z"></i>
-    </a>
-    <button class="floating-btn totop-btn" id="backToTop" title="Lên đầu trang">
-        <i class="fa-solid fa-arrow-up"></i>
-    </button>
+<!-- Sticky Tabs Navigation -->
+<div class="product-tabs-nav" id="productTabsNav">
+    <div class="container">
+        <div class="tabs-wrapper">
+            <a href="#overview" class="tab-link active" data-tab="overview">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Tổng quan</span>
+            </a>
+            <a href="#exterior" class="tab-link" data-tab="exterior">
+                <i class="fa-solid fa-car-side"></i>
+                <span>Ngoại thất</span>
+            </a>
+            <a href="#interior" class="tab-link" data-tab="interior">
+                <i class="fa-solid fa-couch"></i>
+                <span>Nội thất</span>
+            </a>
+            <a href="#performance" class="tab-link" data-tab="performance">
+                <i class="fa-solid fa-gauge"></i>
+                <span>Vận hành</span>
+            </a>
+            <a href="#specs" class="tab-link" data-tab="specs">
+                <i class="fa-solid fa-list-check"></i>
+                <span>Thông số</span>
+            </a>
+            <a href="#gallery" class="tab-link" data-tab="gallery">
+                <i class="fa-solid fa-images"></i>
+                <span>Hình ảnh</span>
+            </a>
+        </div>
+    </div>
 </div>
 
-<?php get_footer(); ?>
+<!-- Pricing Cards Section -->
+<section class="pricing-section section" id="pricing">
+    <div class="container">
+        <div class="section-header">
+            <h2>Bảng Giá Các Phiên Bản</h2>
+            <div class="section-divider"></div>
+            <p>Chọn phiên bản phù hợp với nhu cầu của bạn</p>
+        </div>
+        
+        <div class="pricing-cards">
+            <!-- Pricing Card 1 -->
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3>1.8G</h3>
+                    <div class="pricing-subtitle">Bản tiêu chuẩn</div>
+                </div>
+                <div class="pricing-price">
+                    <span class="price">820 triệu</span>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fa-solid fa-check"></i> Động cơ 1.8L</li>
+                    <li><i class="fa-solid fa-check"></i> Hộp số CVT</li>
+                    <li><i class="fa-solid fa-check"></i> 7 túi khí</li>
+                    <li><i class="fa-solid fa-check"></i> Màn hình 9 inch</li>
+                    <li><i class="fa-solid fa-check"></i> Camera lùi</li>
+                    <li><i class="fa-solid fa-check"></i> Cảm biến lùi</li>
+                </ul>
+                <a href="#contact-form" class="btn btn-outline btn-block">Chọn phiên bản này</a>
+            </div>
+            
+            <!-- Pricing Card 2 - Recommended -->
+            <div class="pricing-card recommended">
+                <div class="recommended-badge">Phổ biến nhất</div>
+                <div class="pricing-header">
+                    <h3>1.8V</h3>
+                    <div class="pricing-subtitle">Bản cao cấp</div>
+                </div>
+                <div class="pricing-price">
+                    <span class="price">890 triệu</span>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fa-solid fa-check"></i> Tất cả tính năng 1.8G</li>
+                    <li><i class="fa-solid fa-check"></i> Màn hình 10.1 inch</li>
+                    <li><i class="fa-solid fa-check"></i> Camera 360°</li>
+                    <li><i class="fa-solid fa-check"></i> Cửa sổ trời</li>
+                    <li><i class="fa-solid fa-check"></i> Ghế da cao cấp</li>
+                    <li><i class="fa-solid fa-check"></i> Đèn LED full</li>
+                    <li><i class="fa-solid fa-check"></i> Cruise control</li>
+                </ul>
+                <a href="#contact-form" class="btn btn-primary btn-block">Chọn phiên bản này</a>
+            </div>
+            
+            <!-- Pricing Card 3 -->
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3>1.8 HEV</h3>
+                    <div class="pricing-subtitle">Bản Hybrid</div>
+                </div>
+                <div class="pricing-price">
+                    <span class="price">913 triệu</span>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fa-solid fa-check"></i> Tất cả tính năng 1.8V</li>
+                    <li><i class="fa-solid fa-check"></i> Động cơ Hybrid</li>
+                    <li><i class="fa-solid fa-check"></i> Tiết kiệm 40% nhiên liệu</li>
+                    <li><i class="fa-solid fa-check"></i> Toyota Safety Sense</li>
+                    <li><i class="fa-solid fa-check"></i> Tự động giữ làn</li>
+                    <li><i class="fa-solid fa-check"></i> Phanh tay điện tử</li>
+                </ul>
+                <a href="#contact-form" class="btn btn-outline btn-block">Chọn phiên bản này</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Calculator Section -->
+<section class="calculator-section section bg-light">
+    <div class="container">
+        <div class="section-header">
+            <h2>Công Cụ Tính Toán</h2>
+            <div class="section-divider"></div>
+            <p>Tính toán chi phí mua xe và trả góp</p>
+        </div>
+        
+        <!-- Calculator Tabs -->
+        <div class="calculator-tabs">
+            <button class="calc-tab-btn active" data-calc="registration">
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+                Phí lăn bánh
+            </button>
+            <button class="calc-tab-btn" data-calc="loan">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+                Trả góp
+            </button>
+        </div>
+        
+        <!-- Registration Fee Calculator -->
+        <div class="calc-content active" id="calc-registration">
+            <div class="calc-grid">
+                <div class="calc-inputs">
+                    <div class="form-group">
+                        <label>Chọn phiên bản xe</label>
+                        <select id="carVersion" class="calc-select">
+                            <option value="820000000">Corolla Cross 1.8G - 820 triệu</option>
+                            <option value="890000000">Corolla Cross 1.8V - 890 triệu</option>
+                            <option value="913000000">Corolla Cross 1.8 HEV - 913 triệu</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Nơi đăng ký</label>
+                        <select id="registrationLocation" class="calc-select">
+                            <option value="lamdong">Lâm Đồng</option>
+                            <option value="daklak">Đắk Lắk</option>
+                            <option value="hcm">TP. Hồ Chí Minh</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-block" onclick="calculateRegistration()">
+                        <i class="fa-solid fa-calculator"></i> Tính toán
+                    </button>
+                </div>
+                
+                <div class="calc-results">
+                    <h3>Chi phí dự toán</h3>
+                    <div class="result-table">
+                        <div class="result-row">
+                            <span>Giá xe:</span>
+                            <strong id="result-car-price">820.000.000 ₫</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Phí trước bạ (10%):</span>
+                            <strong id="result-registration-fee">82.000.000 ₫</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Phí đăng ký biển số:</span>
+                            <strong>20.000.000 ₫</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Bảo hiểm vật chất (1.5%):</span>
+                            <strong id="result-insurance">12.300.000 ₫</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Bảo hiểm bắt buộc:</span>
+                            <strong>480.000 ₫</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Phí đường bộ:</span>
+                            <strong>1.560.000 ₫</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Đăng kiểm:</span>
+                            <strong>140.000 ₫</strong>
+                        </div>
+                        <div class="result-row total">
+                            <span>Tổng chi phí:</span>
+                            <strong id="result-total">936.480.000 ₫</strong>
+                        </div>
+                    </div>
+                    <div class="result-note">
+                        * Chi phí trên là dự toán, có thể thay đổi tùy theo từng tỉnh thành
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Loan Calculator -->
+        <div class="calc-content" id="calc-loan">
+            <div class="calc-grid">
+                <div class="calc-inputs">
+                    <div class="form-group">
+                        <label>Giá xe</label>
+                        <input type="text" id="loanCarPrice" value="820.000.000" readonly class="calc-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Số tiền vay: <span id="loanAmountDisplay">656.000.000 ₫</span></label>
+                        <input type="range" id="loanPercentage" min="0" max="80" value="80" class="calc-slider">
+                        <div class="slider-labels">
+                            <span>0%</span>
+                            <span>80%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Thời gian vay: <span id="loanTermDisplay">5 năm</span></label>
+                        <input type="range" id="loanTerm" min="1" max="7" value="5" class="calc-slider">
+                        <div class="slider-labels">
+                            <span>1 năm</span>
+                            <span>7 năm</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Lãi suất: <span id="interestRateDisplay">7.99%/năm</span></label>
+                        <input type="range" id="interestRate" min="6" max="12" value="7.99" step="0.01" class="calc-slider">
+                        <div class="slider-labels">
+                            <span>6%</span>
+                            <span>12%</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-block" onclick="calculateLoan()">
+                        <i class="fa-solid fa-calculator"></i> Tính toán
+                    </button>
+                </div>
+                
+                <div class="calc-results">
+                    <h3>Kết quả trả góp</h3>
+                    <div class="loan-summary">
+                        <div class="loan-item">
+                            <div class="loan-label">Trả trước</div>
+                            <div class="loan-value" id="loan-downpayment">164.000.000 ₫</div>
+                        </div>
+                        <div class="loan-item highlight">
+                            <div class="loan-label">Trả hàng tháng</div>
+                            <div class="loan-value" id="loan-monthly">12.500.000 ₫</div>
+                        </div>
+                        <div class="loan-item">
+                            <div class="loan-label">Tổng lãi phải trả</div>
+                            <div class="loan-value" id="loan-interest">94.000.000 ₫</div>
+                        </div>
+                        <div class="loan-item">
+                            <div class="loan-label">Tổng tiền phải trả</div>
+                            <div class="loan-value" id="loan-total">750.000.000 ₫</div>
+                        </div>
+                    </div>
+                    <div class="result-note">
+                        * Lãi suất có thể thay đổi tùy theo chương trình của ngân hàng
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Overview Section -->
+<section class="content-section section" id="overview">
+    <div class="container">
+        <div class="section-header">
+            <h2>Tổng Quan Toyota Corolla Cross</h2>
+            <div class="section-divider"></div>
+        </div>
+        
+        <div class="overview-grid">
+            <div class="overview-text">
+                <p>Toyota Corolla Cross là mẫu crossover cỡ B+ được phát triển trên nền tảng TNGA-C, kết hợp hoàn hảo giữa thiết kế năng động, công nghệ hiện đại và hiệu suất vận hành ấn tượng.</p>
+                
+                <p>Với thiết kế ngoại thất mạnh mẽ, nội thất rộng rãi và trang bị công nghệ an toàn tiên tiến Toyota Safety Sense, Corolla Cross đáp ứng mọi nhu cầu của khách hàng Việt Nam.</p>
+                
+                <div class="highlight-features">
+                    <div class="highlight-item">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <div>
+                            <h4>An toàn hàng đầu</h4>
+                            <p>Toyota Safety Sense với 7 túi khí</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fa-solid fa-leaf"></i>
+                        <div>
+                            <h4>Tiết kiệm nhiên liệu</h4>
+                            <p>Công nghệ Hybrid tiết kiệm 40%</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fa-solid fa-star"></i>
+                        <div>
+                            <h4>Thiết kế hiện đại</h4>
+                            <p>Ngoại thất thể thao, nội thất sang trọng</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="overview-image">
+                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=400&fit=crop" alt="Toyota Corolla Cross Overview">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Exterior Section -->
+<section class="content-section section bg-light" id="exterior">
+    <div class="container">
+        <div class="section-header">
+            <h2>Ngoại Thất Toyota Corolla Cross</h2>
+            <div class="section-divider"></div>
+            <p>Thiết kế mạnh mẽ, thể thao và hiện đại</p>
+        </div>
+        
+        <div class="feature-showcase">
+            <div class="feature-item">
+                <div class="feature-image">
+                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&h=400&fit=crop" alt="Lưới tản nhiệt">
+                </div>
+                <div class="feature-content">
+                    <h3>Lưới Tản Nhiệt Sang Trọng</h3>
+                    <p>Lưới tản nhiệt dạng tổ ong tràn viền, thiết kế hoàn toàn mới mang đậm dấu ấn Lexus, tạo nên vẻ ngoài sang trọng và đẳng cấp cho xe.</p>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check"></i> Thiết kế tổ ong tràn viền</li>
+                        <li><i class="fa-solid fa-check"></i> Viền chrome sáng bóng</li>
+                        <li><i class="fa-solid fa-check"></i> Logo Toyota nổi bật</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="feature-item reverse">
+                <div class="feature-image">
+                    <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=600&h=400&fit=crop" alt="Đèn LED">
+                </div>
+                <div class="feature-content">
+                    <h3>Hệ Thống Đèn LED Tiên Tiến</h3>
+                    <p>Cụm đèn LED Crystallized với thiết kế sắc sảo, đèn báo rẽ dạng dòng chảy tạo hình trẻ trung, hiện đại nhưng không kém phần sang trọng.</p>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check"></i> Đèn pha LED Crystallized</li>
+                        <li><i class="fa-solid fa-check"></i> Đèn báo rẽ dạng dòng chảy</li>
+                        <li><i class="fa-solid fa-check"></i> Đèn hậu LED mềm mỏng</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-image">
+                    <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600&h=400&fit=crop" alt="La-zăng">
+                </div>
+                <div class="feature-content">
+                    <h3>La-Zăng Hợp Kim 18 Inch</h3>
+                    <p>Bộ la-zăng 18 inch với thiết kế thể thao, viền đen bóng mang đến vẻ cứng cáp mạnh mẽ cho chiếc xe.</p>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check"></i> Kích thước 18 inch</li>
+                        <li><i class="fa-solid fa-check"></i> Thiết kế đa chấu thể thao</li>
+                        <li><i class="fa-solid fa-check"></i> Ốp viền đen bóng</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Color Options -->
+        <div class="color-section">
+            <h3 class="text-center">Bảng Màu Ngoại Thất</h3>
+            <div class="color-options">
+                <div class="color-item">
+                    <div class="color-swatch" style="background: #1a1a1a;"></div>
+                    <span>Đen</span>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: #f5f5f5;"></div>
+                    <span>Trắng Ngọc Trai</span>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: #c0c0c0;"></div>
+                    <span>Bạc</span>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: #8b8b8b;"></div>
+                    <span>Xám</span>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: #b71c1c;"></div>
+                    <span>Đỏ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Interior Section -->
+<section class="content-section section" id="interior">
+    <div class="container">
+        <div class="section-header">
+            <h2>Nội Thất Toyota Corolla Cross</h2>
+            <div class="section-divider"></div

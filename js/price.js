@@ -2,11 +2,6 @@
   "use strict";
 
   document.addEventListener("DOMContentLoaded", function () {
-    // ... (Các phần Hero Slider, Stats Counter, FAQ, Reviews Slider, Gallery Lightbox, Contact Form, Smooth Scroll, Scroll Animations từ file cũ) ...
-
-    // ==========================================
-    // HERO SLIDER (Giữ nguyên)
-    // ==========================================
     const slider = {
       currentSlide: 0,
       slides: document.querySelectorAll(".slide"),
@@ -28,7 +23,6 @@
 
         this.startAutoplay();
 
-        // Pause on hover
         const sliderContainer = document.querySelector(".slider-container");
         if (sliderContainer) {
           sliderContainer.addEventListener("mouseenter", () =>
@@ -40,17 +34,11 @@
         }
       },
 
-      goToSlide(index) {
-        // ... (Logic goToSlide) ...
-      },
+      goToSlide(index) {},
 
-      next() {
-        // ... (Logic next) ...
-      },
+      next() {},
 
-      prev() {
-        // ... (Logic prev) ...
-      },
+      prev() {},
 
       startAutoplay() {
         this.autoplayInterval = setInterval(() => {
@@ -67,9 +55,6 @@
       slider.init();
     }
 
-    // ==========================================
-    // STATS COUNTER ANIMATION (Giữ nguyên)
-    // ==========================================
     const counters = document.querySelectorAll(".stat-number");
 
     if (counters.length > 0) {
@@ -92,7 +77,6 @@
         updateCounter();
       };
 
-      // Intersection Observer for counter animation
       const counterObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -113,26 +97,20 @@
       });
     }
 
-    // ==========================================
-    // PRODUCT FILTER & PRICE LIST FILTER (CẬP NHẬT)
-    // Sử dụng logic lọc cho cả 2 loại thẻ: .product-card và .price-card
-    // ==========================================
     const filterBtns = document.querySelectorAll(".filter-btn");
 
     if (filterBtns.length > 0) {
       const productCards = document.querySelectorAll(".product-card");
       const priceCards = document.querySelectorAll(".price-card");
 
-      // Hàm xử lý chung việc hiển thị/ẩn thẻ
       const handleFilter = (filter, cards) => {
         cards.forEach((card) => {
           const groupTitle = card.previousElementSibling;
 
           if (filter === "all" || card.dataset.category === filter) {
-            card.style.display = "flex"; // Hiển thị lại thẻ xe
+            card.style.display = "flex";
             card.style.animation = "fadeInUp 0.5s ease";
 
-            // Hiển thị tiêu đề nhóm nếu ít nhất một thẻ trong nhóm đó được hiển thị
             if (
               groupTitle &&
               groupTitle.classList.contains("price-group-title")
@@ -140,12 +118,10 @@
               groupTitle.style.display = "block";
             }
           } else {
-            card.style.display = "none"; // Ẩn thẻ xe
+            card.style.display = "none";
           }
         });
 
-        // Sau khi lọc xong các thẻ, kiểm tra lại các tiêu đề nhóm (price-group-title)
-        // Nếu không có thẻ nào được hiển thị dưới một tiêu đề nhóm, thì ẩn tiêu đề đó đi.
         document.querySelectorAll(".price-group-title").forEach((title) => {
           let hasVisibleCard = false;
           let nextSibling = title.nextElementSibling;
@@ -161,7 +137,6 @@
           if (!hasVisibleCard && filter !== "all") {
             title.style.display = "none";
           } else {
-            // Đảm bảo tiêu đề luôn hiển thị nếu chọn "all"
             title.style.display = "block";
           }
         });
@@ -169,24 +144,18 @@
 
       filterBtns.forEach((btn) => {
         btn.addEventListener("click", function () {
-          // 1. Loại bỏ active từ tất cả các nút
           filterBtns.forEach((b) => b.classList.remove("active"));
           this.classList.add("active");
 
           const filter = this.dataset.filter;
 
-          // 2. Xử lý lọc cho trang chủ (product-card)
           handleFilter(filter, productCards);
 
-          // 3. Xử lý lọc cho trang bảng giá (price-card)
           handleFilter(filter, priceCards);
         });
       });
     }
 
-    // ==========================================
-    // FAQ ACCORDION (Giữ nguyên)
-    // ==========================================
     const faqItems = document.querySelectorAll(".faq-item");
 
     if (faqItems.length > 0) {
@@ -194,29 +163,23 @@
         const question = item.querySelector(".faq-question");
 
         question.addEventListener("click", () => {
-          // Close other items
           faqItems.forEach((otherItem) => {
             if (otherItem !== item && otherItem.classList.contains("active")) {
               otherItem.classList.remove("active");
             }
           });
 
-          // Toggle current item
           item.classList.toggle("active");
         });
       });
     }
 
-    // ==========================================
-    // REVIEWS SLIDER (Simple) (Giữ nguyên)
-    // ==========================================
     const reviewCards = document.querySelectorAll(".review-card");
     const reviewPrev = document.querySelector(".review-prev");
     const reviewNext = document.querySelector(".review-next");
     let currentReview = 0;
 
     if (reviewCards.length > 0 && window.innerWidth <= 768) {
-      // Show one review at a time on mobile
       const showReview = (index) => {
         reviewCards.forEach((card, i) => {
           card.style.display = i === index ? "block" : "none";
@@ -240,14 +203,10 @@
 
       showReview(0);
     } else {
-      // Hide navigation on desktop
       if (reviewPrev) reviewPrev.style.display = "none";
       if (reviewNext) reviewNext.style.display = "none";
     }
 
-    // ==========================================
-    // GALLERY LIGHTBOX (Simple) (Giữ nguyên)
-    // ==========================================
     const galleryItems = document.querySelectorAll(".gallery-item");
 
     if (galleryItems.length > 0) {
@@ -255,7 +214,6 @@
         item.addEventListener("click", function () {
           const img = this.querySelector("img");
           if (img) {
-            // ... (Logic tạo lightbox) ...
             const lightbox = document.createElement("div");
             lightbox.className = "lightbox";
             lightbox.innerHTML = `
@@ -265,7 +223,6 @@
                             </div>
                         `;
 
-            // Add styles
             lightbox.style.cssText = `
                             position: fixed;
                             top: 0;
@@ -307,7 +264,6 @@
 
             document.body.appendChild(lightbox);
 
-            // Close lightbox
             closeBtn.addEventListener("click", () => {
               lightbox.remove();
             });
@@ -328,16 +284,12 @@
       });
     }
 
-    // ==========================================
-    // CONTACT FORM VALIDATION (Giữ nguyên)
-    // ==========================================
     const contactForm = document.getElementById("contactForm");
 
     if (contactForm) {
       contactForm.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        // Basic validation
         const name = this.querySelector('input[name="name"]').value.trim();
         const phone = this.querySelector('input[name="phone"]').value.trim();
 
@@ -346,14 +298,12 @@
           return;
         }
 
-        // Phone validation (basic)
         const phoneRegex = /^[0-9]{10,11}$/;
         if (!phoneRegex.test(phone.replace(/\s/g, ""))) {
           alert("Số điện thoại không hợp lệ!");
           return;
         }
 
-        // Show success message
         const submitBtn = this.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
         submitBtn.innerHTML =
@@ -361,7 +311,6 @@
         submitBtn.disabled = true;
         submitBtn.style.background = "#28a745";
 
-        // Reset form after 2 seconds
         setTimeout(() => {
           this.reset();
           submitBtn.innerHTML = originalText;
@@ -369,7 +318,6 @@
           submitBtn.style.background = "";
         }, 2000);
 
-        // Here you would normally send data to server
         console.log("Form submitted:", {
           name,
           phone,
@@ -380,9 +328,6 @@
       });
     }
 
-    // ==========================================
-    // SMOOTH SCROLL FOR ANCHOR LINKS (Giữ nguyên)
-    // ==========================================
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", function (e) {
         const href = this.getAttribute("href");
@@ -399,11 +344,7 @@
       });
     });
 
-    // ==========================================
-    // SCROLL ANIMATIONS (Fade in on scroll) (Giữ nguyên)
-    // ==========================================
     const animateOnScroll = () => {
-      // Bao gồm .price-card vào danh sách
       const elements = document.querySelectorAll(
         ".featured-card, .product-card, .news-card, .review-card, .why-item, .price-card"
       );
@@ -429,9 +370,6 @@
 
     animateOnScroll();
 
-    // ==========================================
-    // BACK TO TOP BUTTON (Optional) (Giữ nguyên)
-    // ==========================================
     const createBackToTop = () => {
       const btn = document.createElement("button");
       btn.className = "back-to-top";
@@ -481,6 +419,6 @@
 
     createBackToTop();
 
-    console.log("✅ Toyota Homepage & Price Page initialized successfully!");
+    console.log("Toyota Homepage & Price Page initialized successfully!");
   });
 })();

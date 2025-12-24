@@ -2,9 +2,6 @@
   "use strict";
 
   document.addEventListener("DOMContentLoaded", function () {
-    // ==========================================
-    // HERO SLIDER
-    // ==========================================
     const slider = {
       currentSlide: 0,
       slides: document.querySelectorAll(".slide"),
@@ -26,7 +23,6 @@
 
         this.startAutoplay();
 
-        // Pause on hover
         const sliderContainer = document.querySelector(".slider-container");
         sliderContainer.addEventListener("mouseenter", () =>
           this.stopAutoplay()
@@ -70,11 +66,7 @@
 
     slider.init();
 
-    // ==========================================
-    // STATS COUNTER ANIMATION
-    // ==========================================
     const counters = document.querySelectorAll(".stat-number");
-
     const animateCounter = (counter) => {
       const target = parseInt(counter.dataset.target);
       const duration = 2000;
@@ -94,7 +86,6 @@
       updateCounter();
     };
 
-    // Intersection Observer for counter animation
     const counterObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -114,15 +105,11 @@
       counterObserver.observe(counter);
     });
 
-    // ==========================================
-    // PRODUCT FILTER
-    // ==========================================
     const filterBtns = document.querySelectorAll(".filter-btn");
     const productCards = document.querySelectorAll(".product-card");
 
     filterBtns.forEach((btn) => {
       btn.addEventListener("click", function () {
-        // Remove active class from all buttons
         filterBtns.forEach((b) => b.classList.remove("active"));
         this.classList.add("active");
 
@@ -139,37 +126,28 @@
       });
     });
 
-    // ==========================================
-    // FAQ ACCORDION
-    // ==========================================
     const faqItems = document.querySelectorAll(".faq-item");
 
     faqItems.forEach((item) => {
       const question = item.querySelector(".faq-question");
 
       question.addEventListener("click", () => {
-        // Close other items
         faqItems.forEach((otherItem) => {
           if (otherItem !== item && otherItem.classList.contains("active")) {
             otherItem.classList.remove("active");
           }
         });
 
-        // Toggle current item
         item.classList.toggle("active");
       });
     });
 
-    // ==========================================
-    // REVIEWS SLIDER (Simple)
-    // ==========================================
     const reviewCards = document.querySelectorAll(".review-card");
     const reviewPrev = document.querySelector(".review-prev");
     const reviewNext = document.querySelector(".review-next");
     let currentReview = 0;
 
     if (reviewCards.length > 0 && window.innerWidth <= 768) {
-      // Show one review at a time on mobile
       const showReview = (index) => {
         reviewCards.forEach((card, i) => {
           card.style.display = i === index ? "block" : "none";
@@ -189,21 +167,16 @@
 
       showReview(0);
     } else {
-      // Hide navigation on desktop
       if (reviewPrev) reviewPrev.style.display = "none";
       if (reviewNext) reviewNext.style.display = "none";
     }
 
-    // ==========================================
-    // GALLERY LIGHTBOX (Simple)
-    // ==========================================
     const galleryItems = document.querySelectorAll(".gallery-item");
 
     galleryItems.forEach((item) => {
       item.addEventListener("click", function () {
         const img = this.querySelector("img");
         if (img) {
-          // Create simple lightbox
           const lightbox = document.createElement("div");
           lightbox.className = "lightbox";
           lightbox.innerHTML = `
@@ -213,7 +186,6 @@
                     </div>
                 `;
 
-          // Add styles
           lightbox.style.cssText = `
                     position: fixed;
                     top: 0;
@@ -255,7 +227,6 @@
 
           document.body.appendChild(lightbox);
 
-          // Close lightbox
           closeBtn.addEventListener("click", () => {
             lightbox.remove();
           });
@@ -275,16 +246,12 @@
       });
     });
 
-    // ==========================================
-    // CONTACT FORM VALIDATION
-    // ==========================================
     const contactForm = document.getElementById("contactForm");
 
     if (contactForm) {
       contactForm.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        // Basic validation
         const name = this.querySelector('input[name="name"]').value.trim();
         const phone = this.querySelector('input[name="phone"]').value.trim();
 
@@ -293,14 +260,12 @@
           return;
         }
 
-        // Phone validation (basic)
         const phoneRegex = /^[0-9]{10,11}$/;
         if (!phoneRegex.test(phone.replace(/\s/g, ""))) {
           alert("Số điện thoại không hợp lệ!");
           return;
         }
 
-        // Show success message
         const submitBtn = this.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
         submitBtn.innerHTML =
@@ -308,7 +273,6 @@
         submitBtn.disabled = true;
         submitBtn.style.background = "#28a745";
 
-        // Reset form after 2 seconds
         setTimeout(() => {
           this.reset();
           submitBtn.innerHTML = originalText;
@@ -316,7 +280,6 @@
           submitBtn.style.background = "";
         }, 2000);
 
-        // Here you would normally send data to server
         console.log("Form submitted:", {
           name,
           phone,
@@ -327,9 +290,6 @@
       });
     }
 
-    // ==========================================
-    // SMOOTH SCROLL FOR ANCHOR LINKS
-    // ==========================================
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", function (e) {
         const href = this.getAttribute("href");
@@ -346,9 +306,6 @@
       });
     });
 
-    // ==========================================
-    // SCROLL ANIMATIONS (Fade in on scroll)
-    // ==========================================
     const animateOnScroll = () => {
       const elements = document.querySelectorAll(
         ".featured-card, .product-card, .news-card, .review-card, .why-item"
@@ -375,9 +332,6 @@
 
     animateOnScroll();
 
-    // ==========================================
-    // BACK TO TOP BUTTON (Optional)
-    // ==========================================
     const createBackToTop = () => {
       const btn = document.createElement("button");
       btn.className = "back-to-top";

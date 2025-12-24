@@ -18,15 +18,14 @@
     <header class="site-header" id="site-header">
         <div class="header-container">
 
-            <!-- Left Section: Logo + Name + Hotline -->
             <div class="header-left">
                 <div class="logo-section">
                     <a href="<?php echo esc_url(home_url('/')); ?>" class="logo-link">
                         <?php if (has_custom_logo()): ?>
-                            <?php the_custom_logo(); ?>
+                        <?php the_custom_logo(); ?>
                         <?php else: ?>
-                            <img src="https://th.bing.com/th/id/OIP.hKL_zFVdLx8dCiYOZ8hrGgHaGL?w=150&h=150&c=6&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1"
-                                alt="Toyota Logo" class="site-logo">
+                        <img src="https://th.bing.com/th/id/OIP.hKL_zFVdLx8dCiYOZ8hrGgHaGL?w=150&h=150&c=6&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1"
+                            alt="Toyota Logo" class="site-logo">
                         <?php endif; ?>
                         <span class="site-name">Toyota Đà Lạt</span>
                     </a>
@@ -42,7 +41,7 @@
                 <ul class="main-menu">
                     <li><a href="<?php echo esc_url(home_url('/')); ?>">Trang chủ</a></li>
                     <li class="menu-item-has-children">
-                        <a href="<?php echo esc_url(home_url('/san-pham')); ?>">Sản phẩm</a>
+                        <a href="<?php echo esc_url(home_url('/single')); ?>">Sản phẩm</a>
                         <ul class="sub-menu">
                             <li><a href="<?php echo esc_url(home_url('/san-pham/toyota-wigo')); ?>">Toyota Wigo</a></li>
                             <li><a href="<?php echo esc_url(home_url('/san-pham/toyota-vios')); ?>">Toyota Vios</a></li>
@@ -55,10 +54,12 @@
                             <li><a href="<?php echo esc_url(home_url('/san-pham')); ?>">Xem tất cả</a></li>
                         </ul>
                     </li>
-                    <li><a href="<?php echo esc_url(home_url('/bang-gia')); ?>">Bảng giá</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/tin-tuc')); ?>">Tin tức - Khuyến mãi</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/dang-ky-lai-thu')); ?>">Đăng ký lái thử</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/dich-vu')); ?>">Dịch vụ</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/price')); ?>">Bảng giá</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/blogs')); ?>">Tin tức</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/dang-ky-lai-thu')); ?>">Lái thử</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/about_us')); ?>">Giới thiệu</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/single-blogs')); ?>">Chi tiết</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/contact')); ?>">Liên hệ</a></li>
                 </ul>
             </nav>
 
@@ -126,7 +127,6 @@
                 <span></span>
                 <span></span>
             </button>
-
         </div>
     </header>
 

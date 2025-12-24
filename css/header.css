@@ -1,10 +1,3 @@
-/* ================================================
-   TOYOTA HEADER STYLES - FINAL FIXED VERSION
-   ================================================ */
-
-/* ================================================
-   HEADER CONTAINER
-   ================================================ */
 .site-header {
   background: var(--color-bg);
   box-shadow: var(--shadow-sm);
@@ -21,21 +14,18 @@
 .header-container {
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 10px var(--container-padding); /* ✅ Giảm từ 15px → 10px */
+  padding: 10px var(--container-padding);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 40px;
 }
 
-/* ================================================
-   LEFT SECTION - Logo + Hotline (COMPACT & CENTERED)
-   ================================================ */
 .header-left {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px; /* ✅ Giảm từ 6px → 4px */
+  gap: 4px;
   min-width: 180px;
   text-align: center;
 }
@@ -44,14 +34,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px; /* ✅ Giảm từ 6px → 4px */
+  gap: 4px;
 }
 
 .logo-link {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px; /* ✅ Giảm từ 6px → 4px */
+  gap: 4px;
   text-decoration: none;
   transition: opacity var(--transition-base);
 }
@@ -60,17 +50,15 @@
   opacity: 0.85;
 }
 
-/* ✅ LOGO COMPACT HƠN */
 .site-logo,
 .custom-logo {
-  height: 45px; /* ✅ Giảm từ 60px → 45px */
+  height: 45px;
   width: auto;
   object-fit: contain;
 }
 
-/* ✅ TITLE NHỎ, CĂN GIỮA */
 .site-name {
-  font-size: 15px; /* ✅ Fixed size cho consistent */
+  font-size: 15px;
   font-weight: 700;
   color: var(--color-text);
   text-transform: uppercase;
@@ -79,7 +67,6 @@
   line-height: 1.2;
 }
 
-/* ✅ HOTLINE COMPACT, CĂN GIỮA */
 .hotline-section {
   display: flex;
   align-items: center;
@@ -89,11 +76,11 @@
 
 .phone-icon {
   color: var(--color-primary);
-  font-size: 13px; /* ✅ Giảm từ 14px → 13px */
+  font-size: 13px;
 }
 
 .hotline-number {
-  font-size: 13px; /* ✅ Giảm từ 14px → 13px */
+  font-size: 13px;
   font-weight: 700;
   color: var(--color-primary);
   text-decoration: none;
@@ -107,9 +94,6 @@
   color: var(--color-primary-dark);
 }
 
-/* ================================================
-   CENTER SECTION - Navigation Menu
-   ================================================ */
 .header-center {
   flex: 1;
   display: flex;
@@ -129,7 +113,7 @@
 
 .main-menu > li > a {
   display: block;
-  padding: 10px 18px; /* ✅ Giảm padding để compact hơn */
+  padding: 10px 18px;
   color: var(--color-text);
   text-decoration: none;
   font-size: var(--font-size-sm);
@@ -145,7 +129,6 @@
   color: var(--color-bg);
 }
 
-/* Dropdown Menu */
 .main-menu li.menu-item-has-children {
   position: relative;
 }
@@ -201,9 +184,6 @@
   padding-left: 25px;
 }
 
-/* ================================================
-   RIGHT SECTION - Modern Search Form
-   ================================================ */
 .header-right {
   min-width: 280px;
   display: flex;
@@ -217,13 +197,12 @@
   max-width: 280px;
 }
 
-/* ✅ MINIMAL SEARCH FORM - ICON RIGHT */
 .search-form {
   display: flex;
   align-items: center;
-  background: #fff; /* ✅ Background trắng tinh */
+  background: #fff;
   border: 1px solid #e5e5e5;
-  border-radius: 10px; /* ✅ Bo góc 10px */
+  border-radius: 10px;
   overflow: visible;
   transition: all var(--transition-base);
   width: 100%;
@@ -231,20 +210,19 @@
 }
 
 .search-form:hover {
-  border-color: #d0d0d0; /* ✅ Hover nhẹ hơn */
+  border-color: #d0d0d0;
 }
 
 .search-form:focus-within {
-  border-color: #c0c0c0; /* ✅ Focus subtle hơn */
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05); /* ✅ Shadow nhẹ */
+  border-color: #c0c0c0;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
 }
 
-/* ✅ SEARCH INPUT - BÊN TRÁI */
 .search-input {
   flex: 1;
   border: none;
   background: transparent;
-  padding: 11px 16px; /* ✅ Padding đều */
+  padding: 11px 16px;
   font-size: var(--font-size-sm);
   outline: none;
   color: var(--color-text);
@@ -253,11 +231,10 @@
 }
 
 .search-input::placeholder {
-  color: #999; /* ✅ Màu xám nhạt */
+  color: #999;
   font-weight: 400;
 }
 
-/* ✅ SEARCH ICON - BÊN PHẢI (CHỈ VISUAL) */
 .search-button {
   background: transparent;
   border: none;
@@ -266,32 +243,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #aaa; /* ✅ Icon xám nhạt */
+  color: #aaa;
   transition: color var(--transition-fast);
   flex-shrink: 0;
-  pointer-events: auto; /* ✅ Có thể click để submit */
+  pointer-events: auto;
 }
 
 .search-button:hover {
-  color: #888; /* ✅ Hover tối hơn một chút */
+  color: #888;
 }
 
 .search-button i {
   font-size: 16px;
 }
 
-/* ================================================
-   SEARCH DROPDOWN - FIXED POSITION
-   ================================================ */
-
-/* ✅ FIXED DROPDOWN POSITION - CĂN PHẢI */
 .search-dropdown {
   position: absolute;
   top: calc(100% + 8px);
-  right: 0; /* ✅ FIX: Căn phải thay vì trái */
-  left: auto; /* ✅ Reset left */
-  width: 420px; /* ✅ Giảm từ 500px → 420px */
-  max-width: calc(100vw - 40px); /* ✅ Không vượt quá màn hình */
+  right: 0;
+  left: auto;
+  width: 420px;
+  max-width: calc(100vw - 40px);
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -317,7 +289,6 @@
   overflow-y: auto;
 }
 
-/* Custom Scrollbar */
 .search-dropdown-content::-webkit-scrollbar {
   width: 6px;
 }
@@ -336,7 +307,6 @@
   background: var(--color-primary);
 }
 
-/* Loading State */
 .search-loading {
   display: none;
   align-items: center;
@@ -361,7 +331,6 @@
   color: var(--color-primary);
 }
 
-/* Empty State */
 .search-empty {
   display: none;
   flex-direction: column;
@@ -400,7 +369,6 @@
   color: var(--color-text-lighter);
 }
 
-/* Error State */
 .search-error {
   display: none;
   flex-direction: column;
@@ -610,9 +578,6 @@
   font-size: 10px;
 }
 
-/* ================================================
-   MOBILE MENU TOGGLE
-   ================================================ */
 .mobile-menu-toggle {
   display: none;
   flex-direction: column;
@@ -644,9 +609,6 @@
   transform: rotate(-45deg) translate(7px, -7px);
 }
 
-/* ================================================
-   MOBILE MENU OVERLAY
-   ================================================ */
 .mobile-menu-overlay {
   position: fixed;
   top: 0;
@@ -760,10 +722,6 @@
 .mobile-hotline-link:hover {
   background: var(--color-primary-dark);
 }
-
-/* ================================================
-   RESPONSIVE
-   ================================================ */
 
 /* Tablet */
 @media (max-width: 1024px) {

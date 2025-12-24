@@ -1,12 +1,8 @@
-/* ================================================
-   CAR PRICE LIST SECTION (Bảng Giá Xe)
-   ================================================ */
 .price-list-section {
   padding: var(--section-padding) 0;
   background: var(--color-bg-light);
 }
 
-/* Style cho khối tab filter */
 .price-filter-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -18,7 +14,6 @@
   background: var(--color-bg-light);
 }
 
-/* Style cho tiêu đề nhóm xe (SUV, Sedan...) */
 .price-group-title {
   font-size: var(--font-size-4xl);
   font-weight: 800;
@@ -35,9 +30,7 @@
 }
 
 .price-card {
-  /* Đã được cập nhật display: flex trong JS để khớp với mobile/desktop */
   display: flex;
-  /* Thay đổi từ flex-start sang center để căn giữa ảnh theo chiều dọc */
   align-items: center;
   gap: var(--spacing-2xl);
   background: var(--color-bg);
@@ -45,7 +38,7 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   transition: all var(--transition-base);
-  margin-bottom: var(--spacing-xl); /* Khoảng cách giữa các xe */
+  margin-bottom: var(--spacing-xl);
 }
 
 .price-card:hover {
