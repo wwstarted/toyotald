@@ -143,6 +143,22 @@ function toyota_enqueue_assets()
         );
     }
 
+    if (is_page_template('page-wwdo.php')) {
+        wp_enqueue_style(
+            'toyota-wwdo',
+            get_template_directory_uri() . '/css/wwdo.css',
+            array('toyota-global'),
+            '1.0.0'
+        );
+        wp_enqueue_script(
+            'toyota-wwdo',
+            get_template_directory_uri() . '/js/wwdo.js',
+            array(),
+            '1.0.0',
+            true
+        );
+    }
+
     if (is_page_template('page-price.php')) {
         wp_enqueue_style(
             'toyota-price',

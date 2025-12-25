@@ -14,9 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const maxIndex = services.length - 1;
 
-    /* -----------------------------
-       Hover intent
-    ------------------------------ */
     right.addEventListener("mouseenter", () => {
       isHovering = true;
     });
@@ -25,9 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
       isHovering = false;
     });
 
-    /* -----------------------------
-       Animation helpers
-    ------------------------------ */
     function leave(index) {
       services[index].classList.remove("active");
       services[index].classList.add("leaving");
@@ -59,9 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 350);
     }
 
-    /* -----------------------------
-       Scroll lock helpers (QUAN TRỌNG)
-    ------------------------------ */
     function lockScroll() {
       if (scrollLocked) return;
       window.addEventListener("wheel", handleScroll, { passive: false });
@@ -74,43 +65,37 @@ document.addEventListener("DOMContentLoaded", () => {
       scrollLocked = false;
     }
 
-    /* -----------------------------
-       Core scroll logic (FIX DỨT ĐIỂM)
-    ------------------------------ */
     function handleScroll(e) {
       if (!isHovering) return;
       if (isAnimating) return;
 
       const direction = e.deltaY > 0 ? 1 : -1;
 
-      // ⬇️ SCROLL DOWN
+      // SCROLL DOWN
       if (direction === 1) {
         if (currentIndex < maxIndex) {
           e.preventDefault();
           goTo(currentIndex + 1);
         } else {
-          // 🔥 SERVICE CUỐI → THẢ SCROLL, THOÁT SECTION
+          //
           unlockScroll();
         }
         return;
       }
 
-      // ⬆️ SCROLL UP
+      // ⬆SCROLL UP
       if (direction === -1) {
         if (currentIndex > 0) {
           e.preventDefault();
           goTo(currentIndex - 1);
         } else {
-          // 🔥 SERVICE ĐẦU → THẢ SCROLL, THOÁT SECTION
+          //
           unlockScroll();
         }
         return;
       }
     }
 
-    /* -----------------------------
-       Re-lock khi section quay lại trung tâm
-    ------------------------------ */
     function checkSectionFocus() {
       const rect = section.getBoundingClientRect();
       const center = window.innerHeight / 2;
@@ -123,6 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     window.addEventListener("scroll", checkSectionFocus);
-    lockScroll(); // lock lần đầu khi load
+    lockScroll();
   })();
 });
