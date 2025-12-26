@@ -1,18 +1,12 @@
-/**
- * What We Do Section - Modern Controller
- * Features: Smooth crossfade, parallax, hover effects
- */
-
 (function () {
   "use strict";
 
-  // Configuration
   const CONFIG = {
     serviceCount: 3,
     patternMapping: {
-      1: [1, 2], // Service 1 → Pattern 1 or 2
-      2: [3, 4], // Service 2 → Pattern 3 or 4
-      3: [5, 6], // Service 3 → Pattern 5 or 6
+      1: [1, 2],
+      2: [3, 4],
+      3: [5, 6],
     },
     transitionDuration: 800,
     parallaxIntensity: 0.3,
@@ -272,11 +266,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Configuration
     const CONFIG = {
-      visibleCards: 5, // Total visible cards (-2, -1, 0, 1, 2)
-      transitionDuration: 700, // ms
-      autoplayDelay: 5000, // ms (set to 0 to disable)
-      wheelThrottle: 800, // ms between wheel events
-      touchThreshold: 50, // px minimum swipe distance
+      visibleCards: 5,
+      transitionDuration: 700,
+      autoplayDelay: 5000,
+      wheelThrottle: 800,
+      touchThreshold: 50,
     };
 
     // State
@@ -311,38 +305,36 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      // Extract project data
       extractProjectData();
-
-      // Set initial positions
       updateCardPositions();
-
-      // Bind events
       bindEvents();
 
-      // Start autoplay if enabled
       if (CONFIG.autoplayDelay > 0) {
         startAutoplay();
       }
 
-      // Intersection Observer for entrance animation
       setupIntersectionObserver();
 
       console.log("✅ Select Projects carousel initialized");
+      console.log(`📊 Total projects: ${totalProjects}`);
     }
 
-    /**
-     * Extract project data from DOM cards
-     */
     function extractProjectData() {
       cards.forEach((card, index) => {
         const link = card;
         const img = card.querySelector(".sp-card-image");
 
+        let category = card.getAttribute("data-category");
+        if (!category) {
+          // Fallback: Try to find category in card HTML
+          const categoryEl = card.querySelector(".sp-card-category");
+          category = categoryEl ? categoryEl.textContent : "Project Category";
+        }
+
         projects.push({
           index: index,
           title: img ? img.alt : `Project ${index + 1}`,
-          category: "Project Category", // Add data attribute if needed
+          category: category,
           url: link.href,
           element: card,
         });
@@ -350,34 +342,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
       totalProjects = projects.length;
       currentIndex = 0;
+
+      // Update initial info
+      updateProjectInfo(currentIndex);
     }
 
     /**
      * Bind all event listeners
      */
     function bindEvents() {
-      // Navigation buttons
       if (prevBtn) prevBtn.addEventListener("click", () => navigate("prev"));
       if (nextBtn) nextBtn.addEventListener("click", () => navigate("next"));
 
-      // Mouse wheel
       section.addEventListener("wheel", handleWheel, { passive: false });
 
-      // Touch events for swipe
       track.addEventListener("touchstart", handleTouchStart, { passive: true });
       track.addEventListener("touchend", handleTouchEnd, { passive: true });
 
-      // Keyboard navigation
       document.addEventListener("keydown", handleKeyboard);
 
-      // Hover pause autoplay
       section.addEventListener("mouseenter", pauseAutoplay);
       section.addEventListener("mouseleave", resumeAutoplay);
 
-      // Card clicks update info immediately
       cards.forEach((card, index) => {
         card.addEventListener("mouseenter", () => {
-          if (Math.abs(index - currentIndex) <= 1) {
+          if (Math.abs(index - currentIndex) <= 2) {
             updateProjectInfo(index);
           }
         });
@@ -390,19 +379,14 @@ document.addEventListener("DOMContentLoaded", function () {
     function navigate(direction) {
       if (isTransitioning) return;
 
-      const oldIndex = currentIndex;
-
       if (direction === "next") {
         currentIndex = (currentIndex + 1) % totalProjects;
       } else {
         currentIndex = (currentIndex - 1 + totalProjects) % totalProjects;
       }
 
-      // Update positions with transition
       updateCardPositions();
       updateProjectInfo(currentIndex);
-
-      // Reset autoplay
       resetAutoplay();
     }
 
@@ -419,21 +403,17 @@ document.addEventListener("DOMContentLoaded", function () {
           totalProjects
         );
 
-        // Remove all position attributes
         card.removeAttribute("data-position");
 
-        // Set position if within visible range (-2 to +2)
         if (Math.abs(relativePosition) <= 2) {
           card.setAttribute("data-position", relativePosition);
         }
       });
 
-      // Update track data attribute
       if (track) {
         track.setAttribute("data-active-index", currentIndex);
       }
 
-      // Transition finished after duration
       setTimeout(() => {
         isTransitioning = false;
       }, CONFIG.transitionDuration);
@@ -445,7 +425,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function getRelativePosition(cardIndex, activeIndex, total) {
       let diff = cardIndex - activeIndex;
 
-      // Wrap around for shortest path
       if (diff > total / 2) {
         diff -= total;
       } else if (diff < -total / 2) {
@@ -480,7 +459,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /**
-     * Handle mouse wheel for navigation
+     * ✅ FIXED: Handle mouse wheel - CORRECT LOGIC
+     *
+     * Logic mới:
+     * - Ở project ĐẦU (0): Scroll UP → Exit | Scroll DOWN → Next
+     * - Ở project GIỮA: Scroll UP → Prev | Scroll DOWN → Next
+     * - Ở project CUỐI: Scroll UP → Prev | Scroll DOWN → Exit
      */
     function handleWheel(e) {
       const now = Date.now();
@@ -491,50 +475,50 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      // Check if scrolling within section area
+      // Check if section is in view
       const rect = section.getBoundingClientRect();
       const inView = rect.top < window.innerHeight && rect.bottom > 0;
 
       if (!inView) return;
 
-      // Prevent default only if we're handling the scroll
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-        // Horizontal scroll
-        e.preventDefault();
-        lastWheelTime = now;
+      const isScrollingDown = e.deltaY > 0;
+      const isScrollingUp = e.deltaY < 0;
+      const isFirstProject = currentIndex === 0;
+      const isLastProject = currentIndex === totalProjects - 1;
 
-        if (e.deltaX > 0) {
+      // Check if scroll is significant enough
+      if (Math.abs(e.deltaY) < 30) return;
+
+      // ✅ NEW LOGIC
+      if (isScrollingDown) {
+        // SCROLL DOWN ⬇️
+        if (isLastProject) {
+          // Ở project CUỐI → Allow exit xuống
+          console.log("🔽 Last project - allowing exit down");
+          // Don't prevent default - let page scroll
+          lastWheelTime = now;
+          return;
+        } else {
+          // Chưa phải project cuối → Navigate next
+          e.preventDefault();
+          lastWheelTime = now;
           navigate("next");
-        } else {
-          navigate("prev");
+          console.log(`🔽 Navigating to next project: ${currentIndex + 1}`);
         }
-      } else if (Math.abs(e.deltaY) > 50) {
-        // Vertical scroll - check exit conditions
-        e.preventDefault();
-        lastWheelTime = now;
-
-        if (e.deltaY > 0) {
-          // Scroll down
-          if (currentIndex === totalProjects - 1) {
-            // Last project - allow exit
-            section.style.pointerEvents = "none";
-            setTimeout(() => {
-              section.style.pointerEvents = "auto";
-            }, 500);
-          } else {
-            navigate("next");
-          }
+      } else if (isScrollingUp) {
+        // SCROLL UP ⬆️
+        if (isFirstProject) {
+          // Ở project ĐẦU → Allow exit lên
+          console.log("🔼 First project - allowing exit up");
+          // Don't prevent default - let page scroll
+          lastWheelTime = now;
+          return;
         } else {
-          // Scroll up
-          if (currentIndex === 0) {
-            // First project - allow exit
-            section.style.pointerEvents = "none";
-            setTimeout(() => {
-              section.style.pointerEvents = "auto";
-            }, 500);
-          } else {
-            navigate("prev");
-          }
+          // Chưa phải project đầu → Navigate prev
+          e.preventDefault();
+          lastWheelTime = now;
+          navigate("prev");
+          console.log(`🔼 Navigating to prev project: ${currentIndex - 1}`);
         }
       }
     }
@@ -653,12 +637,8 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("🧹 Select Projects carousel destroyed");
     }
 
-    // Initialize on DOM ready
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", init);
-    } else {
-      init();
-    }
+    // Initialize
+    init();
 
     // Expose API
     window.SelectProjectsCarousel = {
@@ -671,7 +651,501 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       },
       getCurrentIndex: () => currentIndex,
+      getTotalProjects: () => totalProjects,
       destroy,
     };
   })();
 });
+
+// ====================================================================
+/**
+ * CDA Hero to About Us - Final Version
+ * Video transitions from Hero → settles in About section (NOT sticky after)
+ */
+
+(function () {
+  "use strict";
+
+  // Configuration
+  const CONFIG = {
+    transitionDistance: 1000, // Scroll distance for full transition
+    enableLogging: true,
+  };
+
+  // State
+  let heroHeight = 0;
+  let aboutOffsetTop = 0;
+  let videoSettled = false;
+  let ticking = false;
+
+  // DOM Elements
+  const heroSection = document.getElementById("cdaHero");
+  const aboutSection = document.getElementById("cdaAbout");
+  const videoIntro = document.getElementById("cdaVideoIntro");
+  const videoSettledArea = document.getElementById("cdaVideoSettledArea");
+  const patternGreen = document.querySelector(".cda-pattern-green");
+  const globePattern = document.querySelector(".cda-globe-pattern");
+  const globeCanvas = document.getElementById("cdaGlobeCanvas");
+  const locations = document.querySelector(".cda-locations");
+  const description = document.querySelector(".cda-description");
+  const videoTextOverlay = document.querySelector(".cda-video-text-overlay");
+
+  /**
+   * Initialize
+   */
+  function init() {
+    if (!heroSection || !aboutSection || !videoIntro) {
+      console.warn("❌ Required sections not found");
+      return;
+    }
+
+    checkVideoLoad();
+    calculatePositions();
+
+    // ✅ Initialize 3D Globe
+    if (globeCanvas) {
+      init3DGlobe();
+    }
+
+    bindEvents();
+
+    log("✅ CDA transition initialized");
+  }
+
+  /**
+   * Check video load
+   */
+  function checkVideoLoad() {
+    const video = videoIntro.querySelector(".cda-video");
+    const fallback = videoIntro.querySelector(".cda-video-fallback");
+
+    if (!video) return;
+
+    video.addEventListener("error", () => {
+      log("❌ Video failed to load");
+      if (fallback) {
+        video.style.display = "none";
+        fallback.style.display = "flex";
+      }
+    });
+
+    video.addEventListener("loadeddata", () => {
+      log("✅ Video loaded successfully");
+    });
+  }
+
+  /**
+   * Calculate positions
+   */
+  function calculatePositions() {
+    heroHeight = heroSection.offsetHeight;
+    aboutOffsetTop = aboutSection.offsetTop;
+    log("Hero height:", heroHeight, "About offset:", aboutOffsetTop);
+  }
+
+  /**
+   * Bind events
+   */
+  function bindEvents() {
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", debounce(onResize, 250));
+  }
+
+  /**
+   * Scroll handler
+   */
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateScrollProgress);
+    }
+  }
+
+  /**
+   * Main scroll update function
+   */
+  function updateScrollProgress() {
+    const scrollY = window.scrollY;
+
+    // Phase 1: Transition animation (0 → transitionDistance)
+    if (scrollY < CONFIG.transitionDistance && !videoSettled) {
+      const progress = scrollY / CONFIG.transitionDistance;
+      const easedProgress = easeInOutCubic(progress);
+
+      updateVideoTransition(easedProgress);
+      updatePatternFade(easedProgress);
+    }
+    // Phase 2: Settle video in About section
+    else if (scrollY >= CONFIG.transitionDistance && !videoSettled) {
+      settleVideoInAbout();
+      revealAboutContent();
+      videoSettled = true;
+      log("✅ Video settled in About section");
+    }
+
+    ticking = false;
+  }
+
+  /**
+   * Update video during transition phase
+   */
+  function updateVideoTransition(progress) {
+    if (!videoIntro) return;
+
+    // Size: 325x225 → 650x450 (2x scale)
+    const width = lerp(325, 650, progress);
+    const height = lerp(225, 450, progress);
+
+    // Position: bottom-right → top-right of About section
+    // Use fixed positioning during transition
+    const translateY = lerp(50, -20, progress); // Start 50% below, move to -20%
+    const translateX = lerp(0, 0, progress); // Stay at right: 5%
+    const opacity = lerp(0.7, 1, progress);
+
+    videoIntro.style.position = "fixed";
+    videoIntro.style.width = width + "px";
+    videoIntro.style.height = height + "px";
+    videoIntro.style.transform = `translateY(${translateY}%) translateX(${translateX}%)`;
+    videoIntro.style.opacity = opacity;
+  }
+
+  /**
+   * Settle video into About section (stop following scroll)
+   * ✅ FIX: Proper alignment in settled area
+   */
+  function settleVideoInAbout() {
+    if (!videoIntro || !videoSettledArea) return;
+
+    // ✅ Move video directly into settled area
+    videoIntro.style.position = "absolute";
+    videoIntro.style.top = "0";
+    videoIntro.style.left = "0";
+    videoIntro.style.right = "auto";
+    videoIntro.style.bottom = "auto";
+    videoIntro.style.width = "100%";
+    videoIntro.style.height = "100%";
+    videoIntro.style.transform = "none";
+    videoIntro.style.opacity = "1";
+
+    // Move video DOM element into settled area
+    videoSettledArea.appendChild(videoIntro);
+
+    // Show video text overlay
+    if (videoSettledArea) {
+      videoSettledArea.classList.add("has-video");
+    }
+
+    log("✅ Video settled in area - proper alignment");
+  }
+
+  /**
+   * Update pattern fade
+   */
+  function updatePatternFade(progress) {
+    if (patternGreen && progress > 0.3) {
+      patternGreen.style.opacity = 1 - (progress - 0.3) / 0.7;
+    }
+  }
+
+  /**
+   * Reveal About section content
+   */
+  function revealAboutContent() {
+    // Globe pattern
+    if (globePattern) {
+      setTimeout(() => {
+        globePattern.classList.add("revealed");
+      }, 200);
+    }
+
+    // Locations
+    if (locations) {
+      setTimeout(() => {
+        locations.classList.add("revealed");
+      }, 400);
+    }
+
+    // Description
+    if (description) {
+      setTimeout(() => {
+        description.classList.add("revealed");
+      }, 600);
+    }
+  }
+
+  /**
+   * Resize handler
+   */
+  function onResize() {
+    calculatePositions();
+
+    // Reset if video already settled
+    if (videoSettled) {
+      videoSettled = false;
+      videoIntro.style.position = "fixed";
+      videoIntro.style.bottom = "0";
+      videoIntro.style.right = "5%";
+      videoIntro.style.top = "auto";
+
+      // Re-trigger update
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateScrollProgress);
+      }
+    }
+  }
+
+  /**
+   * Linear interpolation
+   */
+  function lerp(start, end, t) {
+    return start * (1 - t) + end * t;
+  }
+
+  /**
+   * Easing function
+   */
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  /**
+   * Debounce helper
+   */
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
+  /**
+   * Logging helper
+   */
+  function log(...args) {
+    if (CONFIG.enableLogging) {
+      console.log("[CDA]", ...args);
+    }
+  }
+
+  /**
+   * =============================================
+   * 3D GLOBE CANVAS - OPTION B
+   * Real 3D sphere rotating around axis
+   * =============================================
+   */
+  let globe3D = null;
+
+  function init3DGlobe() {
+    if (!globeCanvas) return;
+
+    const canvas = globeCanvas;
+    const ctx = canvas.getContext("2d");
+
+    // Set canvas size
+    const size = 400;
+    canvas.width = size;
+    canvas.height = size;
+
+    const centerX = size / 2;
+    const centerY = size / 2;
+    const radius = 180;
+
+    // Generate dots on sphere surface
+    const dots = [];
+    const numDots = 200;
+
+    for (let i = 0; i < numDots; i++) {
+      // Fibonacci sphere distribution for even spacing
+      const phi = Math.acos(1 - (2 * (i + 0.5)) / numDots);
+      const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+
+      dots.push({
+        phi: phi,
+        theta: theta,
+        x: 0,
+        y: 0,
+        z: 0,
+        alpha: 1,
+      });
+    }
+
+    let rotation = 0;
+
+    // Animation function
+    function animate() {
+      // Clear canvas
+      ctx.clearRect(0, 0, size, size);
+
+      // Update rotation
+      rotation += 0.003; // Slow rotation speed
+
+      // Calculate 3D positions and project to 2D
+      dots.forEach((dot) => {
+        // Convert spherical to Cartesian coordinates
+        const x = radius * Math.sin(dot.phi) * Math.cos(dot.theta + rotation);
+        const y = radius * Math.cos(dot.phi);
+        const z = radius * Math.sin(dot.phi) * Math.sin(dot.theta + rotation);
+
+        // Store 3D coordinates
+        dot.x = x;
+        dot.y = y;
+        dot.z = z;
+
+        // Calculate alpha based on z-depth (dots in back are dimmer)
+        dot.alpha = ((z + radius) / (2 * radius)) * 0.7 + 0.3;
+      });
+
+      // Sort dots by z-depth (back to front)
+      dots.sort((a, b) => a.z - b.z);
+
+      // Draw dots
+      dots.forEach((dot) => {
+        const screenX = centerX + dot.x;
+        const screenY = centerY + dot.y;
+
+        // Dot size based on depth
+        const dotSize = 2 + ((dot.z + radius) / (2 * radius)) * 2;
+
+        // Draw dot with gradient
+        const gradient = ctx.createRadialGradient(
+          screenX,
+          screenY,
+          0,
+          screenX,
+          screenY,
+          dotSize
+        );
+
+        gradient.addColorStop(0, `rgba(135, 206, 235, ${dot.alpha})`);
+        gradient.addColorStop(1, `rgba(135, 206, 235, 0)`);
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(screenX, screenY, dotSize, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Draw rotating rings
+      drawRings(ctx, centerX, centerY, radius, rotation);
+
+      // Continue animation
+      requestAnimationFrame(animate);
+    }
+
+    // Start animation
+    animate();
+
+    globe3D = { canvas, ctx, animate };
+    log("✅ 3D Globe initialized");
+  }
+
+  /**
+   * Draw rotating rings around globe
+   */
+  function drawRings(ctx, centerX, centerY, radius, rotation) {
+    // Ring 1 - Equator
+    ctx.strokeStyle = "rgba(135, 206, 235, 0.2)";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+
+    for (let angle = 0; angle < Math.PI * 2; angle += 0.1) {
+      const x = centerX + radius * Math.cos(angle);
+      const y = centerY + radius * Math.sin(angle) * Math.cos(rotation);
+
+      if (angle === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    }
+    ctx.closePath();
+    ctx.stroke();
+
+    // Ring 2 - Meridian
+    ctx.beginPath();
+    for (let angle = 0; angle < Math.PI * 2; angle += 0.1) {
+      const x = centerX + radius * Math.cos(angle) * Math.sin(rotation);
+      const y = centerY + radius * Math.sin(angle);
+
+      if (angle === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    }
+    ctx.closePath();
+    ctx.stroke();
+
+    // Ring 3 - Tilted ring
+    ctx.strokeStyle = "rgba(135, 206, 235, 0.15)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+
+    for (let angle = 0; angle < Math.PI * 2; angle += 0.1) {
+      const tilt = Math.PI / 6; // 30 degree tilt
+      const x = centerX + radius * 0.8 * Math.cos(angle);
+      const y =
+        centerY +
+        radius * 0.8 * Math.sin(angle) * Math.cos(tilt + rotation * 0.5);
+
+      if (angle === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    }
+    ctx.closePath();
+    ctx.stroke();
+  }
+
+  /**
+   * Public API
+   */
+  window.CDATransition = {
+    enableLogging: () => {
+      CONFIG.enableLogging = true;
+    },
+    disableLogging: () => {
+      CONFIG.enableLogging = false;
+    },
+    reset: () => {
+      videoSettled = false;
+      videoIntro.style.position = "fixed";
+      videoIntro.style.bottom = "0";
+      videoIntro.style.right = "5%";
+      videoIntro.style.width = "325px";
+      videoIntro.style.height = "225px";
+      videoIntro.style.transform = "translateY(50%)";
+      videoIntro.style.opacity = "0.7";
+    },
+  };
+
+  // Auto-initialize
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+
+/**
+ * Smooth scroll indicator
+ */
+(function initSmoothScroll() {
+  const scrollIndicator = document.querySelector(".cda-scroll-indicator");
+
+  if (scrollIndicator) {
+    scrollIndicator.addEventListener("click", () => {
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: "smooth",
+      });
+    });
+  }
+})();

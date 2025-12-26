@@ -176,6 +176,23 @@ function toyota_enqueue_assets()
         );
     }
 
+    if (is_page_template('page-wwdo-hero.php')) {
+        wp_enqueue_style(
+            'wwdo-hero',
+            get_template_directory_uri() . '/css/aus.css',
+            array('toyota-global'),
+            '1.0.0'
+        );
+
+        wp_enqueue_script(
+            'wwdo-hero',
+            get_template_directory_uri() . '/js/aus.js',
+            array(),
+            '1.0.0',
+            true
+        );
+    }
+
     if (is_page_template('page-text.php')) {
         wp_enqueue_style(
             'text',

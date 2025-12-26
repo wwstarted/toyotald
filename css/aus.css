@@ -1,0 +1,551 @@
+/* =============================================
+   HERO + ABOUT US - FINAL VERSION
+   ============================================= */
+
+/* =============================================
+   HERO SECTION
+   ============================================= */
+
+.cda-hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #f5f5f5;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cda-hero-container {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  z-index: 1;
+}
+
+/* Hero Title - New Grid Layout */
+.cda-hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 1400px;
+  width: 100%;
+}
+
+.cda-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  row-gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.cda-hero-word {
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: 700;
+  line-height: 0.9;
+  margin: 0;
+  color: #0a0a0a;
+  letter-spacing: -0.02em;
+}
+
+.cda-hero-line {
+  display: block;
+  animation: fadeInUp 1s ease-out backwards;
+}
+
+/* Left aligned words */
+.cda-word-left {
+  grid-column: 1;
+  text-align: left;
+  justify-self: start;
+}
+
+.cda-word-left:nth-child(1) .cda-hero-line {
+  animation-delay: 0.2s;
+}
+
+.cda-word-left:nth-child(4) .cda-hero-line {
+  animation-delay: 0.6s;
+}
+
+/* Right aligned word */
+.cda-word-right {
+  grid-column: 2;
+  text-align: right;
+  justify-self: end;
+}
+
+.cda-word-right .cda-hero-line {
+  animation-delay: 0.4s;
+}
+
+/* Tagline - Center, spans both columns */
+.cda-hero-tagline {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: #333;
+  margin: 2rem 0;
+  animation: fadeInUp 1s ease-out 0.5s backwards;
+}
+
+.cda-hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+  text-align: left;
+  animation: fadeInUp 1s ease-out 0.8s backwards;
+}
+
+/* Green/Lime Pattern Background - More Visible */
+.cda-pattern-green {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 850px;
+  height: 850px;
+  opacity: 1;
+  background: radial-gradient(
+      circle at 25% 25%,
+      rgba(144, 238, 144, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(173, 255, 47, 0.25) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(152, 251, 152, 0.2) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 30% 70%,
+      rgba(144, 238, 144, 0.18) 0%,
+      transparent 55%
+    );
+  background-size: 300% 300%;
+  animation: patternMove 20s ease-in-out infinite;
+  border-radius: 50%;
+  filter: blur(25px); /* Less blur - more visible */
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.8s ease;
+}
+
+@keyframes patternMove {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Video Intro Container - STARTS SMALL */
+.cda-video-intro {
+  position: fixed;
+  bottom: 0;
+  right: 5%;
+  width: 325px; /* 50% of final size */
+  height: 225px; /* 50% of final size */
+  z-index: 100;
+  transform: translateY(50%);
+  opacity: 0.7;
+  will-change: transform, opacity, width, height;
+  transition: none; /* JS controls all animations */
+}
+
+.cda-video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+
+.cda-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cda-video-fallback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.cda-video:error + .cda-video-fallback {
+  display: flex;
+}
+
+.cda-logo-animated {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Scroll Indicator */
+.cda-scroll-indicator {
+  position: absolute;
+  bottom: 4rem;
+  left: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: #0a0a0a;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  z-index: 3;
+  cursor: pointer;
+  animation: fadeInUp 1s ease-out 1s backwards;
+}
+
+.cda-scroll-indicator svg {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* =============================================
+   ABOUT US SECTION - FIT 100VH
+   ============================================= */
+
+.cda-about-section {
+  position: relative;
+  height: 100vh; /* ✅ Fixed height - exactly 1 viewport */
+  background: #f5f5f5;
+  padding: 4rem 4rem; /* ✅ Reduced padding */
+  overflow: hidden;
+  display: flex;
+  align-items: center; /* ✅ Center content vertically */
+}
+
+.cda-about-container {
+  position: relative;
+  max-width: 1400px;
+  width: 100%;
+  height: 100%; /* ✅ Take full height */
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center; /* ✅ Center items vertically */
+  z-index: 2;
+}
+
+/* =============================================
+   LEFT SIDE - 3D GLOBE + LOCATIONS
+   ============================================= */
+
+.cda-about-left {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* ✅ Center globe */
+  align-items: center;
+}
+
+/* 3D Globe Canvas - Option B */
+.cda-globe-pattern {
+  position: relative;
+  width: 400px; /* ✅ Reduced size to fit 100vh */
+  height: 400px;
+  margin-bottom: 2rem; /* Space for locations below */
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.cda-globe-pattern.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cda-globe-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Locations - Bottom-left corner */
+.cda-locations {
+  position: absolute;
+  bottom: 2rem; /* ✅ Adjusted for 100vh */
+  left: 0;
+  max-width: 250px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+}
+
+.cda-locations.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cda-locations-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #666;
+  margin: 0 0 0.75rem 0; /* ✅ Reduced margin */
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.cda-locations-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cda-location-item {
+  font-size: 1.25rem; /* ✅ Slightly smaller */
+  font-weight: 700;
+  color: #0a0a0a;
+  margin: 0.2rem 0; /* ✅ Tighter spacing */
+  line-height: 1.2;
+}
+
+/* =============================================
+   RIGHT SIDE - VIDEO + DESCRIPTION (FIT 100VH)
+   ============================================= */
+
+.cda-about-right {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* ✅ Center vertically */
+  gap: 2rem; /* ✅ Reduced gap */
+}
+
+/* Video Settled Area */
+.cda-video-settled-area {
+  position: relative;
+  width: 100%;
+  height: 380px; /* ✅ Reduced height to fit 100vh */
+  border-radius: 24px;
+  background: rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+/* Video Text Overlay */
+.cda-video-text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.cda-video-settled-area.has-video .cda-video-text-overlay {
+  opacity: 1;
+}
+
+.cda-overlay-text {
+  display: block;
+  font-size: clamp(1.5rem, 3vw, 3rem); /* ✅ Smaller text */
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.2;
+  margin: 0.3rem 0; /* ✅ Tighter spacing */
+  text-transform: capitalize;
+  letter-spacing: 0.05em;
+}
+
+/* Company Description */
+.cda-description {
+  opacity: 0;
+  transform: translateY(30px); /* ✅ Less movement */
+  transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
+}
+
+.cda-description.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cda-description-text {
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem); /* ✅ Smaller font */
+  font-weight: 400;
+  line-height: 1.4; /* ✅ Tighter line height */
+  color: #0a0a0a;
+  margin: 0;
+}
+
+/* Scroll Spacer */
+.cda-scroll-spacer {
+  height: 50vh;
+  background: transparent;
+}
+
+/* =============================================
+   ANIMATIONS
+   ============================================= */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =============================================
+   RESPONSIVE DESIGN
+   ============================================= */
+
+@media (max-width: 1200px) {
+  .cda-hero-grid {
+    row-gap: 2rem;
+  }
+
+  .cda-pattern-green {
+    width: 700px;
+    height: 700px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cda-about-section {
+    height: auto; /* Allow natural height on tablets */
+    min-height: 100vh;
+    padding: 4rem 2rem;
+  }
+
+  .cda-about-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    height: auto;
+  }
+
+  .cda-globe-pattern {
+    width: 350px;
+    height: 350px;
+  }
+
+  .cda-video-intro {
+    width: 280px;
+    height: 190px;
+  }
+
+  .cda-video-settled-area {
+    height: 320px;
+  }
+
+  .cda-pattern-green {
+    width: 600px;
+    height: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cda-hero-container,
+  .cda-about-section {
+    padding: 0 1.5rem;
+  }
+
+  .cda-about-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .cda-hero-grid {
+    grid-template-columns: 1fr;
+    row-gap: 1.5rem;
+  }
+
+  .cda-word-left,
+  .cda-word-right {
+    grid-column: 1;
+    text-align: left;
+    justify-self: start;
+  }
+
+  .cda-hero-tagline {
+    text-align: left;
+    font-size: 1.125rem;
+  }
+
+  .cda-globe-pattern {
+    width: 280px;
+    height: 280px;
+  }
+
+  .cda-video-intro {
+    width: 240px;
+    height: 160px;
+    right: 2%;
+  }
+
+  .cda-video-settled-area {
+    height: 280px;
+  }
+
+  .cda-location-item {
+    font-size: 1.1rem;
+  }
+
+  .cda-description-text {
+    font-size: 1.25rem;
+  }
+
+  .cda-pattern-green {
+    width: 450px;
+    height: 450px;
+  }
+}
+
+/* Performance Optimizations */
+.cda-video-intro,
+.cda-globe-pattern {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
