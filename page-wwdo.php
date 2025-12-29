@@ -21,19 +21,16 @@ get_header(); ?>
                     <span class="cda-hero-line">Design</span>
                 </h1>
 
-                <!-- Row 2: Tagline (center, spans both columns) -->
                 <p class="cda-hero-tagline">
                     A collective of strategists,<br>
                     storytellers, and makers.
                 </p>
 
-                <!-- Row 3: Agency (left) -->
                 <h1 class="cda-hero-word cda-word-left">
                     <span class="cda-hero-line">Agency</span>
                 </h1>
             </div>
 
-            <!-- Description below grid -->
             <p class="cda-hero-subtitle">
                 Designing intentional experiences<br>
                 across brand and digital.
@@ -50,7 +47,6 @@ get_header(); ?>
                     <source src="<?php echo get_template_directory_uri(); ?>/uploads/video/intro.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <!-- Fallback -->
                 <div class="cda-video-fallback">
                     <div class="cda-logo-animated">
                         <svg width="80" height="80" viewBox="0 0 120 120">
@@ -96,11 +92,8 @@ get_header(); ?>
             </div>
         </div>
 
-        <!-- Right Side: Video Box (settled) + Description -->
         <div class="cda-about-right">
-            <!-- Video Box Placeholder (video will settle here) -->
             <div class="cda-video-settled-area" id="cdaVideoSettledArea">
-                <!-- Video text overlay -->
                 <div class="cda-video-text-overlay">
                     <span class="cda-overlay-text">Stories</span>
                     <span class="cda-overlay-text">Systems</span>
@@ -108,7 +101,6 @@ get_header(); ?>
                 </div>
             </div>
 
-            <!-- Company Description -->
             <div class="cda-description">
                 <h2 class="cda-description-text">
                     CDA is a vision-driven, human-centered creative consultancy that helps brands become more
@@ -119,7 +111,6 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Smooth Scroll Spacer -->
 <div class="cda-scroll-spacer"></div>
 
 <section class="wwd-section" id="whatWeDo">

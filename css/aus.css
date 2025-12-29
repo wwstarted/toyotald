@@ -1,5 +1,5 @@
 /* =============================================
-   HERO + ABOUT US - FINAL VERSION
+   CDA HERO + ABOUT US - FIXED VERSION
    ============================================= */
 
 /* =============================================
@@ -10,7 +10,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: #f5f5f5;
+  background: #ffffff;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -26,7 +26,7 @@
   z-index: 1;
 }
 
-/* Hero Title - New Grid Layout */
+/* Hero Title - Grid Layout */
 .cda-hero-content {
   position: relative;
   z-index: 3;
@@ -56,7 +56,6 @@
   animation: fadeInUp 1s ease-out backwards;
 }
 
-/* Left aligned words */
 .cda-word-left {
   grid-column: 1;
   text-align: left;
@@ -71,7 +70,6 @@
   animation-delay: 0.6s;
 }
 
-/* Right aligned word */
 .cda-word-right {
   grid-column: 2;
   text-align: right;
@@ -82,7 +80,6 @@
   animation-delay: 0.4s;
 }
 
-/* Tagline - Center, spans both columns */
 .cda-hero-tagline {
   grid-column: 1 / -1;
   text-align: center;
@@ -102,68 +99,58 @@
   text-align: left;
   animation: fadeInUp 1s ease-out 0.8s backwards;
 }
-.cda-pattern-green {
+
+/* =============================================
+   3D SPHERE PATTERN BACKGROUND - FIXED
+   ============================================= */
+
+.cda-pattern-3d {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 550px;
-  height: 550px;
+  width: 600px;
+  height: 600px;
   opacity: 1;
-  background: radial-gradient(
-      circle at 25% 25%,
-      rgba(144, 238, 144, 0.3) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 75% 75%,
-      rgba(173, 255, 47, 0.25) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(152, 251, 152, 0.2) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      circle at 30% 70%,
-      rgba(144, 238, 144, 0.18) 0%,
-      transparent 55%
-    );
-  background-size: 300% 300%;
-  animation: patternMove 20s ease-in-out infinite;
-  border-radius: 50%;
-  filter: blur(25px); /* Less blur - more visible */
   pointer-events: none;
   z-index: 2;
   transition: opacity 0.8s ease;
 }
 
-@keyframes patternMove {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+.cda-sphere-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: blur(8px);
+  opacity: 1;
+  transition: opacity 0.8s ease;
 }
 
-/* Video Intro Container - STARTS SMALL */
+/* =============================================
+   VIDEO INTRO CONTAINER
+   ============================================= */
+
 .cda-video-intro {
   position: fixed;
   bottom: 0;
   right: 5%;
-  width: 325px; /* 50% of final size */
-  height: 225px; /* 50% of final size */
+  width: 325px;
+  height: 225px;
   z-index: 100;
-  transform: translateY(50%);
+  /* transform: translateY(50%); */
   opacity: 0.7;
-  will-change: transform, opacity, width, height;
-  transition: none; /* JS controls all animations */
+  /* will-change: transform, opacity, width, height, top, left; */
+  transition: none;
+  transform-origin: top left; /* Quan trọng để tính toán scale */
+  will-change: transform, width, height, top, left;
+  pointer-events: none; /* Để không chặn scroll khi đang bay */
 }
 
-.cda-video-wrapper {
+.cda-video-intro.is-settled {
+  pointer-events: auto;
+}
+
+/* .cda-video-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
@@ -171,6 +158,15 @@
   overflow: hidden;
   background: #000;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+} */
+.cda-video-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transform: translateZ(0); /* Hardware Acceleration */
 }
 
 .cda-video {
@@ -228,6 +224,11 @@
   z-index: 3;
   cursor: pointer;
   animation: fadeInUp 1s ease-out 1s backwards;
+  transition: opacity 0.3s ease;
+}
+
+.cda-scroll-indicator:hover {
+  opacity: 0.7;
 }
 
 .cda-scroll-indicator svg {
@@ -245,29 +246,29 @@
 }
 
 /* =============================================
-   ABOUT US SECTION - FIT 100VH
+   ABOUT US SECTION
    ============================================= */
 
 .cda-about-section {
   position: relative;
-  height: 100vh; /* ✅ Fixed height - exactly 1 viewport */
-  background: #f5f5f5;
-  padding: 4rem 4rem; /* ✅ Reduced padding */
+  height: 100vh;
+  background: #ffffff;
+  padding: 4rem 4rem;
   overflow: hidden;
   display: flex;
-  align-items: center; /* ✅ Center content vertically */
+  align-items: center;
 }
 
 .cda-about-container {
   position: relative;
   max-width: 1400px;
   width: 100%;
-  height: 100%; /* ✅ Take full height */
+  height: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: center; /* ✅ Center items vertically */
+  align-items: center;
   z-index: 2;
 }
 
@@ -280,16 +281,15 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* ✅ Center globe */
+  justify-content: center;
   align-items: center;
 }
 
-/* 3D Globe Canvas - Option B */
 .cda-globe-pattern {
   position: relative;
-  width: 400px; /* ✅ Reduced size to fit 100vh */
+  width: 400px;
   height: 400px;
-  margin-bottom: 2rem; /* Space for locations below */
+  margin-bottom: 2rem;
   opacity: 0;
   transform: scale(0.8);
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -306,10 +306,9 @@
   display: block;
 }
 
-/* Locations - Bottom-left corner */
 .cda-locations {
   position: absolute;
-  bottom: 2rem; /* ✅ Adjusted for 100vh */
+  bottom: 2rem;
   left: 0;
   max-width: 250px;
   opacity: 0;
@@ -326,7 +325,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   color: #666;
-  margin: 0 0 0.75rem 0; /* ✅ Reduced margin */
+  margin: 0 0 0.75rem 0;
   line-height: 1.4;
   letter-spacing: 0.02em;
 }
@@ -338,15 +337,15 @@
 }
 
 .cda-location-item {
-  font-size: 1.25rem; /* ✅ Slightly smaller */
+  font-size: 1.25rem;
   font-weight: 700;
   color: #0a0a0a;
-  margin: 0.2rem 0; /* ✅ Tighter spacing */
+  margin: 0.2rem 0;
   line-height: 1.2;
 }
 
 /* =============================================
-   RIGHT SIDE - VIDEO + DESCRIPTION (FIT 100VH)
+   RIGHT SIDE - VIDEO + DESCRIPTION
    ============================================= */
 
 .cda-about-right {
@@ -358,15 +357,24 @@
   gap: 2rem;
 }
 
-.cda-video-settled-area {
+/* .cda-video-settled-area {
   position: relative;
   width: 75%;
   height: 280px;
   border-radius: 24px;
   background: rgba(0, 0, 0, 0.05);
   overflow: hidden;
-}
+} */
 
+.cda-video-settled-area {
+  position: relative;
+  width: 100%; /* Full width của cột phải */
+  aspect-ratio: 16 / 9; /* Tự động tính chiều cao theo tỷ lệ */
+  height: auto; /* Bỏ height cứng */
+  border-radius: 24px;
+  background: rgba(0, 0, 0, 0.05);
+  /* Border ảo để giữ chỗ cho video */
+}
 /* Video Text Overlay */
 .cda-video-text-overlay {
   position: absolute;
@@ -386,19 +394,20 @@
 
 .cda-overlay-text {
   display: block;
-  font-size: clamp(1.5rem, 3vw, 3rem); /* ✅ Smaller text */
+  font-size: clamp(1.5rem, 3vw, 3rem);
   font-weight: 300;
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.2;
-  margin: 0.3rem 0; /* ✅ Tighter spacing */
+  margin: 0.3rem 0;
   text-transform: capitalize;
   letter-spacing: 0.05em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Company Description */
 .cda-description {
   opacity: 0;
-  transform: translateY(30px); /* ✅ Less movement */
+  transform: translateY(30px);
   transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
 }
 
@@ -407,10 +416,15 @@
   transform: translateY(0);
 }
 
+.cda-video-intro.is-settled + .cda-video-text-overlay, /* Logic mới */
+.cda-video-settled-area.has-video .cda-video-text-overlay {
+  opacity: 1;
+}
+
 .cda-description-text {
-  font-size: clamp(1.5rem, 2.5vw, 2.25rem); /* ✅ Smaller font */
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
   font-weight: 400;
-  line-height: 1.4; /* ✅ Tighter line height */
+  line-height: 1.4;
   color: #0a0a0a;
   margin: 0;
 }
@@ -445,15 +459,15 @@
     row-gap: 2rem;
   }
 
-  .cda-pattern-green {
-    width: 700px;
-    height: 700px;
+  .cda-pattern-3d {
+    width: 500px;
+    height: 500px;
   }
 }
 
 @media (max-width: 1024px) {
   .cda-about-section {
-    height: auto; /* Allow natural height on tablets */
+    height: auto;
     min-height: 100vh;
     padding: 4rem 2rem;
   }
@@ -475,12 +489,13 @@
   }
 
   .cda-video-settled-area {
+    width: 90%;
     height: 320px;
   }
 
-  .cda-pattern-green {
-    width: 600px;
-    height: 600px;
+  .cda-pattern-3d {
+    width: 450px;
+    height: 450px;
   }
 }
 
@@ -523,6 +538,7 @@
   }
 
   .cda-video-settled-area {
+    width: 100%;
     height: 280px;
   }
 
@@ -534,15 +550,30 @@
     font-size: 1.25rem;
   }
 
-  .cda-pattern-green {
-    width: 450px;
-    height: 450px;
+  .cda-pattern-3d {
+    width: 350px;
+    height: 350px;
+  }
+
+  .cda-scroll-indicator {
+    bottom: 2rem;
+    left: 2rem;
   }
 }
 
-/* Performance Optimizations */
+/* =============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================= */
+
 .cda-video-intro,
-.cda-globe-pattern {
+.cda-globe-pattern,
+.cda-sphere-canvas {
   transform: translateZ(0);
   backface-visibility: hidden;
+}
+
+.cda-video-wrapper,
+.cda-video-settled-area {
+  transform: translateZ(0);
+  will-change: transform;
 }

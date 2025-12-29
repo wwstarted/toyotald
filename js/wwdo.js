@@ -43,7 +43,7 @@
 
     initParallax();
 
-    console.log("✅ What We Do section initialized (Modern Version)");
+    console.log("What We Do section initialized (Modern Version)");
   }
 
   function onScroll() {
@@ -905,7 +905,6 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   };
 
-  // Auto-initialize
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {

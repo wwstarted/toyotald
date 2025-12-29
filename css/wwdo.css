@@ -1361,10 +1361,6 @@
   }
 }
 
-/* =============================================
-   RESPONSIVE DESIGN
-   ============================================= */
-
 @media (max-width: 1200px) {
   .cda-hero-grid {
     row-gap: 2rem;
@@ -1378,7 +1374,7 @@
 
 @media (max-width: 1024px) {
   .cda-about-section {
-    height: auto; /* Allow natural height on tablets */
+    height: auto;
     min-height: 100vh;
     padding: 4rem 2rem;
   }

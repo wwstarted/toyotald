@@ -1,16 +1,15 @@
 <?php
 /**
- * Template Name: CDA Hero About - Toyota Lâm Đồng
- * Description: Hero to About Us Scroll Transition - Final Version
+ * Template Name: CDA Hero About - Toyota Lâm Đồng (UPGRADED)
+ * Description: Hero to About Us Scroll Transition - Enhanced Version
  */
 get_header(); ?>
 
 <!-- Hero Section -->
 <section class="cda-hero-section" id="cdaHero">
     <div class="cda-hero-container">
-        <!-- Hero Text Content - New Grid Layout -->
+        <!-- Hero Text Content -->
         <div class="cda-hero-content">
-            <!-- Hero Grid: Split layout -->
             <div class="cda-hero-grid">
                 <!-- Row 1: Collective (left) + Design (right) -->
                 <h1 class="cda-hero-word cda-word-left">
@@ -39,8 +38,10 @@ get_header(); ?>
             </p>
         </div>
 
-        <!-- Decorative Pattern Background - Green/Lime (More Visible) -->
-        <div class="cda-pattern cda-pattern-green"></div>
+        <!-- UPGRADED: 3D Sphere Pattern Background (Canvas) -->
+        <div class="cda-pattern-3d" id="cdaPattern3D">
+            <canvas id="cdaSphereCanvas" class="cda-sphere-canvas"></canvas>
+        </div>
 
         <!-- Video Intro Container (starts bottom-right at 50% size) -->
         <div class="cda-video-intro" id="cdaVideoIntro">
@@ -78,7 +79,7 @@ get_header(); ?>
 
         <!-- Left Side: 3D Globe + Locations -->
         <div class="cda-about-left">
-            <!-- 3D Globe Canvas (Option B - Canvas + Math) -->
+            <!-- 3D Globe Canvas -->
             <div class="cda-globe-pattern">
                 <canvas id="cdaGlobeCanvas" class="cda-globe-canvas"></canvas>
             </div>
