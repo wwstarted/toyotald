@@ -444,9 +444,6 @@
     ctx.stroke();
   }
 
-  /**
-   * Public API
-   */
   window.CDATransition = {
     enableLogging: () => {
       CONFIG.enableLogging = true;
@@ -466,7 +463,6 @@
     },
   };
 
-  // Auto-initialize
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
@@ -474,9 +470,6 @@
   }
 })();
 
-/**
- * Smooth scroll indicator
- */
 (function initSmoothScroll() {
   const scrollIndicator = document.querySelector(".cda-scroll-indicator");
 

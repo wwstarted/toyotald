@@ -118,7 +118,6 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Smooth Scroll Spacer -->
 <div class="cda-scroll-spacer"></div>
 
 <?php get_footer(); ?>

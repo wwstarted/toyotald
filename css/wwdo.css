@@ -1311,11 +1311,11 @@
 
 .cda-overlay-text {
   display: block;
-  font-size: clamp(1.5rem, 3vw, 3rem); /* ✅ Smaller text */
+  font-size: clamp(1.5rem, 3vw, 3rem);
   font-weight: 300;
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.2;
-  margin: 0.3rem 0; /* ✅ Tighter spacing */
+  margin: 0.3rem 0;
   text-transform: capitalize;
   letter-spacing: 0.05em;
 }
@@ -1323,7 +1323,7 @@
 /* Company Description */
 .cda-description {
   opacity: 0;
-  transform: translateY(30px); /* ✅ Less movement */
+  transform: translateY(30px);
   transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
 }
 
@@ -1333,9 +1333,9 @@
 }
 
 .cda-description-text {
-  font-size: clamp(1.5rem, 2.5vw, 2.25rem); /* ✅ Smaller font */
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
   font-weight: 400;
-  line-height: 1.4; /* ✅ Tighter line height */
+  line-height: 1.4;
   color: #0a0a0a;
   margin: 0;
 }
