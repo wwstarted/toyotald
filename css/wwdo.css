@@ -921,7 +921,7 @@
 
 /* ================================ hero banner + about us section ================================= */
 /* =============================================
-   HERO + ABOUT US - FINAL VERSION
+   CDA HERO + ABOUT US - FIXED VERSION
    ============================================= */
 
 /* =============================================
@@ -932,7 +932,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: #f5f5f5;
+  background: #ffffff;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -948,7 +948,7 @@
   z-index: 1;
 }
 
-/* Hero Title - New Grid Layout */
+/* Hero Title - Grid Layout */
 .cda-hero-content {
   position: relative;
   z-index: 3;
@@ -978,7 +978,6 @@
   animation: fadeInUp 1s ease-out backwards;
 }
 
-/* Left aligned words */
 .cda-word-left {
   grid-column: 1;
   text-align: left;
@@ -993,7 +992,6 @@
   animation-delay: 0.6s;
 }
 
-/* Right aligned word */
 .cda-word-right {
   grid-column: 2;
   text-align: right;
@@ -1004,7 +1002,6 @@
   animation-delay: 0.4s;
 }
 
-/* Tagline - Center, spans both columns */
 .cda-hero-tagline {
   grid-column: 1 / -1;
   text-align: center;
@@ -1025,69 +1022,57 @@
   animation: fadeInUp 1s ease-out 0.8s backwards;
 }
 
-/* Green/Lime Pattern Background - More Visible */
-.cda-pattern-green {
+/* =============================================
+   3D SPHERE PATTERN BACKGROUND - FIXED
+   ============================================= */
+
+.cda-pattern-3d {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 850px;
-  height: 850px;
+  width: 600px;
+  height: 600px;
   opacity: 1;
-  background: radial-gradient(
-      circle at 25% 25%,
-      rgba(144, 238, 144, 0.3) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 75% 75%,
-      rgba(173, 255, 47, 0.25) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(152, 251, 152, 0.2) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      circle at 30% 70%,
-      rgba(144, 238, 144, 0.18) 0%,
-      transparent 55%
-    );
-  background-size: 300% 300%;
-  animation: patternMove 20s ease-in-out infinite;
-  border-radius: 50%;
-  filter: blur(25px); /* Less blur - more visible */
   pointer-events: none;
   z-index: 2;
   transition: opacity 0.8s ease;
 }
 
-@keyframes patternMove {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+.cda-sphere-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: blur(8px);
+  opacity: 1;
+  transition: opacity 0.8s ease;
 }
 
-/* Video Intro Container - STARTS SMALL */
+/* =============================================
+   VIDEO INTRO CONTAINER
+   ============================================= */
+
 .cda-video-intro {
   position: fixed;
   bottom: 0;
   right: 5%;
-  width: 325px; /* 50% of final size */
-  height: 225px; /* 50% of final size */
+  width: 325px;
+  height: 225px;
   z-index: 100;
-  transform: translateY(50%);
+  /* transform: translateY(50%); */
   opacity: 0.7;
-  will-change: transform, opacity, width, height;
-  transition: none; /* JS controls all animations */
+  /* will-change: transform, opacity, width, height, top, left; */
+  transition: none;
+  transform-origin: top left; /* Quan trọng để tính toán scale */
+  will-change: transform, width, height, top, left;
+  pointer-events: none; /* Để không chặn scroll khi đang bay */
 }
 
-.cda-video-wrapper {
+.cda-video-intro.is-settled {
+  pointer-events: auto;
+}
+
+/* .cda-video-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
@@ -1095,6 +1080,15 @@
   overflow: hidden;
   background: #000;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+} */
+.cda-video-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transform: translateZ(0); /* Hardware Acceleration */
 }
 
 .cda-video {
@@ -1152,6 +1146,11 @@
   z-index: 3;
   cursor: pointer;
   animation: fadeInUp 1s ease-out 1s backwards;
+  transition: opacity 0.3s ease;
+}
+
+.cda-scroll-indicator:hover {
+  opacity: 0.7;
 }
 
 .cda-scroll-indicator svg {
@@ -1168,52 +1167,43 @@
   }
 }
 
-/* =============================================
-   ABOUT US SECTION - FIT 100VH
-   ============================================= */
-
 .cda-about-section {
   position: relative;
-  height: 100vh; /* ✅ Fixed height - exactly 1 viewport */
-  background: #f5f5f5;
-  padding: 4rem 4rem; /* ✅ Reduced padding */
+  height: 100vh;
+  background: #ffffff;
+  padding: 4rem 4rem;
   overflow: hidden;
   display: flex;
-  align-items: center; /* ✅ Center content vertically */
+  align-items: center;
 }
 
 .cda-about-container {
   position: relative;
   max-width: 1400px;
   width: 100%;
-  height: 100%; /* ✅ Take full height */
+  height: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: center; /* ✅ Center items vertically */
+  align-items: center;
   z-index: 2;
 }
-
-/* =============================================
-   LEFT SIDE - 3D GLOBE + LOCATIONS
-   ============================================= */
 
 .cda-about-left {
   position: relative;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* ✅ Center globe */
+  justify-content: center;
   align-items: center;
 }
 
-/* 3D Globe Canvas - Option B */
 .cda-globe-pattern {
   position: relative;
-  width: 400px; /* ✅ Reduced size to fit 100vh */
+  width: 400px;
   height: 400px;
-  margin-bottom: 2rem; /* Space for locations below */
+  margin-bottom: 2rem;
   opacity: 0;
   transform: scale(0.8);
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -1230,10 +1220,9 @@
   display: block;
 }
 
-/* Locations - Bottom-left corner */
 .cda-locations {
   position: absolute;
-  bottom: 2rem; /* ✅ Adjusted for 100vh */
+  bottom: 2rem;
   left: 0;
   max-width: 250px;
   opacity: 0;
@@ -1250,7 +1239,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   color: #666;
-  margin: 0 0 0.75rem 0; /* ✅ Reduced margin */
+  margin: 0 0 0.75rem 0;
   line-height: 1.4;
   letter-spacing: 0.02em;
 }
@@ -1262,15 +1251,15 @@
 }
 
 .cda-location-item {
-  font-size: 1.25rem; /* ✅ Slightly smaller */
+  font-size: 1.25rem;
   font-weight: 700;
   color: #0a0a0a;
-  margin: 0.2rem 0; /* ✅ Tighter spacing */
+  margin: 0.2rem 0;
   line-height: 1.2;
 }
 
 /* =============================================
-   RIGHT SIDE - VIDEO + DESCRIPTION (FIT 100VH)
+   RIGHT SIDE - VIDEO + DESCRIPTION
    ============================================= */
 
 .cda-about-right {
@@ -1278,20 +1267,27 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* ✅ Center vertically */
-  gap: 2rem; /* ✅ Reduced gap */
+  justify-content: center;
+  gap: 2rem;
 }
 
-/* Video Settled Area */
-.cda-video-settled-area {
+/* .cda-video-settled-area {
   position: relative;
-  width: 100%;
-  height: 380px; /* ✅ Reduced height to fit 100vh */
+  width: 75%;
+  height: 280px;
   border-radius: 24px;
   background: rgba(0, 0, 0, 0.05);
   overflow: hidden;
-}
+} */
 
+.cda-video-settled-area {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border-radius: 24px;
+  z-index: -1000;
+}
 /* Video Text Overlay */
 .cda-video-text-overlay {
   position: absolute;
@@ -1318,6 +1314,7 @@
   margin: 0.3rem 0;
   text-transform: capitalize;
   letter-spacing: 0.05em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Company Description */
@@ -1332,9 +1329,14 @@
   transform: translateY(0);
 }
 
+.cda-video-intro.is-settled + .cda-video-text-overlay,
+.cda-video-settled-area.has-video .cda-video-text-overlay {
+  opacity: 1;
+}
+
 .cda-description-text {
   font-size: clamp(1.5rem, 2.5vw, 2.25rem);
-  font-weight: 400;
+  font-weight: 280;
   line-height: 1.4;
   color: #0a0a0a;
   margin: 0;
@@ -1345,10 +1347,6 @@
   height: 50vh;
   background: transparent;
 }
-
-/* =============================================
-   ANIMATIONS
-   ============================================= */
 
 @keyframes fadeInUp {
   from {
@@ -1361,14 +1359,18 @@
   }
 }
 
+/* =============================================
+   RESPONSIVE DESIGN
+   ============================================= */
+
 @media (max-width: 1200px) {
   .cda-hero-grid {
     row-gap: 2rem;
   }
 
-  .cda-pattern-green {
-    width: 700px;
-    height: 700px;
+  .cda-pattern-3d {
+    width: 500px;
+    height: 500px;
   }
 }
 
@@ -1396,12 +1398,13 @@
   }
 
   .cda-video-settled-area {
+    width: 90%;
     height: 320px;
   }
 
-  .cda-pattern-green {
-    width: 600px;
-    height: 600px;
+  .cda-pattern-3d {
+    width: 450px;
+    height: 450px;
   }
 }
 
@@ -1444,6 +1447,7 @@
   }
 
   .cda-video-settled-area {
+    width: 100%;
     height: 280px;
   }
 
@@ -1455,15 +1459,693 @@
     font-size: 1.25rem;
   }
 
-  .cda-pattern-green {
-    width: 450px;
-    height: 450px;
+  .cda-pattern-3d {
+    width: 350px;
+    height: 350px;
+  }
+
+  .cda-scroll-indicator {
+    bottom: 2rem;
+    left: 2rem;
   }
 }
 
-/* Performance Optimizations */
 .cda-video-intro,
-.cda-globe-pattern {
+.cda-globe-pattern,
+.cda-sphere-canvas {
   transform: translateZ(0);
   backface-visibility: hidden;
+}
+
+.cda-video-wrapper,
+.cda-video-settled-area {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* ================================ blog ========================================= */
+/* ===================================
+   BLOG SECTION - SPOTLIGHT EFFECT
+   =================================== */
+
+/* Body Dark Mode Toggle - Smooth Transition */
+body {
+  transition: background-color 1.2s ease-in-out, color 1.2s ease-in-out;
+}
+
+body.blog-dark-mode {
+  background-color: #000;
+  color: #fff;
+}
+
+/* CRITICAL: Đảm bảo TẤT CẢ sections TRANSPARENT để đồng bộ với body background */
+.cda-hero-section,
+.cda-about-section,
+.cda-scroll-spacer,
+.wwd-section,
+.sp-section,
+.blog-section {
+  background: transparent !important;
+}
+
+/* Blog Section */
+.blog-section {
+  min-height: 100vh;
+  padding: 8rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Đảm bảo text trong các sections khác cũng chuyển màu mượt mà */
+body.blog-dark-mode .cda-hero-section *,
+body.blog-dark-mode .cda-about-section *,
+body.blog-dark-mode .wwd-section *,
+body.blog-dark-mode .sp-section * {
+  transition: color 1.2s ease-in-out;
+}
+
+/* Override các text colors khi dark mode (nếu cần) */
+body.blog-dark-mode .cda-hero-section h1,
+body.blog-dark-mode .cda-hero-section p,
+body.blog-dark-mode .cda-about-section h2,
+body.blog-dark-mode .cda-about-section p,
+body.blog-dark-mode .wwd-section h2,
+body.blog-dark-mode .wwd-section h3,
+body.blog-dark-mode .sp-section h2,
+body.blog-dark-mode .sp-section h3 {
+  color: #fff;
+}
+
+body.blog-dark-mode .sp-nav-btn,
+body.blog-dark-mode .sp-view-all-btn {
+  color: #fff;
+  border-color: #fff;
+}
+
+.blog-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Blog Header */
+.blog-header {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.blog-section-label {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #888;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.blog-header h2 {
+  font-size: 3.5rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  font-style: italic;
+  transition: color 0.8s ease;
+}
+
+body.blog-dark-mode .blog-header h2 {
+  color: #fff;
+}
+
+.blog-header h2 em {
+  font-weight: 500;
+  font-style: italic;
+}
+
+.view-more {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 1rem;
+  margin-bottom: 4rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid currentColor;
+  transition: opacity 0.3s, color 0.8s ease;
+}
+
+body.blog-dark-mode .view-more {
+  color: #fff;
+}
+
+.view-more:hover {
+  opacity: 0.7;
+}
+
+/* Blog Grid - 2x2 Layout */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  position: relative;
+}
+
+/* Blog Card */
+.blog-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Dim other cards when one is hovered */
+.blog-grid:hover .blog-card:not(:hover) {
+  opacity: 0.5;
+}
+
+.blog-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  background: #111;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Spotlight Overlay with Increased Brightness */
+.blog-card-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    650px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.25),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.blog-card:hover .blog-card-link::before {
+  opacity: 1;
+}
+
+/* Glow Border Effect */
+.blog-card-link::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.1)
+    )
+    border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.blog-card:hover .blog-card-link::after {
+  opacity: 1;
+}
+
+/* Lift Effect + Glow Shadow */
+.blog-card:hover .blog-card-link {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 255, 255, 0.1);
+}
+
+/* Blog Image */
+.blog-image {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.blog-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.blog-card:hover .blog-image img {
+  transform: scale(1.08);
+}
+
+/* Blog Content */
+.blog-content {
+  padding: 2rem;
+  position: relative;
+  z-index: 4;
+}
+
+.blog-category {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.blog-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.blog-card:hover .blog-title {
+  color: #667eea;
+}
+
+.blog-meta {
+  font-size: 0.875rem;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.blog-card:hover .blog-meta {
+  color: #888;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .blog-section {
+    padding: 6rem 1.5rem;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .blog-header h2 {
+    font-size: 2.5rem;
+  }
+
+  .blog-image {
+    height: 250px;
+  }
+
+  .blog-content {
+    padding: 1.5rem;
+  }
+
+  .blog-title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .blog-section {
+    padding: 4rem 1rem;
+  }
+
+  .blog-header h2 {
+    font-size: 2rem;
+  }
+
+  .blog-image {
+    height: 200px;
+  }
+}
+
+/* ====================================== contact ======================================= */
+/* ===================================
+   CONTACT SECTION - MINIMALIST SPLIT
+   =================================== */
+
+/* Contact Section - Dark Background */
+.contact-section {
+  min-height: 100vh;
+  padding: 8rem 2rem;
+  background: transparent;
+  position: relative;
+  color: #fff;
+}
+
+.contact-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+/* ===================================
+   LEFT SIDE - INFO
+   =================================== */
+
+.contact-left {
+  position: sticky;
+  top: 8rem;
+}
+
+/* Header */
+.contact-label {
+  display: block;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #888;
+  margin-bottom: 1.5rem;
+}
+
+.contact-title {
+  font-size: 4rem;
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+.contact-title em {
+  font-weight: 500;
+  font-style: italic;
+}
+
+.contact-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #aaa;
+  margin-bottom: 4rem;
+}
+
+/* Contact Info */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-info-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #666;
+}
+
+.contact-info-link {
+  font-size: 1.125rem;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+}
+
+.contact-info-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #667eea;
+  transition: width 0.3s ease;
+}
+
+.contact-info-link:hover {
+  color: #667eea;
+}
+
+.contact-info-link:hover::after {
+  width: 100%;
+}
+
+.contact-info-text {
+  font-size: 1.125rem;
+  color: #aaa;
+  margin: 0;
+}
+
+/* Social Links */
+.contact-social {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-social-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #666;
+}
+
+.contact-social-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.contact-social-link {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.contact-social-link:hover {
+  color: #fff;
+  border-color: #667eea;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* ===================================
+   RIGHT SIDE - FORM
+   =================================== */
+
+.contact-right {
+  position: relative;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Form Group */
+.contact-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-form-label {
+  font-size: 0.875rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Input Base Styles */
+.contact-form-input,
+.contact-form-textarea {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.contact-form-input::placeholder,
+.contact-form-textarea::placeholder {
+  color: #555;
+}
+
+/* Glow Border on Focus */
+.contact-form-input:focus,
+.contact-form-textarea:focus {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1),
+    0 8px 24px rgba(102, 126, 234, 0.2);
+}
+
+/* Textarea Specific */
+.contact-form-textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+/* Submit Button */
+.contact-form-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.25rem 2.5rem;
+  background: #667eea;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.contact-form-submit::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.contact-form-submit:hover {
+  background: #5568d3;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+}
+
+.contact-form-submit:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.contact-form-submit:active {
+  transform: translateY(-2px);
+}
+
+.contact-submit-text {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-submit-arrow {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.contact-form-submit:hover .contact-submit-arrow {
+  transform: translateX(4px);
+}
+
+/* Form Status Message */
+.contact-form-status {
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  display: none;
+}
+
+.contact-form-status.success {
+  display: block;
+  background: rgba(46, 213, 115, 0.1);
+  border: 1px solid rgba(46, 213, 115, 0.3);
+  color: #2ed573;
+}
+
+.contact-form-status.error {
+  display: block;
+  background: rgba(255, 71, 87, 0.1);
+  border: 1px solid rgba(255, 71, 87, 0.3);
+  color: #ff4757;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
+@media (max-width: 1024px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .contact-left {
+    position: static;
+  }
+
+  .contact-title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 6rem 1.5rem;
+  }
+
+  .contact-title {
+    font-size: 2.5rem;
+  }
+
+  .contact-subtitle {
+    font-size: 1rem;
+  }
+
+  .contact-info {
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .contact-form-submit {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-title {
+    font-size: 2rem;
+  }
+
+  .contact-social-links {
+    gap: 1rem;
+  }
+
+  .contact-social-link {
+    width: 36px;
+    height: 36px;
+  }
 }

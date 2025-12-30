@@ -154,4 +154,17 @@
         </div>
     </div>
 
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <div class="mobile-menu-header">
+                <span class="site-name">Toyota Đà Lạt</span>
+                <button class="mobile-menu-close" id="mobile-menu-close">&times;</button>
+            </div>
+            <ul class="mobile-menu">
+                <li><a href="<?php echo esc_url(home_url('/')); ?>"></a></li>
+                <li><a href="<?php echo esc_url(home_url('/')); ?>"></a></li>
+            </ul>
+        </div>
+    </div>
+
     <main class="site-content"></main>

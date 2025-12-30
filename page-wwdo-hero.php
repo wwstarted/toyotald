@@ -47,7 +47,8 @@ get_header(); ?>
         <div class="cda-video-intro" id="cdaVideoIntro">
             <div class="cda-video-wrapper">
                 <video autoplay loop muted playsinline class="cda-video">
-                    <source src="<?php echo get_template_directory_uri(); ?>/uploads/video/intro.mp4" type="video/mp4">
+                    <source src="<?php echo get_template_directory_uri(); ?>/uploads/video/videointro.mp4"
+                        type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <!-- Fallback -->

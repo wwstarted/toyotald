@@ -210,6 +210,23 @@ function toyota_enqueue_assets()
         );
     }
 
+    if (is_page_template('page-blog.php')) {
+        wp_enqueue_style(
+            'text',
+            get_template_directory_uri() . '/css/blog.css',
+            array('toyota-global'),
+            '1.0.0'
+        );
+
+        wp_enqueue_script(
+            'text',
+            get_template_directory_uri() . '/js/blog.js',
+            array(),
+            '1.0.0',
+            true
+        );
+    }
+
 
     // Header JS
     wp_enqueue_script(
