@@ -1,460 +1,686 @@
-.wwd-section {
+.cda-hero-section {
   position: relative;
   width: 100%;
+  height: 100vh; /* Chỉ đúng 1 màn hình */
+  min-height: unset;
   background: #ffffff;
-  color: #1a1a1a;
-  padding-top: 4rem;
-}
-
-.wwd-scroll-container {
-  position: relative;
-  width: 100%;
+  overflow: hidden;
   display: flex;
-  overflow: visible;
+  align-items: center;
+  justify-content: center;
 }
 
-/* UPDATED: 35% → 40% */
-.wwd-bg-wrapper {
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 40%;
-  height: 100vh;
-  align-self: flex-start;
-  z-index: 1;
-}
-
-.wwd-bg-container {
+.cda-hero-container {
   position: relative;
   width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 4rem;
   height: 100%;
-  background: white;
-  padding: 3rem;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-.wwd-pattern {
-  position: absolute;
-  top: 3rem;
-  left: 3rem;
-  right: 3rem;
-  bottom: 3rem;
-  width: calc(100% - 6rem);
-  height: calc(100% - 6rem);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.wwd-pattern.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Pattern Image Wrapper - For Parallax Effect */
-.wwd-pattern-image {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.wwd-pattern.active .wwd-pattern-image {
-  transform: scale(1.05);
-}
-
-.wwd-pattern-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Subtle Parallax on Active Pattern */
-.wwd-pattern.active .wwd-pattern-image img {
-  transform: scale(1.1);
-}
-
-/* Fade OUT Animation - Smooth */
-.wwd-pattern.fading-out {
-  opacity: 0;
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.wwd-pattern.fading-out .wwd-pattern-image {
-  transform: scale(0.95);
-}
-
-/* UPDATED: 65% → 60% */
-.wwd-content-wrapper {
-  position: relative;
-  width: 60%;
-  padding: 0 5rem;
+  display: flex;
+  align-items: center;
   z-index: 2;
 }
 
-.wwd-content-header {
+.cda-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cda-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.7;
+}
+
+/* Hero Title - Grid Layout */
+.cda-hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 1400px;
+  width: 100%;
+}
+
+.cda-floating-dots {
+  position: absolute;
+  inset: 0;
+}
+
+.cda-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  animation: float 18s infinite linear;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(100vh) translateX(0vw);
+  }
+  to {
+    transform: translateY(-100px) translateX(80vw);
+  }
+}
+
+.cda-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  row-gap: 2rem;
+  width: 100%;
+  margin-bottom: 5rem;
+}
+
+.cda-hero-word {
+  font-size: clamp(4.5rem, 12vw, 11rem);
+  font-weight: 700;
+  line-height: 0.9;
+  margin: 0;
+  color: #0a0a0a;
+  letter-spacing: -0.03em;
+}
+
+.cda-hero-line {
+  display: block;
+  animation: fadeInUp 1s ease-out backwards;
+}
+
+.cda-word-left:nth-child(1) .cda-hero-line {
+  animation-delay: 0.3s;
+}
+.cda-word-right .cda-hero-line {
+  animation-delay: 0.5s;
+}
+.cda-word-center .cda-hero-line {
+  animation-delay: 0.8s;
+}
+
+.cda-word-left {
+  grid-column: 1;
+  text-align: left;
+  justify-self: start;
+}
+.cda-word-right {
+  grid-column: 2;
+  text-align: right;
+  justify-self: end;
+}
+.cda-word-center {
+  grid-column: 1 / -1;
+  text-align: center;
+  justify-self: center;
+  margin-top: 1rem;
+}
+
+.cda-hero-subtitles {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.6;
+  color: #333;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  height: 4rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.cda-subtitle-item {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50px);
+  opacity: 0;
+  transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cda-subtitle-item.active {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+.cda-word-left:nth-child(1) .cda-hero-line {
+  animation-delay: 0.2s;
+}
+
+.cda-word-left:nth-child(4) .cda-hero-line {
+  animation-delay: 0.6s;
+}
+
+.cda-word-right {
+  grid-column: 2;
+  text-align: right;
+  justify-self: end;
+}
+
+.cda-word-right .cda-hero-line {
+  animation-delay: 0.4s;
+}
+
+.cda-hero-tagline {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: #333;
+  margin: 2rem 0;
+  animation: fadeInUp 1s ease-out 0.5s backwards;
+}
+
+.cda-hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+  text-align: left;
+  animation: fadeInUp 1s ease-out 0.8s backwards;
+}
+
+/* =============================================
+   3D SPHERE PATTERN BACKGROUND - FIXED
+   ============================================= */
+
+.cda-pattern-3d {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.8s ease;
+}
+
+.cda-sphere-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: blur(8px);
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+/* =============================================
+   VIDEO INTRO CONTAINER
+   ============================================= */
+
+.cda-video-intro {
+  position: fixed;
+  bottom: 0;
+  right: 5%;
+  width: 325px;
+  height: 225px;
+  z-index: 100;
+  /* transform: translateY(50%); */
+  opacity: 0.7;
+  /* will-change: transform, opacity, width, height, top, left; */
+  transition: none;
+  transform-origin: top left; /* Quan trọng để tính toán scale */
+  will-change: transform, width, height, top, left;
+  pointer-events: none; /* Để không chặn scroll khi đang bay */
+}
+
+.cda-video-intro.is-settled {
+  pointer-events: auto;
+}
+
+/* .cda-video-wrapper {
   position: relative;
   width: 100%;
-  max-width: 700px;
-  margin: 0 auto 4rem;
-  padding-top: 2rem;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+} */
+.cda-video-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transform: translateZ(0); /* Hardware Acceleration */
 }
 
-.wwd-section-title {
-  font-size: clamp(2.5rem, 6vw, 5rem);
+.cda-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cda-video-fallback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.cda-video:error + .cda-video-fallback {
+  display: flex;
+}
+
+.cda-logo-animated {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Scroll Indicator */
+.cda-scroll-indicator {
+  position: absolute;
+  bottom: 4rem;
+  left: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: #0a0a0a;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  z-index: 3;
+  cursor: pointer;
+  animation: fadeInUp 1s ease-out 1s backwards;
+  transition: opacity 0.3s ease;
+}
+
+.cda-scroll-indicator:hover {
+  opacity: 0.7;
+}
+
+.cda-scroll-indicator svg {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.cda-about-section {
+  position: relative;
+  height: 100vh;
+  background: #ffffff;
+  padding: 4rem 4rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.cda-about-container {
+  position: relative;
+  max-width: 1400px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  z-index: 2;
+}
+
+.cda-about-left {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cda-globe-pattern {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.cda-globe-pattern.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cda-globe-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cda-locations {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  max-width: 250px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+}
+
+.cda-locations.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cda-locations-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #666;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.cda-locations-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cda-location-item {
+  font-size: 1.25rem;
   font-weight: 700;
-  letter-spacing: -0.03em;
-  margin: 0 0 2rem 0;
-  color: #1a1a1a;
+  color: #0a0a0a;
+  margin: 0.2rem 0;
+  line-height: 1.2;
+}
+
+/* =============================================
+   RIGHT SIDE - VIDEO + DESCRIPTION
+   ============================================= */
+
+.cda-about-right {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* .cda-video-settled-area {
+  position: relative;
+  width: 75%;
+  height: 280px;
+  border-radius: 24px;
+  background: rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+} */
+
+.cda-video-settled-area {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border-radius: 24px;
+  z-index: -1000;
+}
+/* Video Text Overlay */
+.cda-video-text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.cda-video-settled-area.has-video .cda-video-text-overlay {
+  opacity: 1;
+}
+
+.cda-overlay-text {
+  display: block;
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.2;
+  margin: 0.3rem 0;
+  text-transform: capitalize;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Company Description */
+.cda-description {
   opacity: 0;
   transform: translateY(30px);
-  animation: fadeInTitle 1s ease-out 0.3s forwards;
+  transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
 }
 
-@keyframes fadeInTitle {
+.cda-description.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cda-video-intro.is-settled + .cda-video-text-overlay,
+.cda-video-settled-area.has-video .cda-video-text-overlay {
+  opacity: 1;
+}
+
+.cda-description-text {
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 280;
+  line-height: 1.4;
+  color: #0a0a0a;
+  margin: 0;
+}
+
+/* Scroll Spacer */
+.cda-scroll-spacer {
+  height: 15vh;
+  background: transparent;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Horizontal line under title */
-.wwd-content-header::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, #1a1a1a 0%, #1a1a1a 60%, transparent 100%);
-  opacity: 0.2;
-}
-
-/* Service Slide Container */
-.wwd-service-slide {
-  position: relative;
-  min-height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 0;
-}
-
-/* Service Card */
-.wwd-card {
-  width: 100%;
-  max-width: 700px;
-  opacity: 0.25;
-  transform: translateY(80px) scale(0.92);
-  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  filter: blur(3px);
-  cursor: default;
-}
-
-/* Hover Effect on Card */
-.wwd-card:hover {
-  transform: translateY(-5px) scale(1);
-}
-
-.wwd-service-slide.active .wwd-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
-}
-
-/* Active State */
-.wwd-service-slide.active .wwd-card {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
-}
-
-/* Before State */
-.wwd-service-slide.before .wwd-card {
-  opacity: 0.2;
-  transform: translateY(-80px) scale(0.92);
-  filter: blur(4px);
-}
-
-/* After State */
-.wwd-service-slide.after .wwd-card {
-  opacity: 0.3;
-  transform: translateY(80px) scale(0.92);
-  filter: blur(3px);
-}
-
-.wwd-card-inner {
-  width: 100%;
-}
-
-.wwd-card-number {
-  display: block;
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: #ccc;
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  line-height: 1;
-}
-
-.wwd-service-slide.active .wwd-card-number {
-  color: #00a8cc;
-}
-
-/* Hover Effect on Number */
-.wwd-card:hover .wwd-card-number {
-  letter-spacing: 0.15em;
-  transform: translateX(5px);
-}
-
-/* ======================================
-   CARD TITLE
-   ====================================== */
-
-.wwd-card-title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 700;
-  line-height: 1.1;
-  margin: 0 0 1.5rem 0;
-  letter-spacing: -0.03em;
-  color: #1a1a1a;
-  transition: color 0.3s ease;
-}
-
-.wwd-card:hover .wwd-card-title {
-  color: #00a8cc;
-}
-
-/* ======================================
-   CARD DESCRIPTION
-   ====================================== */
-
-.wwd-card-desc {
-  font-size: 1.125rem;
-  line-height: 1.7;
-  color: #666;
-  margin: 0 0 2.5rem 0;
-  transition: color 0.3s ease;
-}
-
-.wwd-service-slide.active .wwd-card-desc {
-  color: #333;
-}
-
-/* ======================================
-   CARD LIST - WITH HOVER EFFECTS
-   ====================================== */
-
-.wwd-card-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem 2rem;
-}
-
-.wwd-card-list li {
-  font-size: 0.95rem;
-  color: #999;
-  padding-left: 1.5rem;
-  position: relative;
-  line-height: 1.6;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-}
-
-.wwd-service-slide.active .wwd-card-list li {
-  color: #666;
-}
-
-/* Hover Effect on List Items */
-.wwd-card-list li:hover {
-  color: #00a8cc;
-  padding-left: 2rem;
-}
-
-.wwd-card-list li::before {
-  content: "✱";
-  position: absolute;
-  left: 0;
-  color: #00a8cc;
-  font-size: 0.8rem;
-  opacity: 0.4;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.wwd-service-slide.active .wwd-card-list li::before {
-  opacity: 1;
-}
-
-.wwd-card-list li:hover::before {
-  opacity: 1;
-  transform: rotate(180deg);
-}
-
-/* ======================================
-   SUBTLE DIVIDER BETWEEN SERVICES
-   ====================================== */
-
-.wwd-service-divider {
-  width: 100%;
-  max-width: 700px;
-  height: 1px;
-  margin-top: 4rem;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(0, 168, 204, 0.15) 20%,
-    rgba(0, 168, 204, 0.25) 50%,
-    rgba(0, 168, 204, 0.15) 80%,
-    transparent 100%
-  );
-  opacity: 0.5;
-  transition: opacity 0.4s ease;
-}
-
-.wwd-service-slide.active .wwd-service-divider {
-  opacity: 0.8;
-}
-
-/* Remove divider from last service */
-.wwd-service-slide:last-child .wwd-service-divider {
-  display: none;
-}
-
-/* ======================================
-   PARALLAX EFFECT ON SCROLL
-   ====================================== */
-
-.wwd-card[data-parallax] {
-  transform-style: preserve-3d;
-}
-
-/* ======================================
+/* =============================================
    RESPONSIVE DESIGN
-   ====================================== */
+   ============================================= */
 
 @media (max-width: 1200px) {
-  .wwd-content-wrapper {
-    padding: 0 3rem;
+  .cda-hero-grid {
+    row-gap: 2rem;
   }
 
-  .wwd-content-header {
-    margin-bottom: 3rem;
-  }
-
-  .wwd-bg-container {
-    padding: 2rem;
-  }
-
-  .wwd-pattern {
-    top: 2rem;
-    left: 2rem;
-    right: 2rem;
-    bottom: 2rem;
-    width: calc(100% - 4rem);
-    height: calc(100% - 4rem);
-  }
-
-  .wwd-card-number {
-    font-size: 2rem;
+  .cda-pattern-3d {
+    width: 500px;
+    height: 500px;
   }
 }
 
 @media (max-width: 1024px) {
-  .wwd-scroll-container {
-    flex-direction: column;
+  .cda-about-section {
+    height: auto;
+    min-height: 100vh;
+    padding: 4rem 2rem;
   }
 
-  .wwd-bg-wrapper {
-    position: relative;
-    width: 100%;
-    height: 50vh;
-  }
-
-  .wwd-content-wrapper {
-    width: 100%;
-    padding: 0 2rem;
-  }
-
-  .wwd-content-header {
-    margin-bottom: 2rem;
-  }
-
-  .wwd-service-slide {
-    min-height: auto;
-    padding: 4rem 0;
-  }
-
-  .wwd-card-list {
+  .cda-about-container {
     grid-template-columns: 1fr;
+    gap: 3rem;
+    height: auto;
   }
 
-  .wwd-section-title {
-    font-size: 2.5rem;
+  .cda-globe-pattern {
+    width: 350px;
+    height: 350px;
+  }
+
+  .cda-video-intro {
+    width: 280px;
+    height: 190px;
+  }
+
+  .cda-video-settled-area {
+    width: 90%;
+    height: 320px;
+  }
+
+  .cda-pattern-3d {
+    width: 450px;
+    height: 450px;
   }
 }
 
 @media (max-width: 768px) {
-  .wwd-content-wrapper {
+  .cda-hero-container,
+  .cda-about-section {
     padding: 0 1.5rem;
   }
 
-  .wwd-content-header {
-    margin-bottom: 2rem;
-    padding-top: 1rem;
+  .cda-about-section {
+    padding: 3rem 1.5rem;
   }
 
-  .wwd-bg-container {
-    padding: 1.5rem;
+  .cda-hero-grid {
+    grid-template-columns: 1fr;
+    row-gap: 1.5rem;
   }
 
-  .wwd-pattern {
-    top: 1.5rem;
-    left: 1.5rem;
-    right: 1.5rem;
-    bottom: 1.5rem;
-    width: calc(100% - 3rem);
-    height: calc(100% - 3rem);
+  .cda-word-left,
+  .cda-word-right {
+    grid-column: 1;
+    text-align: left;
+    justify-self: start;
   }
 
-  .wwd-card-title {
-    font-size: 2rem;
+  .cda-hero-tagline {
+    text-align: left;
+    font-size: 1.125rem;
   }
 
-  .wwd-section-title {
-    font-size: 2rem;
+  .cda-globe-pattern {
+    width: 280px;
+    height: 280px;
   }
 
-  .wwd-card-number {
-    font-size: 1.75rem;
+  .cda-video-intro {
+    width: 240px;
+    height: 160px;
+    right: 2%;
   }
 
-  /* Disable hover effects on mobile */
-  .wwd-card:hover {
-    transform: none;
+  .cda-video-settled-area {
+    width: 100%;
+    height: 280px;
   }
 
-  .wwd-card-list li:hover {
-    padding-left: 1.5rem;
+  .cda-location-item {
+    font-size: 1.1rem;
+  }
+
+  .cda-description-text {
+    font-size: 1.25rem;
+  }
+
+  .cda-pattern-3d {
+    width: 350px;
+    height: 350px;
+  }
+
+  .cda-scroll-indicator {
+    bottom: 2rem;
+    left: 2rem;
   }
 }
 
-/* ======================================
-   SMOOTH CURSOR EFFECTS
-   ====================================== */
-
-.wwd-card,
-.wwd-card-list li {
-  cursor: pointer;
+.cda-video-intro,
+.cda-globe-pattern,
+.cda-sphere-canvas {
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
-.wwd-service-slide.active .wwd-card {
-  cursor: default;
+.cda-video-wrapper,
+.cda-video-settled-area {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+@media (max-width: 1024px) {
+  .cda-hero-grid {
+    row-gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+  .cda-grid-lines {
+    background-size: 50px 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cda-hero-container {
+    padding: 0 2rem;
+  }
+  .cda-hero-grid {
+    grid-template-columns: 1fr;
+    row-gap: 1rem;
+  }
+  .cda-word-left,
+  .cda-word-right,
+  .cda-word-center {
+    grid-column: 1;
+    text-align: center;
+    justify-self: center;
+  }
+  .cda-word-right {
+    text-align: center;
+  }
+  .cda-hero-subtitles {
+    height: 6rem;
+    font-size: 1.25rem;
+  }
+  .cda-grid-lines {
+    background-size: 40px 40px;
+    opacity: 0.5;
+  }
 }

@@ -35,29 +35,42 @@
     const searchIconBtn = document.querySelector(".search-icon-btn");
     const searchDropdown = document.getElementById("searchDropdown");
 
-    if (!searchForm || !searchInput) return;
+    if (!searchForm || !searchInput || !searchIconBtn) {
+      console.error("❌ Search elements not found");
+      return;
+    }
+
+    console.log("✅ Search toggle initialized");
 
     let isExpanded = false;
 
     // Click icon to expand/collapse
-    searchIconBtn?.addEventListener("click", (e) => {
+    searchIconBtn.addEventListener("click", (e) => {
       e.preventDefault();
+      e.stopPropagation();
 
       if (!isExpanded) {
         expandSearch();
       } else {
         // If expanded and has text, submit form
         if (searchInput.value.trim().length >= 2) {
+          console.log("📤 Submitting search:", searchInput.value);
           searchForm.submit();
         }
       }
     });
 
     // Click input to ensure expanded state
-    searchInput.addEventListener("click", () => {
+    searchInput.addEventListener("click", (e) => {
+      e.stopPropagation();
       if (!isExpanded) {
         expandSearch();
       }
+    });
+
+    // Prevent form from collapsing when clicking inside
+    searchForm.addEventListener("click", (e) => {
+      e.stopPropagation();
     });
 
     // Close on outside click
@@ -75,6 +88,7 @@
     });
 
     function expandSearch() {
+      console.log("🔍 Expanding search");
       isExpanded = true;
       searchForm.classList.add("expanded");
       setTimeout(() => {
@@ -83,6 +97,7 @@
     }
 
     function collapseSearch() {
+      console.log("❌ Collapsing search");
       isExpanded = false;
       searchForm.classList.remove("expanded");
       searchInput.value = "";

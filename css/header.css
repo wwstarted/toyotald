@@ -182,27 +182,29 @@ body.blog-dark-mode .nav-link:hover {
   width: 44px;
   height: 44px;
   background: transparent;
-  border: 1px solid transparent;
+  /* border: 1px solid transparent; */
   border-radius: 50%;
   padding: 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+  overflow: visible; /* CRITICAL: Không clip dropdown */
 }
 
 /* Search Form - Expanded State */
 .search-form.expanded {
   width: 280px;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  /* border: 1px solid rgba(0, 0, 0, 0.08); */
   border-radius: 24px;
   padding: 0 1rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  /* box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); */
+  overflow: visible; /* CRITICAL: Không clip dropdown */
 }
 
+/* CRITICAL: Dark mode - Form phải TRẮNG, không phải đen */
 body.blog-dark-mode .search-form.expanded {
-  background: rgba(0, 0, 0, 0.95);
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.1);
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 2px 12px #ffffff;
 }
 
 .search-form.expanded:focus-within {
@@ -211,42 +213,69 @@ body.blog-dark-mode .search-form.expanded {
 }
 
 body.blog-dark-mode .search-form.expanded:focus-within {
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+  border-color: rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 /* Search Input */
 .search-input {
   flex: 1;
-  /* border: none; */
+  border: none;
   background: transparent;
   outline: none;
   font-size: 0.95rem;
-  /* padding: 0.625rem 0; */
+  padding: 0.625rem 0;
   color: inherit;
+  width: 0;
   opacity: 0;
   visibility: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transition-delay: 0s;
+
+  /* CRITICAL: Override global input styles */
   width: auto !important;
-  padding: 0.625rem 0 !important;
   border: none !important;
   border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
+/* Collapsed state: Hide input completely */
+.search-form:not(.expanded) .search-input {
+  display: none;
+  width: 0 !important;
+  padding: 0 !important;
+}
+
+/* Expanded state: Show input */
 .search-form.expanded .search-input {
+  display: block;
   opacity: 1;
   visibility: visible;
   transition-delay: 0.1s;
+  color: #000 !important;
 }
 
+/* CRITICAL: Dark mode - Text phải ĐEN vì background TRẮNG */
+body.blog-dark-mode .search-form.expanded .search-input {
+  color: #000 !important;
+}
+
+/* Placeholder colors */
 .search-input::placeholder {
   color: rgba(0, 0, 0, 0.4);
-  transition: color var(--transition-duration) ease-in-out;
+  transition: color 0.3s ease;
 }
 
 body.blog-dark-mode .search-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* CRITICAL: Override global focus styles */
+.search-input:focus {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border-color: transparent !important;
 }
 
 /* Search Icon Button */
@@ -265,30 +294,15 @@ body.blog-dark-mode .search-input::placeholder {
   flex-shrink: 0;
   position: relative;
   z-index: 2;
-}
-
-/* Default state: Icon visible */
-.search-icon-btn {
-  opacity: 1;
-}
-
-/* Collapsed state: Show ONLY icon */
-.search-form:not(.expanded) {
-  width: 44px;
-  height: 44px;
-  padding: 0;
-}
-
-.search-form:not(.expanded) .search-input {
-  display: none; /* Ẩn hoàn toàn, không chỉ opacity */
-  width: 0;
-  padding: 0;
-}
-
-.search-form:not(.expanded) .search-icon-btn {
   margin: 0;
+  padding: 0;
+}
+
+/* Collapsed state: Icon visible and centered */
+.search-form:not(.expanded) .search-icon-btn {
   width: 44px;
   height: 44px;
+  margin: 0;
 }
 
 /* Hover effect when collapsed */
@@ -306,6 +320,11 @@ body.blog-dark-mode .search-form:not(.expanded) .search-icon-btn:hover {
   width: 36px;
   height: 36px;
   margin-left: 0.5rem;
+  color: #000;
+}
+
+body.blog-dark-mode .search-form.expanded .search-icon-btn {
+  color: #000 !important;
 }
 
 .search-form.expanded .search-icon-btn:hover {
@@ -313,7 +332,7 @@ body.blog-dark-mode .search-form:not(.expanded) .search-icon-btn:hover {
 }
 
 body.blog-dark-mode .search-form.expanded .search-icon-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.05) !important;
 }
 
 .search-icon-btn i {
@@ -328,7 +347,7 @@ body.blog-dark-mode .search-form.expanded .search-icon-btn:hover {
 /* Search Dropdown */
 .search-dropdown {
   position: absolute;
-  top: calc(100% + 12px);
+  top: calc(100% + 8px);
   right: 0;
   width: 420px;
   max-width: calc(100vw - 40px);
@@ -340,7 +359,8 @@ body.blog-dark-mode .search-form.expanded .search-icon-btn:hover {
   visibility: hidden;
   transform: translateY(-10px);
   transition: all var(--transition-fast) ease;
-  z-index: var(--z-search-dropdown);
+  z-index: 9999; /* CRITICAL: Z-index rất cao */
+  pointer-events: none; /* Không block clicks khi hidden */
 
   /* Light mode */
   background: rgba(255, 255, 255, 0.98);
@@ -348,16 +368,18 @@ body.blog-dark-mode .search-form.expanded .search-icon-btn:hover {
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+/* CRITICAL: Dark mode - Dropdown cũng TRẮNG */
 body.blog-dark-mode .search-dropdown {
-  background: rgba(0, 0, 0, 0.98);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 .search-dropdown.active {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+  pointer-events: auto; /* Enable clicks khi visible */
 }
 
 .search-dropdown-content {
@@ -397,6 +419,7 @@ body.blog-dark-mode .search-dropdown-content::-webkit-scrollbar-thumb {
   justify-content: center;
   padding: 2rem;
   text-align: center;
+  color: black;
 }
 
 .search-dropdown.loading .search-loading {

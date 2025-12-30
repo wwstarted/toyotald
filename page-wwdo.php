@@ -13,10 +13,10 @@ get_header(); ?>
             <div class="cda-hero-grid">
                 <!-- Row 1: Collective (left) + Design (right) -->
                 <h1 class="cda-hero-word cda-word-left">
-                    <span class="cda-hero-line">Collective</span>
+                    <span class="cda-hero-line">Pixel</span>
                 </h1>
                 <h1 class="cda-hero-word cda-word-right">
-                    <span class="cda-hero-line">Design</span>
+                    <span class="cda-hero-line">Perfect</span>
                 </h1>
 
                 <!-- Row 2: Tagline (center, spans both columns) -->

@@ -1499,14 +1499,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // ======================================= Section Blog =======================================
 
-/**
- * Blog Section - Spotlight Effect & Dark Mode Toggle
- * Features:
- * 1. Background chuyển đen khi scroll vào section blog
- * 2. Spotlight hover effect theo mouse
- * 3. Glow border khi hover
- */
-
 (function () {
   "use strict";
 
@@ -1643,14 +1635,6 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 
 // ============================================= contact ======================================
-/**
- * Contact Section - Form Handling & Animations
- * Features:
- * 1. Form validation
- * 2. AJAX form submission
- * 3. Smooth animations
- * 4. Input glow effects
- */
 
 (function () {
   "use strict";

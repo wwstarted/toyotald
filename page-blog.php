@@ -5,141 +5,111 @@
  */
 get_header();
 ?>
-<!-- Contact Section - Minimalist Split Layout -->
-<section class="wwd-section" id="whatWeDo">
 
-    <div class="wwd-scroll-container">
+<section class="cda-hero-section" id="cdaHero">
+    <div class="cda-hero-container">
+        <!-- NEW: Enhanced Background - Grid + Floating Dots with Parallax -->
+        <div class="cda-hero-bg">
+            <div class="cda-grid-lines"></div>
+            <div class="cda-floating-dots" id="cdaFloatingDots"></div>
+        </div>
 
-        <div class="wwd-bg-wrapper">
-            <div class="wwd-bg-container">
+        <!-- Hero Text Content - Centered Vertically -->
+        <div class="cda-hero-content">
+            <div class="cda-hero-grid">
+                <!-- Pixel (left top) -->
+                <h1 class="cda-hero-word cda-word-left">
+                    <span class="cda-hero-line">Pixel</span>
+                </h1>
+                <!-- Perfect (right top) -->
+                <h1 class="cda-hero-word cda-word-right">
+                    <span class="cda-hero-line">Perfect</span>
+                </h1>
+                <!-- Agency (center bottom) -->
+                <h1 class="cda-hero-word cda-word-center">
+                    <span class="cda-hero-line">Agency</span>
+                </h1>
+            </div>
 
-                <?php
-                // Define image URLs for each service
-                $serviceImages = [
-                    1 => 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800', // Branding - Creative/Design
-                    2 => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800', // Digital - Technology
-                    3 => 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800', // Enterprise - Business
-                    4 => 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800'  // Strategy - Planning/Analytics
-                ];
-
-                // Pattern mapping: 1-2 for Service 1, 3-4 for Service 2, 5-6 for Service 3, 7-8 for Service 4
-                for ($p = 1; $p <= 8; $p++):
-                    // Determine which service this pattern belongs to
-                    $serviceIndex = ceil($p / 2);
-                    $imageUrl = $serviceImages[$serviceIndex];
-                    ?>
-                <div class="wwd-pattern" data-pattern="<?php echo $p; ?>">
-                    <div class="wwd-pattern-image">
-                        <img src="<?php echo $imageUrl; ?>"
-                            alt="Service <?php echo $serviceIndex; ?> - Pattern <?php echo $p; ?>" loading="lazy">
-                    </div>
-                </div>
-                <?php endfor; ?>
-
+            <!-- Auto Sliding Subtitles - Centered -->
+            <div class="cda-hero-subtitles" id="cdaHeroSubtitles">
+                <div class="cda-subtitle-item active">CDA Creative Agency</div>
+                <div class="cda-subtitle-item">We partner with ambitious brands</div>
+                <div class="cda-subtitle-item">Crafting meaningful digital experiences</div>
             </div>
         </div>
 
-        <div class="wwd-content-wrapper">
-
-            <!-- Title Inside Content Area -->
-            <div class="wwd-content-header">
-                <h2 class="wwd-section-title">What We Do</h2>
-            </div>
-
-            <div class="wwd-service-slide" data-service="1">
-                <article class="wwd-card">
-                    <div class="wwd-card-inner">
-                        <span class="wwd-card-number">01</span>
-                        <h3 class="wwd-card-title">Branding</h3>
-                        <p class="wwd-card-desc">
-                            We craft distinctive brand identities rooted in strategy and cultural insight — built to
-                            spark connection and endure change.
-                        </p>
-                        <ul class="wwd-card-list">
-                            <li>Brand Strategy & Architecture</li>
-                            <li>ToV & Messaging Framework</li>
-                            <li>Visual Identity</li>
-                            <li>Typeface Design</li>
-                            <li>Packaging Design</li>
-                            <li>Event, Installation & Spatial</li>
-                            <li>Motions, Illustrations, and 3D</li>
-                            <li>Comprehensive Brand Guideline & System</li>
-                        </ul>
+        <!-- Video Intro - Keep unchanged -->
+        <div class="cda-video-intro" id="cdaVideoIntro">
+            <div class="cda-video-wrapper">
+                <video autoplay loop muted playsinline class="cda-video">
+                    <source src="<?php echo get_template_directory_uri(); ?>/uploads/video/videointro.mp4"
+                        type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="cda-video-fallback">
+                    <div class="cda-logo-animated">
+                        <svg width="80" height="80" viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="50" fill="none" stroke="#fff" stroke-width="2" />
+                            <path d="M60 20 L60 100 M20 60 L100 60" stroke="#fff" stroke-width="2" />
+                        </svg>
                     </div>
-                </article>
-                <div class="wwd-service-divider"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="cda-scroll-indicator">
+            <span>SCROLL</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" />
+            </svg>
+        </div>
+    </div>
+</section>
+
+<!-- ================= ABOUT SECTION (GIỮ NGUYÊN) ================= -->
+<section class="cda-about-section" id="cdaAbout">
+    <div class="cda-about-container">
+
+        <div class="cda-about-left">
+            <div class="cda-globe-pattern">
+                <canvas id="cdaGlobeCanvas"></canvas>
             </div>
 
-            <div class="wwd-service-slide" data-service="2">
-                <article class="wwd-card">
-                    <div class="wwd-card-inner">
-                        <span class="wwd-card-number">02</span>
-                        <h3 class="wwd-card-title">Digital Experience</h3>
-                        <p class="wwd-card-desc">
-                            From websites to interactive systems, we design digital journeys that are immersive,
-                            intuitive, and conversion-driven.
-                        </p>
-                        <ul class="wwd-card-list">
-                            <li>User Experience & Interface</li>
-                            <li>Digital Storytelling</li>
-                            <li>Concept & Prototype</li>
-                            <li>Web Design & Development</li>
-                            <li>CMS, Analytics & Optimization</li>
-                        </ul>
-                    </div>
-                </article>
-                <div class="wwd-service-divider"></div>
+            <div class="cda-locations">
+                <p class="cda-locations-title">Our team are<br>located in:</p>
+                <ul class="cda-locations-list">
+                    <li class="cda-location-item">New York</li>
+                    <li class="cda-location-item">Hanoi</li>
+                    <li class="cda-location-item">Ho Chi Minh City</li>
+                    <li class="cda-location-item">Singapore</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cda-about-right">
+            <div class="cda-video-settled-area" id="cdaVideoSettledArea">
+                <div class="cda-video-text-overlay">
+                    <span class="cda-overlay-text">Stories</span>
+                    <span class="cda-overlay-text">Systems</span>
+                    <span class="cda-overlay-text">Solutions</span>
+                </div>
             </div>
 
-            <div class="wwd-service-slide" data-service="3">
-                <article class="wwd-card">
-                    <div class="wwd-card-inner">
-                        <span class="wwd-card-number">03</span>
-                        <h3 class="wwd-card-title">Enterprise Solutions</h3>
-                        <p class="wwd-card-desc">
-                            Our proprietary tools and talent model streamline brand management, scale operations, and
-                            unlock long-term creative efficiency.
-                        </p>
-                        <ul class="wwd-card-list">
-                            <li>ODC & Dedicated Personnel</li>
-                            <li>Brand Cōmpass™ & CōllectCMS™</li>
-                            <li>CMS, API & Data Integrations</li>
-                            <li>AI Automation, Solutions & Integrations</li>
-                            <li>Collective Care & DevOps</li>
-                        </ul>
-                    </div>
-                </article>
-                <div class="wwd-service-divider"></div>
+            <div class="cda-description">
+                <h2 class="cda-description-text">
+                    CDA is a vision-driven, human-centered creative consultancy that helps brands become more
+                    meaningful,
+                    purposeful, and intentional.
+                </h2>
             </div>
-
-            <div class="wwd-service-slide" data-service="4">
-                <article class="wwd-card">
-                    <div class="wwd-card-inner">
-                        <span class="wwd-card-number">04</span>
-                        <h3 class="wwd-card-title">Strategy & Consulting</h3>
-                        <p class="wwd-card-desc">
-                            We transform business challenges into strategic opportunities through data-driven insights
-                            and
-                            collaborative thinking that drives measurable results.
-                        </p>
-                        <ul class="wwd-card-list">
-                            <li>Market Research & Analysis</li>
-                            <li>Competitive Intelligence</li>
-                            <li>Business Model Innovation</li>
-                            <li>Go-to-Market Strategy</li>
-                            <li>Customer Journey Mapping</li>
-                            <li>Brand Positioning & Differentiation</li>
-                            <li>Digital Transformation Roadmap</li>
-                            <li>Performance Metrics & KPIs</li>
-                        </ul>
-                    </div>
-                </article>
-            </div>
-
         </div>
 
     </div>
-
 </section>
+
+
 
 <?php get_footer(); ?>
