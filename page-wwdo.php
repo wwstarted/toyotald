@@ -134,11 +134,12 @@ get_header(); ?>
                 $serviceImages = [
                     1 => 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800', // Branding - Creative/Design
                     2 => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800', // Digital - Technology
-                    3 => 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800'  // Enterprise - Business
+                    3 => 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800', // Enterprise - Business
+                    4 => 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800'  // Strategy - Planning/Analytics
                 ];
 
-                // Pattern mapping: 1-2 for Service 1, 3-4 for Service 2, 5-6 for Service 3
-                for ($p = 1; $p <= 6; $p++):
+                // Pattern mapping: 1-2 for Service 1, 3-4 for Service 2, 5-6 for Service 3, 7-8 for Service 4
+                for ($p = 1; $p <= 8; $p++):
                     // Determine which service this pattern belongs to
                     $serviceIndex = ceil($p / 2);
                     $imageUrl = $serviceImages[$serviceIndex];
@@ -221,6 +222,31 @@ get_header(); ?>
                             <li>CMS, API & Data Integrations</li>
                             <li>AI Automation, Solutions & Integrations</li>
                             <li>Collective Care & DevOps</li>
+                        </ul>
+                    </div>
+                </article>
+                <div class="wwd-service-divider"></div>
+            </div>
+
+            <div class="wwd-service-slide" data-service="4">
+                <article class="wwd-card">
+                    <div class="wwd-card-inner">
+                        <span class="wwd-card-number">04</span>
+                        <h3 class="wwd-card-title">Strategy & Consulting</h3>
+                        <p class="wwd-card-desc">
+                            We transform business challenges into strategic opportunities through data-driven insights
+                            and
+                            collaborative thinking that drives measurable results.
+                        </p>
+                        <ul class="wwd-card-list">
+                            <li>Market Research & Analysis</li>
+                            <li>Competitive Intelligence</li>
+                            <li>Business Model Innovation</li>
+                            <li>Go-to-Market Strategy</li>
+                            <li>Customer Journey Mapping</li>
+                            <li>Brand Positioning & Differentiation</li>
+                            <li>Digital Transformation Roadmap</li>
+                            <li>Performance Metrics & KPIs</li>
                         </ul>
                     </div>
                 </article>

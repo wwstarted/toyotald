@@ -1,12 +1,14 @@
 (function () {
   "use strict";
 
+  // UPDATED: serviceCount 3 → 4, patternMapping thêm service 4
   const CONFIG = {
-    serviceCount: 3,
+    serviceCount: 4,
     patternMapping: {
       1: [1, 2],
       2: [3, 4],
       3: [5, 6],
+      4: [7, 8], // NEW: Service 4
     },
     transitionDuration: 800,
     parallaxIntensity: 0.3,
@@ -37,13 +39,12 @@
 
     updateOnScroll();
 
-    if (patterns.length > 0) {
-      patterns[0].classList.add("active");
-    }
+    // REMOVED: patterns[0].classList.add("active");
+    // Image đầu tiên sẽ chỉ xuất hiện khi service 1 active (vào center viewport)
 
     initParallax();
 
-    console.log("What We Do section initialized (Modern Version)");
+    console.log("What We Do section initialized (4 Services)");
   }
 
   function onScroll() {
@@ -61,26 +62,54 @@
   }
 
   function updateOnScroll() {
-    const viewportCenter = window.innerHeight / 2 + window.scrollY;
+    const viewportHeight = window.innerHeight;
+    const activeZoneTop = viewportHeight * 0.2; // 40% from top
+    const activeZoneBottom = viewportHeight * 0.9; // 60% from top
+
     let closestService = 0;
     let closestDistance = Infinity;
 
     serviceSlides.forEach((slide, index) => {
       const rect = slide.getBoundingClientRect();
-      const slideCenter = rect.top + window.scrollY + rect.height / 2;
-      const distance = Math.abs(viewportCenter - slideCenter);
+      const slideCenter = rect.top + rect.height / 2;
 
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestService = index + 1;
+      // Check if slide center is within active zone (40-60% of viewport)
+      const inActiveZone =
+        slideCenter >= activeZoneTop && slideCenter <= activeZoneBottom;
+
+      if (inActiveZone) {
+        // Calculate distance from viewport center
+        const viewportCenter = viewportHeight / 2;
+        const distance = Math.abs(slideCenter - viewportCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestService = index + 1;
+        }
       }
     });
 
+    // closestService will be 0 if no service is in active zone
     updateServiceStates(closestService);
 
-    if (closestService !== currentService && closestService > 0) {
-      if (currentService > 0) {
-        transitionPattern(currentService, closestService);
+    if (closestService !== currentService) {
+      if (closestService > 0) {
+        if (currentService > 0) {
+          // Transition from one service to another
+          transitionPattern(currentService, closestService);
+        } else {
+          // First time: Fade in pattern when service enters active zone
+          const toPatterns = CONFIG.patternMapping[closestService];
+          if (toPatterns && patterns[toPatterns[0] - 1]) {
+            patterns[toPatterns[0] - 1].classList.add("active");
+          }
+        }
+      } else if (currentService > 0) {
+        // Service left active zone - fade out current pattern
+        const currentPatterns = CONFIG.patternMapping[currentService];
+        if (currentPatterns && patterns[currentPatterns[0] - 1]) {
+          patterns[currentPatterns[0] - 1].classList.remove("active");
+        }
       }
       currentService = closestService;
     }
