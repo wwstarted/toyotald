@@ -1,17 +1,17 @@
 /**
- * Modern Header JavaScript
+ * Header New JavaScript
  * Features:
- * - Expandable search with dropdown results
- * - Mobile menu toggle
- * - Active menu highlighting
- * - Search with AJAX (Products + Posts)
- * - Keyboard navigation
+ * 1. Transparent → Solid background on scroll
+ * 2. Expandable search with dropdown results
+ * 3. Search products and posts from WordPress REST API
+ * 4. Mobile menu toggle
+ * 5. Keyboard navigation
  */
 
 (function () {
   "use strict";
 
-  // Wait for DOM ready
+  // Initialize when DOM is ready
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
@@ -19,20 +19,61 @@
   }
 
   function init() {
+    initScrollEffect();
     initSearchToggle();
     initSearch();
     initMobileMenu();
     initActiveMenu();
-    initLogoClick();
+    console.log("✅ Header New initialized successfully!");
   }
 
   /* ==========================================
-     SEARCH TOGGLE - Clean Expand Animation
+     1. SCROLL EFFECT - TRANSPARENT → SOLID
+  ========================================== */
+  function initScrollEffect() {
+    const header = document.getElementById("headerNew");
+    if (!header) return;
+
+    let lastScrollY = window.scrollY;
+    const scrollThreshold = 50;
+
+    function handleScroll() {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > scrollThreshold) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+
+      lastScrollY = currentScrollY;
+    }
+
+    // Initial check
+    handleScroll();
+
+    // Listen to scroll with throttle
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    console.log("✅ Scroll effect initialized");
+  }
+
+  /* ==========================================
+     2. SEARCH TOGGLE - EXPAND/COLLAPSE
   ========================================== */
   function initSearchToggle() {
     const searchForm = document.getElementById("searchForm");
     const searchInput = document.getElementById("searchInput");
-    const searchIconBtn = document.querySelector(".search-icon-btn");
+    const searchIconBtn = document.getElementById("searchIconBtn");
     const searchDropdown = document.getElementById("searchDropdown");
 
     if (!searchForm || !searchInput || !searchIconBtn) {
@@ -40,11 +81,9 @@
       return;
     }
 
-    console.log("✅ Search toggle initialized");
-
     let isExpanded = false;
 
-    // Click icon to expand/collapse
+    // Click icon to expand/collapse or submit
     searchIconBtn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -54,7 +93,6 @@
       } else {
         // If expanded and has text, submit form
         if (searchInput.value.trim().length >= 2) {
-          console.log("📤 Submitting search:", searchInput.value);
           searchForm.submit();
         }
       }
@@ -88,7 +126,6 @@
     });
 
     function expandSearch() {
-      console.log("🔍 Expanding search");
       isExpanded = true;
       searchForm.classList.add("expanded");
       setTimeout(() => {
@@ -97,7 +134,6 @@
     }
 
     function collapseSearch() {
-      console.log("❌ Collapsing search");
       isExpanded = false;
       searchForm.classList.remove("expanded");
       searchInput.value = "";
@@ -108,10 +144,12 @@
         searchDropdown.classList.remove("active");
       }
     }
+
+    console.log("✅ Search toggle initialized");
   }
 
   /* ==========================================
-     SEARCH FUNCTIONALITY
+     3. SEARCH FUNCTIONALITY
   ========================================== */
   class ModernSearch {
     constructor() {
@@ -149,13 +187,12 @@
 
     cacheElements() {
       this.searchInput = document.getElementById("searchInput");
-      this.searchForm = document.querySelector(".search-form");
-      this.searchButton = document.querySelector(".search-submit");
+      this.searchForm = document.getElementById("searchForm");
       this.dropdown = document.getElementById("searchDropdown");
-      this.productsContainer = document.querySelector("#products-results");
-      this.postsContainer = document.querySelector("#posts-results");
-      this.productsSection = document.querySelector("#products-section");
-      this.postsSection = document.querySelector("#posts-section");
+      this.productsContainer = document.getElementById("productsResults");
+      this.postsContainer = document.getElementById("postsResults");
+      this.productsSection = document.getElementById("productsSection");
+      this.postsSection = document.getElementById("postsSection");
     }
 
     async fetchAllData() {
@@ -383,7 +420,7 @@
                 ${
                   image
                     ? `<img src="${image}" alt="${title}">`
-                    : `<div class="search-result-placeholder"><i class="fa-solid fa-car"></i></div>`
+                    : `<div class="search-result-placeholder"><i class="fa-solid fa-box"></i></div>`
                 }
               </div>
               <div class="search-result-content">
@@ -533,10 +570,11 @@
 
   function initSearch() {
     new ModernSearch();
+    console.log("✅ Search functionality initialized");
   }
 
   /* ==========================================
-     MOBILE MENU TOGGLE
+     4. MOBILE MENU TOGGLE
   ========================================== */
   function initMobileMenu() {
     const mobileToggle = document.getElementById("mobileToggle");
@@ -545,7 +583,6 @@
 
     if (!mobileToggle || !mobileOverlay) return;
 
-    // Open mobile menu
     mobileToggle.addEventListener("click", () => {
       const isOpen = mobileOverlay.classList.contains("active");
       if (isOpen) {
@@ -555,19 +592,16 @@
       }
     });
 
-    // Close button
     if (mobileClose) {
       mobileClose.addEventListener("click", closeMobileMenu);
     }
 
-    // Close on overlay click
     mobileOverlay.addEventListener("click", (e) => {
       if (e.target === mobileOverlay) {
         closeMobileMenu();
       }
     });
 
-    // Close on menu link click
     const menuLinks = mobileOverlay.querySelectorAll(".mobile-menu-link");
     menuLinks.forEach((link) => {
       link.addEventListener("click", () => {
@@ -575,7 +609,6 @@
       });
     });
 
-    // Close on ESC key
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && mobileOverlay.classList.contains("active")) {
         closeMobileMenu();
@@ -593,10 +626,12 @@
       mobileToggle.setAttribute("aria-expanded", "false");
       document.body.style.overflow = "";
     }
+
+    console.log("✅ Mobile menu initialized");
   }
 
   /* ==========================================
-     ACTIVE MENU HIGHLIGHTING
+     5. ACTIVE MENU HIGHLIGHTING
   ========================================== */
   function initActiveMenu() {
     const currentPath = window.location.pathname;
@@ -608,27 +643,7 @@
         link.parentElement.classList.add("current-menu-item");
       }
     });
+
+    console.log("✅ Active menu initialized");
   }
-
-  /* ==========================================
-     LOGO SMOOTH SCROLL TO TOP
-  ========================================== */
-  function initLogoClick() {
-    const logoLinks = document.querySelectorAll(".logo-link, .mobile-logo");
-
-    logoLinks.forEach((logo) => {
-      logo.addEventListener("click", (e) => {
-        const href = logo.getAttribute("href");
-        if (href === window.location.pathname || href === "/") {
-          e.preventDefault();
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
-        }
-      });
-    });
-  }
-
-  console.log("✅ Modern Header initialized successfully!");
 })();

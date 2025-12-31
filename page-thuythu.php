@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Thuy Thu - Toyota Lâm Đồng (UPGRADED)
- * Description: Hero to About Us Scroll Transition - Enhanced Version
+ * Template Name: Thuy Thu - Toyota Lâm Đồng (FINAL VERSION)
+ * Description: Hero to About Us Scroll Transition - Image Inside Hero
  */
 get_header(); ?>
 
@@ -9,7 +9,7 @@ get_header(); ?>
 <section class="pp-hero-section" id="ppHero">
     <!-- Video Background -->
     <video autoplay loop muted playsinline class="pp-hero-video">
-        <source src="https://thuythu.vn/wp-content/uploads/2023/11/shutterstock_1050608956-1.mp4" type="video/mp4">
+        <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
@@ -22,9 +22,9 @@ get_header(); ?>
             <div class="pp-hero-text">
                 <p class="pp-hero-subtitle">Digital Agency Trọn Gói</p>
                 <h1 class="pp-hero-title">
-                    PIXEL PERFECT
+                    Pixel Perfect
                     <br>
-                    <span class="pp-hero-title-highlight">CREATIVE SOLUTIONS</span>
+                    <!-- <span class="pp-hero-title-highlight">CREATIVE SOLUTIONS</span> -->
                 </h1>
                 <p class="pp-hero-description">
                     Chúng tôi cung cấp giải pháp thiết kế website chuyên nghiệp, SEO tối ưu,
@@ -65,21 +65,18 @@ get_header(); ?>
             <img src="https://thuythu.vn/wp-content/uploads/2023/11/cr-1.svg" alt="CR">
         </div>
     </div>
-</section>
 
-<!-- About Section with Overlapping Devices -->
-<section class="pp-about-section" id="ppAbout">
-    <!-- 3D Devices Mockup (Overlapping from Hero) -->
+    <!-- 3D Devices Mockup (MOVED INSIDE HERO) -->
     <div class="pp-devices-container">
         <div class="pp-devices-wrapper">
             <img src="https://thuythu.vn/wp-content/uploads/2023/11/Mask-group-39-1.png"
                 alt="Pixel Perfect Devices Showcase" class="pp-devices-image">
         </div>
     </div>
+</section>
 
-    <!-- Gradient Background Overlay -->
-    <div class="pp-about-gradient"></div>
-
+<!-- About Section -->
+<section class="pp-about-section" id="ppAbout">
     <!-- Partner Logos Section -->
     <div class="pp-about-logos">
         <div class="pp-about-container">
