@@ -227,6 +227,23 @@ function toyota_enqueue_assets()
         );
     }
 
+    if (is_page_template('page-thuythu.php')) {
+        wp_enqueue_style(
+            'thuythu',
+            get_template_directory_uri() . '/css/thuythu.css',
+            array('toyota-global'),
+            '1.0.0'
+        );
+
+        wp_enqueue_script(
+            'thuythu',
+            get_template_directory_uri() . '/js/thuythu.js',
+            array(),
+            '1.0.0',
+            true
+        );
+    }
+
 
     // Header JS
     wp_enqueue_script(
