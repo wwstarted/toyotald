@@ -4,122 +4,93 @@
  * Description: Hero to About Us Scroll Transition - Enhanced Version
  */
 get_header(); ?>
+<section class="pp-reviews-section">
+    <div class="pp-reviews-bg-pattern">
+        <div class="pp-reviews-gradient-overlay"></div>
 
-<!-- Hero Section -->
-<section class="cda-hero-section" id="cdaHero">
-    <div class="cda-hero-container">
-        <!-- Hero Text Content -->
-        <div class="cda-hero-content">
-            <div class="cda-hero-grid">
-                <!-- Row 1: Collective (left) + Design (right) -->
-                <h1 class="cda-hero-word cda-word-left">
-                    <span class="cda-hero-line">Collective</span>
-                </h1>
-                <h1 class="cda-hero-word cda-word-right">
-                    <span class="cda-hero-line">Design</span>
-                </h1>
-
-                <!-- Row 2: Tagline (center, spans both columns) -->
-                <p class="cda-hero-tagline">
-                    A collective of strategists,<br>
-                    storytellers, and makers.
-                </p>
-
-                <!-- Row 3: Agency (left) -->
-                <h1 class="cda-hero-word cda-word-left">
-                    <span class="cda-hero-line">Agency</span>
-                </h1>
+        <div class="pp-reviews-container">
+            <div class="pp-reviews-header">
+                <span class="pp-reviews-subtitle">TESTIMONIALS</span>
+                <h2 class="pp-reviews-heading">
+                    <span class="pp-text-gradient">KHÁCH HÀNG REVIEW</span>
+                </h2>
             </div>
 
-            <!-- Description below grid -->
-            <p class="cda-hero-subtitle">
-                Designing intentional experiences<br>
-                across brand and digital.
-            </p>
-        </div>
+            <div class="pp-reviews-grid-wrapper">
+                <div class="pp-reviews-fade-top"></div>
+                <div class="pp-reviews-fade-bottom"></div>
 
-        <!-- UPGRADED: 3D Sphere Pattern Background (Canvas) -->
-        <div class="cda-pattern-3d" id="cdaPattern3D">
-            <canvas id="cdaSphereCanvas" class="cda-sphere-canvas"></canvas>
-        </div>
+                <div class="pp-reviews-grid">
+                    <div class="pp-reviews-column pp-scroll-up">
+                        <div class="pp-reviews-column-content">
+                            <?php render_review_card('E', 'Ethan Collins', '@ethancoatshunter', 'Tech Startup', 'Cheap doesn\'t mean low quality here. Amazing speeds and whenever I have questions, real people answer within minutes. Perfect for my data scraping projects.'); ?>
+                            <?php render_review_card('N', 'Nolan Perkins', '@_ra3nolan', 'E-commerce Business', 'The attention to detail and professionalism is outstanding. They transformed our outdated website into a modern, high-performing platform that our customers love.'); ?>
+                            <?php render_review_card('J', 'Janus Tiu', '@janustiu', 'Marketing Agency', 'Working with Pixel Perfect was a game-changer for our business. Their expertise in web design and development is unmatched. Highly recommend!'); ?>
 
-        <!-- Video Intro Container (starts bottom-right at 50% size) -->
-        <div class="cda-video-intro" id="cdaVideoIntro">
-            <div class="cda-video-wrapper">
-                <video autoplay loop muted playsinline class="cda-video">
-                    <source src="<?php echo get_template_directory_uri(); ?>/uploads/video/videointro.mp4"
-                        type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <!-- Fallback -->
-                <div class="cda-video-fallback">
-                    <div class="cda-logo-animated">
-                        <svg width="80" height="80" viewBox="0 0 120 120">
-                            <circle cx="60" cy="60" r="50" fill="none" stroke="#fff" stroke-width="2" />
-                            <path d="M60 20 L60 100 M20 60 L100 60" stroke="#fff" stroke-width="2" />
-                        </svg>
+                            <?php render_review_card('E', 'Ethan Collins', '@ethancoatshunter', 'Tech Startup', 'Cheap doesn\'t mean low quality here. Amazing speeds and whenever I have questions, real people answer within minutes. Perfect for my data scraping projects.'); ?>
+                            <?php render_review_card('N', 'Nolan Perkins', '@_ra3nolan', 'E-commerce Business', 'The attention to detail and professionalism is outstanding. They transformed our outdated website into a modern, high-performing platform that our customers love.'); ?>
+                            <?php render_review_card('J', 'Janus Tiu', '@janustiu', 'Marketing Agency', 'Working with Pixel Perfect was a game-changer for our business. Their expertise in web design and development is unmatched. Highly recommend!'); ?>
+                        </div>
+                    </div>
+
+                    <div class="pp-reviews-column pp-scroll-down">
+                        <div class="pp-reviews-column-content">
+                            <?php render_review_card('S', 'Sarah Johnson', '@sarahj_design', 'Design Studio', 'Exceptional service from start to finish. The team understood our vision and brought it to life with precision and creativity.'); ?>
+                            <?php render_review_card('M', 'Michael Chen', '@mchen_tech', 'SaaS Company', 'Best web development partner we\'ve ever worked with. Fast, reliable, and always delivers beyond expectations.'); ?>
+                            <?php render_review_card('E', 'Emma Davis', '@emmadavis', 'Healthcare Tech', 'Their innovative approach and technical skills helped us achieve our digital transformation goals. Couldn\'t be happier!'); ?>
+
+                            <?php render_review_card('S', 'Sarah Johnson', '@sarahj_design', 'Design Studio', 'Exceptional service from start to finish. The team understood our vision and brought it to life with precision and creativity.'); ?>
+                            <?php render_review_card('M', 'Michael Chen', '@mchen_tech', 'SaaS Company', 'Best web development partner we\'ve ever worked with. Fast, reliable, and always delivers beyond expectations.'); ?>
+                            <?php render_review_card('E', 'Emma Davis', '@emmadavis', 'Healthcare Tech', 'Their innovative approach and technical skills helped us achieve our digital transformation goals. Couldn\'t be happier!'); ?>
+                        </div>
+                    </div>
+
+                    <div class="pp-reviews-column pp-scroll-up">
+                        <div class="pp-reviews-column-content">
+                            <?php render_review_card('J', 'Janus Tiu', '@janustiu', 'Marketing Agency', 'Working with Pixel Perfect was a game-changer for our business. Their expertise in web design and development is unmatched. Highly recommend!'); ?>
+                            <?php render_review_card('E', 'Ethan Collins', '@ethancoatshunter', 'Tech Startup', 'Cheap doesn\'t mean low quality here. Amazing speeds and whenever I have questions, real people answer within minutes. Perfect for my data scraping projects.'); ?>
+                            <?php render_review_card('N', 'Nolan Perkins', '@_ra3nolan', 'E-commerce Business', 'The attention to detail and professionalism is outstanding. They transformed our outdated website into a modern, high-performing platform that our customers love.'); ?>
+
+                            <?php render_review_card('J', 'Janus Tiu', '@janustiu', 'Marketing Agency', 'Working with Pixel Perfect was a game-changer for our business. Their expertise in web design and development is unmatched. Highly recommend!'); ?>
+                            <?php render_review_card('E', 'Ethan Collins', '@ethancoatshunter', 'Tech Startup', 'Cheap doesn\'t mean low quality here. Amazing speeds and whenever I have questions, real people answer within minutes. Perfect for my data scraping projects.'); ?>
+                            <?php render_review_card('N', 'Nolan Perkins', '@_ra3nolan', 'E-commerce Business', 'The attention to detail and professionalism is outstanding. They transformed our outdated website into a modern, high-performing platform that our customers love.'); ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Scroll Indicator -->
-        <div class="cda-scroll-indicator">
-            <span>SCROLL</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" />
-            </svg>
-        </div>
     </div>
 </section>
 
-<!-- About Us Section -->
-<section class="cda-about-section" id="cdaAbout">
-    <div class="cda-about-container">
-
-        <!-- Left Side: 3D Globe + Locations -->
-        <div class="cda-about-left">
-            <!-- 3D Globe Canvas -->
-            <div class="cda-globe-pattern">
-                <canvas id="cdaGlobeCanvas" class="cda-globe-canvas"></canvas>
-            </div>
-
-            <!-- Locations (Bottom-left corner) -->
-            <div class="cda-locations">
-                <p class="cda-locations-title">Our team are<br>located in:</p>
-                <ul class="cda-locations-list">
-                    <li class="cda-location-item">New York</li>
-                    <li class="cda-location-item">Hanoi</li>
-                    <li class="cda-location-item">Ho Chi Minh City</li>
-                    <li class="cda-location-item">Singapore</li>
-                </ul>
-            </div>
+<?php
+// Helper Function để render card (Bạn có thể đặt function này trong functions.php hoặc đầu file)
+function render_review_card($initial, $name, $handle, $role, $content) {
+    ?>
+<div class="pp-review-card">
+    <div class="pp-card-header">
+        <div class="pp-card-avatar">
+            <?php echo $initial; ?>
         </div>
-
-        <!-- Right Side: Video Box (settled) + Description -->
-        <div class="cda-about-right">
-            <!-- Video Box Placeholder (video will settle here) -->
-            <div class="cda-video-settled-area" id="cdaVideoSettledArea">
-                <!-- Video text overlay -->
-                <div class="cda-video-text-overlay">
-                    <span class="cda-overlay-text">Stories</span>
-                    <span class="cda-overlay-text">Systems</span>
-                    <span class="cda-overlay-text">Solutions</span>
-                </div>
-            </div>
-
-            <!-- Company Description -->
-            <div class="cda-description">
-                <h2 class="cda-description-text">
-                    CDA is a vision-driven, human-centered creative consultancy that helps brands become more
-                    meaningful, purposeful, and intentional.
-                </h2>
-            </div>
+        <div class="pp-card-info">
+            <h3 class="pp-card-name"><?php echo $name; ?></h3>
+            <p class="pp-card-handle"><?php echo $handle; ?></p>
+            <p class="pp-card-role"><?php echo $role; ?></p>
         </div>
     </div>
-</section>
-
-<div class="cda-scroll-spacer"></div>
+    <div class="pp-card-stars">
+        <?php for($i=0; $i<5; $i++): ?>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pp-star-icon">
+            <path
+                d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
+            </path>
+        </svg>
+        <?php endfor; ?>
+    </div>
+    <p class="pp-card-text"><?php echo $content; ?></p>
+</div>
+<?php
+}
+?>
 
 <?php get_footer(); ?>

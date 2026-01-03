@@ -22,10 +22,10 @@
                 <div class="logo-section">
                     <a href="<?php echo esc_url(home_url('/')); ?>" class="logo-link">
                         <?php if (has_custom_logo()): ?>
-                        <?php the_custom_logo(); ?>
+                            <?php the_custom_logo(); ?>
                         <?php else: ?>
-                        <img src="https://th.bing.com/th/id/OIP.hKL_zFVdLx8dCiYOZ8hrGgHaGL?w=150&h=150&c=6&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1"
-                            alt="Toyota Logo" class="site-logo">
+                            <img src="https://th.bing.com/th/id/OIP.hKL_zFVdLx8dCiYOZ8hrGgHaGL?w=150&h=150&c=6&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1"
+                                alt="Toyota Logo" class="site-logo">
                         <?php endif; ?>
                         <span class="site-name">Toyota Đà Lạt</span>
                     </a>
@@ -153,6 +153,5 @@
             </div>
         </div>
     </div>
-
 
     <main class="site-content"></main>
