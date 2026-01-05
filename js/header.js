@@ -198,8 +198,10 @@
     async fetchAllData() {
       try {
         const [productsRes, postsRes] = await Promise.all([
-          fetch(this.API_PRODUCTS).catch(() => ({ ok: false })),
-          fetch(this.API_POSTS).catch(() => ({ ok: false })),
+          fetch(this.API_PRODUCTS + "?per_page=100").catch(() => ({
+            ok: false,
+          })),
+          fetch(this.API_POSTS + "?per_page=100").catch(() => ({ ok: false })),
         ]);
 
         if (productsRes.ok) {
@@ -411,7 +413,10 @@
           const title = product.title?.rendered || "Untitled";
           const excerpt = this.stripHtml(product.excerpt?.rendered || "");
           const link = product.link || "#";
-          const image = product.featured_media_url || "";
+          const image =
+            product.featured_media_url ||
+            product.better_featured_image?.source_url ||
+            "";
           const highlightedTitle = this.highlightText(title, this.state.query);
 
           return `
@@ -448,7 +453,10 @@
           const title = post.title?.rendered || "Untitled";
           const excerpt = this.stripHtml(post.excerpt?.rendered || "");
           const link = post.link || "#";
-          const image = post.featured_media_url || "";
+          const image =
+            post.featured_media_url ||
+            post.better_featured_image?.source_url ||
+            "";
           const date = post.date ? this.formatDate(post.date) : "";
           const highlightedTitle = this.highlightText(title, this.state.query);
 

@@ -1,113 +1,19 @@
-document.addEventListener("DOMContentLoaded", () => {
-  (() => {
-    const section = document.getElementById("whatWeDo");
-    if (!section) return;
+document.addEventListener("DOMContentLoaded", function () {
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1, // Kích hoạt khi thấy 10% phần tử
+  };
 
-    const services = [...section.querySelectorAll(".wwd-service")];
-    const images = [...section.querySelectorAll(".wwd-image")];
-    const right = section.querySelector(".wwd-right");
-
-    let currentIndex = 0;
-    let isAnimating = false;
-    let isHovering = false;
-    let scrollLocked = false;
-
-    const maxIndex = services.length - 1;
-
-    right.addEventListener("mouseenter", () => {
-      isHovering = true;
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("pp-visible");
+        observer.unobserve(entry.target); // Chỉ chạy 1 lần
+      }
     });
+  }, observerOptions);
 
-    right.addEventListener("mouseleave", () => {
-      isHovering = false;
-    });
-
-    function leave(index) {
-      services[index].classList.remove("active");
-      services[index].classList.add("leaving");
-
-      images[index].classList.remove("active");
-      images[index].classList.add("leaving");
-    }
-
-    function enter(index) {
-      services[index].classList.remove("leaving");
-      services[index].classList.add("active");
-
-      images[index].classList.remove("leaving");
-      images[index].classList.add("active");
-    }
-
-    function goTo(index) {
-      if (isAnimating) return;
-      if (index < 0 || index > maxIndex) return;
-      if (index === currentIndex) return;
-
-      isAnimating = true;
-      leave(currentIndex);
-
-      setTimeout(() => {
-        enter(index);
-        currentIndex = index;
-        isAnimating = false;
-      }, 350);
-    }
-
-    function lockScroll() {
-      if (scrollLocked) return;
-      window.addEventListener("wheel", handleScroll, { passive: false });
-      scrollLocked = true;
-    }
-
-    function unlockScroll() {
-      if (!scrollLocked) return;
-      window.removeEventListener("wheel", handleScroll);
-      scrollLocked = false;
-    }
-
-    function handleScroll(e) {
-      if (!isHovering) return;
-      if (isAnimating) return;
-
-      const direction = e.deltaY > 0 ? 1 : -1;
-
-      // SCROLL DOWN
-      if (direction === 1) {
-        if (currentIndex < maxIndex) {
-          e.preventDefault();
-          goTo(currentIndex + 1);
-        } else {
-          //
-          unlockScroll();
-        }
-        return;
-      }
-
-      // ⬆SCROLL UP
-      if (direction === -1) {
-        if (currentIndex > 0) {
-          e.preventDefault();
-          goTo(currentIndex - 1);
-        } else {
-          //
-          unlockScroll();
-        }
-        return;
-      }
-    }
-
-    function checkSectionFocus() {
-      const rect = section.getBoundingClientRect();
-      const center = window.innerHeight / 2;
-
-      const inView = rect.top < center && rect.bottom > center;
-
-      if (inView) {
-        lockScroll();
-      }
-    }
-
-    window.addEventListener("scroll", checkSectionFocus);
-    lockScroll();
-  })();
+  const animatedElements = document.querySelectorAll(".animate-on-scroll");
+  animatedElements.forEach((el) => observer.observe(el));
 });

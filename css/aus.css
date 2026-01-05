@@ -1,277 +1,461 @@
-.pp-reviews-section {
+/* ============================================
+   FAQ SECTION - GÓC HỎI ĐÁP
+   - Tab switching with image change
+   - Accordion FAQ with smooth animation
+   - Gradient effects
+============================================ */
+
+/* CSS Variables */
+:root {
+  --brand-primary: #009fd3;
+  --brand-secondary: #95d3c5;
+  --text-dark: #000000;
+  --text-gray: #57534e;
+  --text-light: #78716c;
+  --border-color: #d6d3d1;
+  --white: #ffffff;
+  --transition-smooth: 0.3s;
+  --transition-slow: 0.5s;
+}
+
+/* ============================================
+   SECTION CONTAINER
+============================================ */
+
+.faq-section {
   position: relative;
-  background-color: #ffffff;
-  padding: 0 96px 80px 96px;
+  padding: 3rem 0;
   overflow: hidden;
+  background: var(--white);
 }
 
-/* Background Pattern - MATCHING PREVIOUS SECTION */
-/* .pp-reviews-bg-pattern {
-  background-image: url("https://thuythu.vn/wp-content/themes/thuythu/images/map-bg.svg");
-  background-repeat: repeat;
-  background-position: center;
-  background-size: auto;
-  position: relative;
-  width: 100%;
-} */
-
-/* Gradient Overlay - MATCHING PREVIOUS SECTION */
-.pp-reviews-gradient-overlay {
+/* Gradient Overlays */
+.faq-gradient-top,
+.faq-gradient-bottom {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 0%,
-    /* Top trong suốt để nối liền section trên */ rgba(255, 255, 255, 0.3) 25%,
-    rgba(255, 255, 255, 0.5) 50%,
-    rgba(255, 255, 255, 0.8) 75%,
-    #ffffff 100%
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
-.pp-reviews-container {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  position: relative;
+  left: 0;
+  right: 0;
+  height: 8rem;
   z-index: 10;
+  pointer-events: none;
 }
 
-/* Header Styles */
-.pp-reviews-header {
-  text-align: center;
-  max-width: 56rem;
-  margin: 0 auto 4rem auto;
-  padding-top: 4rem;
+.faq-gradient-top {
+  top: 0;
+  background: linear-gradient(to bottom, var(--white), transparent);
 }
 
-.pp-reviews-subtitle {
-  color: #57534e; /* text-stone-600 */
-  font-weight: 500;
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.faq-gradient-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, var(--white), transparent);
+}
+
+/* Container */
+.faq-container {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  max-width: 1340px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   GRID LAYOUT
+============================================ */
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .faq-grid {
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+  }
+}
+
+/* ============================================
+   LEFT: IMAGE
+============================================ */
+
+.faq-image-wrapper {
+  width: 100%;
+  padding: 0 1rem;
+}
+
+@media (min-width: 1024px) {
+  .faq-image-wrapper {
+    /* Expand image to the left edge */
+    margin-left: calc((100vw - 1340px) / -2 - 2rem);
+    padding: 0;
+  }
+}
+
+.faq-image-container {
+  position: relative;
+  width: 100%;
+  opacity: 1;
+  transition: opacity var(--transition-smooth) ease;
+}
+
+.faq-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
   display: block;
+}
+
+/* Image fade transition */
+.faq-image-container.fade-out {
+  opacity: 0;
+}
+
+/* ============================================
+   RIGHT: CONTENT
+============================================ */
+
+.faq-content-wrapper {
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .faq-content-wrapper {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .faq-content-wrapper {
+    padding: 0;
+  }
+}
+
+/* ============================================
+   HEADER
+============================================ */
+
+.faq-header {
+  margin-bottom: 2rem;
+}
+
+.faq-title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: #1c1917;
   margin-bottom: 1rem;
 }
 
-.pp-reviews-heading {
-  font-size: clamp(2.25rem, 5vw, 3.75rem); /* text-4xl to 6xl */
-  font-weight: 900;
-  color: #1c1917; /* text-stone-900 */
-  letter-spacing: -0.05em;
-  margin: 0;
-  line-height: 1.1;
+@media (min-width: 1024px) {
+  .faq-title {
+    font-size: 3.75rem;
+  }
 }
 
-.pp-text-gradient {
-  background: linear-gradient(90deg, #95d3c5 0%, #009fd3 100%);
+.faq-title-gradient {
+  background: linear-gradient(
+    to right,
+    var(--brand-secondary),
+    var(--brand-primary)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Grid Layout */
-.pp-reviews-grid-wrapper {
-  position: relative;
-  height: 600px; /* Chiều cao cố định cho khu vực cuộn */
-  overflow: hidden;
-  margin: 0 -1rem; /* Bù trừ cho padding của container nếu cần */
-}
-
-/* Fade Overlay for Reviews (Top/Bottom mask) */
-.pp-reviews-fade-top,
-.pp-reviews-fade-bottom {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 80px;
-  z-index: 20;
-  pointer-events: none;
-}
-
-.pp-reviews-fade-top {
-  top: 0;
-  background: linear-gradient(to bottom, #ffffff, transparent);
-}
-
-.pp-reviews-fade-bottom {
-  bottom: 0;
-  background: linear-gradient(to top, #ffffff, transparent);
-}
-
-.pp-reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 2rem;
-  height: 100%;
-}
-
-@media (min-width: 768px) {
-  .pp-reviews-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.faq-description {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #1c1917;
+  max-width: 42rem;
 }
 
 @media (min-width: 1024px) {
-  .pp-reviews-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .faq-description {
+    font-size: 1.25rem;
   }
 }
 
-/* Columns & Animation */
-.pp-reviews-column {
-  position: relative;
-  height: 100%;
-  overflow: hidden; /* Ẩn phần thừa */
+/* ============================================
+   TABS
+============================================ */
+
+.faq-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.pp-reviews-column-content {
+.faq-tab {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  /* Quan trọng: padding bottom để tránh bị cắt card cuối khi loop */
-  padding-bottom: 1.5rem;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  margin-right: 3rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-smooth) ease;
 }
 
-/* Animation Classes */
-.pp-scroll-up .pp-reviews-column-content {
-  animation: scrollVertical 40s linear infinite;
+.faq-tab:hover {
+  color: var(--brand-primary);
 }
 
-.pp-scroll-down .pp-reviews-column-content {
-  animation: scrollVerticalReverse 45s linear infinite;
+.faq-tab.active {
+  color: var(--brand-primary);
 }
 
-/* Pause on Hover */
-.pp-reviews-grid:hover .pp-reviews-column-content {
-  animation-play-state: paused;
+/* Tab Icon Container */
+.faq-tab-icon {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
 }
 
-/* Card Styles */
-.pp-review-card {
-  background: #ffffff;
-  border: 1px solid #e7e5e4; /* border-stone-200 */
-  border-radius: 1rem; /* rounded-2xl */
-  padding: 1.5rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+.faq-tab-icon i {
+  font-size: 1.75rem;
+  opacity: 0.5;
+  transition: all var(--transition-smooth) ease;
 }
 
-.pp-review-card:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  transform: translateY(-2px);
-  border-color: #95d3c5;
+.faq-tab.active .faq-tab-icon i {
+  opacity: 1;
+  color: var(--brand-primary);
 }
 
-/* Card Header */
-.pp-card-header {
+/* Tab Underline */
+.faq-tab-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--brand-secondary),
+    var(--brand-primary)
+  );
+  opacity: 0;
+  transition: opacity var(--transition-smooth) ease;
+}
+
+.faq-tab.active .faq-tab-underline {
+  opacity: 1;
+}
+
+/* ============================================
+   ACCORDION
+============================================ */
+
+.faq-accordion {
+  position: relative;
+}
+
+/* Tab Content */
+.faq-tab-content {
+  display: none;
+}
+
+.faq-tab-content.active {
+  display: block;
+}
+
+/* FAQ Item */
+.faq-item {
+  position: relative;
+  margin-bottom: 0;
+}
+
+/* Gradient Border on Hover */
+.faq-item-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(
+    to right,
+    var(--brand-secondary),
+    var(--brand-primary)
+  );
+  transition: width var(--transition-slow) ease;
+}
+
+.faq-item:hover .faq-item-border {
+  width: 100%;
+}
+
+/* Question Button */
+.faq-question {
+  width: 100%;
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  justify-content: space-between;
+  text-align: left;
+  padding: 1.25rem 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: border-color var(--transition-smooth) ease;
 }
 
-.pp-card-avatar {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #95d3c5 0%, #009fd3 100%);
+.faq-item:hover .faq-question {
+  border-bottom-color: var(--brand-primary);
+}
+
+.faq-question span {
+  flex: 1;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #1c1917;
+  padding-right: 3rem;
+}
+
+/* Chevron Icon */
+.faq-chevron {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-weight: 700;
-  flex-shrink: 0;
-  font-size: 1.125rem;
 }
 
-.pp-card-info {
-  flex: 1;
-  min-width: 0;
+.faq-chevron svg {
+  width: 100%;
+  height: 100%;
+  color: var(--text-gray);
+  transition: transform var(--transition-smooth) ease;
+  transform: rotate(0deg);
 }
 
-.pp-card-name {
-  font-weight: 600;
-  color: #1c1917; /* text-stone-900 */
-  margin: 0;
+/* Rotate SVG when active */
+.faq-item.active .faq-chevron svg {
+  transform: rotate(180deg);
+}
+
+/* ============================================
+   ANSWER
+============================================ */
+
+.faq-answer {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--transition-smooth) ease;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 500px;
+}
+
+.faq-answer-content {
+  padding: 0 0 1.25rem 0;
   font-size: 1rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.6;
+  color: var(--text-light);
 }
 
-.pp-card-handle {
-  font-size: 0.875rem;
-  color: #78716c; /* text-stone-500 */
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+/* ============================================
+   RESPONSIVE
+============================================ */
 
-.pp-card-role {
-  font-size: 0.75rem;
-  color: #a8a29e; /* text-stone-400 */
-  margin-top: 0.25rem;
-}
-
-/* Stars */
-.pp-card-stars {
-  display: flex;
-  gap: 0.25rem;
-  margin-bottom: 0.75rem;
-}
-
-.pp-star-icon {
-  width: 1rem;
-  height: 1rem;
-  fill: #009fd3;
-  color: #009fd3;
-}
-
-/* Card Text */
-.pp-card-text {
-  color: #57534e; /* text-stone-600 */
-  font-size: 0.875rem;
-  line-height: 1.625;
-  margin: 0;
-}
-
-/* Keyframes */
-@keyframes scrollVertical {
-  0% {
-    transform: translateY(0);
+@media (max-width: 1024px) {
+  .faq-section {
+    padding: 2rem 0;
   }
-  100% {
-    transform: translateY(-50%);
-  } /* -50% vì ta đã nhân đôi nội dung */
-}
 
-@keyframes scrollVerticalReverse {
-  0% {
-    transform: translateY(-50%);
+  .faq-gradient-top,
+  .faq-gradient-bottom {
+    height: 4rem;
   }
-  100% {
-    transform: translateY(0);
+
+  .faq-grid {
+    gap: 2rem;
   }
 }
 
-/* Responsive Hide Columns */
-/* Ẩn bớt cột trên mobile để tránh rối */
-@media (max-width: 767px) {
-  .pp-reviews-column:nth-child(2),
-  .pp-reviews-column:nth-child(3) {
-    display: none; /* Chỉ hiện 1 cột trên mobile */
+@media (max-width: 768px) {
+  .faq-title {
+    font-size: 2rem;
+  }
+
+  .faq-description {
+    font-size: 1rem;
+  }
+
+  .faq-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .faq-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .faq-tab {
+    margin-right: 2rem;
+    white-space: nowrap;
+  }
+
+  .faq-question span {
+    font-size: 1rem;
+    padding-right: 2rem;
+  }
+
+  .faq-answer-content {
+    font-size: 0.9rem;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  .pp-reviews-column:nth-child(3) {
-    display: none; /* Hiện 2 cột trên tablet */
+@media (max-width: 480px) {
+  .faq-section {
+    padding: 1.5rem 0;
+  }
+
+  .faq-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .faq-title {
+    font-size: 1.75rem;
+  }
+
+  .faq-tab {
+    margin-right: 1.5rem;
+    font-size: 0.75rem;
+  }
+
+  .faq-tab-icon i {
+    font-size: 1.5rem;
+  }
+
+  .faq-question {
+    padding: 1rem 0;
+  }
+
+  .faq-chevron i {
+    font-size: 1.25rem;
   }
 }

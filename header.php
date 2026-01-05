@@ -36,7 +36,10 @@
                         <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-link">TRANG CHỦ</a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?php echo esc_url(home_url('/dich-vu')); ?>" class="nav-link">DỊCH VỤ</a>
+                        <a href="<?php echo esc_url(home_url('/dich-vu')); ?>" class="nav-link">
+                            DỊCH VỤ
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?php echo esc_url(home_url('/quy-trinh')); ?>" class="nav-link">QUY TRÌNH</a>
@@ -62,6 +65,7 @@
                         id="searchForm">
                         <input type="search" class="search-input" placeholder="Tìm kiếm..." name="s"
                             value="<?php echo get_search_query(); ?>" autocomplete="off" id="searchInput">
+
                         <button type="button" class="search-icon-btn" aria-label="Tìm kiếm" id="searchIconBtn">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>

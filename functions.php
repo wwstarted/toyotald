@@ -256,6 +256,14 @@ function toyota_enqueue_assets()
 
     wp_enqueue_script(
         'toyota-footer',
+        get_template_directory_uri() . 'js/footer.js',
+        array(),
+        '1.0.0',
+        true
+    );
+
+    wp_enqueue_script(
+        'toyota-footer',
         get_template_directory_uri() . '/js/footer.js',
         array(),
         '1.0.0',
